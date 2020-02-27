@@ -1,0 +1,37 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap');
+
+ * {
+   font-family: "Roboto";
+   padding: 0;
+   margin: 0;
+ }
+
+ a {
+    text-decoration: none;
+}
+
+ /* Stlyes for paper grid effect
+
+@import url('https://fonts.googleapis.com/css?family=Cedarville+Cursive&display=swap');
+font-family: Cedarville Cursive;
+.Paper-grid {
+  height: 100vh;
+  background-color: #fff;
+  background-image:
+  linear-gradient(90deg, transparent 160px, #abced4 19px, #abced4 162px, transparent 81px),
+  linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 1.2em;
+  padding: 1rem;
+}
+ */
+
+ .App {
+   height: 100vh;
+ }
+
+ .Main {
+   height: 100%;
+   display: flex;
+   flex-direction: row;
+ }

@@ -1,0 +1,29 @@
+.Home {
+    margin: 1em 4em;
+}
+
+
+.screen {
+    background-color: white;
+    flex: auto;
+    padding: 2em 6em;
+}
+
+.popout-container {
+    padding: .75em 0;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    max-width: 900px;
+}
+.popout {
+    height: 200px;
+    background-color: whitesmoke;
+}
+
+.text-container {
+    color: #181818;
+    font-family: 'Roboto';
+    line-height: 1.5em;
+    padding: 3em 0;
+    max-width: 900px;
+}

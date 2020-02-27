@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Oleo+Script:400,700|Raleway|Roboto|Roboto+Condensed&display=swap');
+
+
+.Navbar {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+    padding: .5rem 5rem .5rem 1em;
+    align-items: center;
+}
+
+.Navbar-logo {
+    width: 25px;
+    height: 25px;
+    padding: 12px 10px 11px 12px;
+    border-radius: 3px;
+    background-color: #c73636;
+    color: #fafafa;
+    font-family: 'Oleo Script', sans-serif;
+    font-size: 32px;
+    line-height: 29px;
+    margin-right: .5em;
+}
+.Navbar-title {
+    font-size: 2em;
+    font-family: "Raleways";
+    /* font-family: 'Oleo Script', sans-serif; */
+}
+.Navbar-links {
+    margin-left: auto;
+}
