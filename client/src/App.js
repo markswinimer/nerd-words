@@ -1,7 +1,8 @@
 import React from 'react';
 import Home from './components/Home';
+import Discover from './components/Discover';
 import Navbar from './components/Navbar'
-import Leftbar from './components/Leftbar'
+import Sidebar from './components/Sidebar'
 import {
   BrowserRouter as Router,
   Route,
@@ -14,27 +15,27 @@ const routes = [
   {
     path: '/',
     exact: true,
-    sidebar: () => <Leftbar currentPage='home'/>,
+    sidebar: () => <Sidebar currentPage='home'/>,
     main: () => <Home />
   },
   {
     path: '/play',
-    sidebar: () => <Leftbar currentPage='play'/>,
+    sidebar: () => <Sidebar currentPage='play'/>,
     main: () => <h2>Play</h2>
   },
   {
     path: '/discover',
-    sidebar: () => <Leftbar currentPage='discover'/>,
-    main: () => <h2>Discover</h2>
+    sidebar: () => <Sidebar currentPage='discover'/>,
+    main: () => <Discover />
   },
   {
     path: '/community',
-    sidebar: () => <Leftbar currentPage='community'/>,
+    sidebar: () => <Sidebar currentPage='community'/>,
     main: () => <h2>Community</h2>
   },
   {
     path: '/howto',
-    sidebar: () => <Leftbar currentPage='howto'/>,
+    sidebar: () => <Sidebar currentPage='howto'/>,
     main: () => <h2>How to play</h2>
   },
 ]
@@ -61,7 +62,7 @@ class App extends React.Component {
                 component={route.sidebar}
               />
             ))}
-
+            <div className="Container">
             {routes.map((route, index) => (
               <Route
                 key={route.path}
@@ -70,6 +71,7 @@ class App extends React.Component {
                 component={route.main}
               />
             ))}
+            </div>
             </div>
           </div>
       </Router>

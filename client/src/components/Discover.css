@@ -1,0 +1,121 @@
+.testBreak {
+    margin-bottom: 20em;
+}
+
+.Discover {
+    padding-top: 2em;
+    max-width: 1000px;
+    margin: auto 2em;
+}
+
+.Discover-title {
+    padding: 1em 6em 2em 4em;
+    display: flex;
+    flex-direction: row;
+}
+
+.Discover-title h1 {
+    font-size: 2em;
+}
+
+.Discover-title button {
+    font-family: "Roboto Condensed";
+    font-size: 1em;
+    padding: .5em 2em;
+    color: white;
+    background-color: #c73636;
+    margin-left: auto;
+    border: none;
+    border-radius: 10px;
+}
+
+.Discover-filter-container {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid silver;
+    padding: 0 4em;
+}
+
+
+.Discover-filter {
+    flex: 1;
+    display: flex;
+    height: 40px;
+    padding-bottom: .5em;
+    align-items: center;
+    /* justify-content: center; */
+    margin-right: 4em;
+    color: #707070;
+    font-weight: bold;
+}
+
+.Discover-filter:hover {
+    color: #202020;
+    background-color: snow;
+}
+
+.Discover-filter:last-child {
+    border-right: none;
+}
+
+.Discover-filter-amount {
+    margin-left: .4em;
+    background-color: #d87171;
+    color: white;
+    padding: .2em .4em;
+    border-radius: 5px;
+}
+
+.focus .Discover-filter-amount {
+    background-color: #c73636;
+}
+
+.Discover-filter.focus {
+    border-bottom: 2px solid #c73636;
+    color: #202020;
+}
+
+.Discover-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Discover-table-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 2em;
+    border: 1px solid silver;
+    border-radius: 8px;
+    margin: 1.5em 0 .25em 0;
+    height: 30px;
+    max-width: 100%;
+}
+
+.Discover-table-header th {
+    font-family: "Roboto Condensed";
+    color: #303030;
+    text-align: left;
+    
+}
+
+.libraryName {
+    flex: 3;
+}
+.authorName {
+    flex: 3;
+}
+.date {
+    flex: 2;
+}
+.wordCount {
+    flex: 1;
+}
+.playCount {
+    flex: 1;
+}
+.sortSpace {
+    flex: 2;
+}

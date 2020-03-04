@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Roboto|Roboto+Condensed&display=swap');
 
-.Leftbar {
+.Sidebar {
     width: 15em;
     min-width: 15em;
     height: 100%;
@@ -9,16 +9,15 @@
     flex-direction: column;
 }
 
-.Leftbar-user {
+.Sidebar-user {
     padding-left: 1em;
     padding: 2em 0em 3em 1em;
     background-color: #F5F5F5;
-    border-top: 1px solid silver;
     color: #A9A9A9;
     font-size: .8em;
 }
 
-.Leftbar-link-container {
+.Sidebar-link-container {
 
 }
 
@@ -35,7 +34,7 @@ h3 {
     font-size: 1.75em;
 }
 
-.Leftbar-link {
+.Sidebar-link {
     color: #808080;
     display: flex;
     flex-direction: row;
@@ -51,10 +50,10 @@ h3 {
 }
 
 
-.Leftbar-link:hover {
+.Sidebar-link:hover {
     background-color: #F8F8F8;
     color: #d87171;
-    border-top: 1px solid white;
+    border-top: 1px solid #F8F8F8;
  }
 
 .active {
@@ -64,6 +63,6 @@ h3 {
     pointer-events: none;
 }
 
-.Leftbar-copywrite {
+.Sidebar-copywrite {
     margin-top: auto;
 }

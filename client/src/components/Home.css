@@ -1,7 +1,5 @@
 .Home {
-    margin: 1em 4em;
 }
-
 
 .screen {
     background-color: white;
@@ -16,7 +14,7 @@
     max-width: 900px;
 }
 .popout {
-    height: 200px;
+    height: 100px;
     background-color: whitesmoke;
 }
 

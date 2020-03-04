@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 
-import './Leftbar.css'
+import './Sidebar.css'
 
 const links = [
     {
@@ -33,7 +33,7 @@ const links = [
     },
 ]
 
-class Leftbar extends React.Component {
+class Sidebar extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -41,52 +41,52 @@ class Leftbar extends React.Component {
     render() {
         console.log('location ' + this.props.currentPage)
         return(
-            <div className="Leftbar">
-                <div className="Leftbar-user">
+            <div className="Sidebar">
+                <div className="Sidebar-user">
                     <h3 id="name">Mark Swinimer</h3>
                     <p>Account | Log Out</p>
                 </div>
-                <div className='Leftbar-link-container'>
+                <div className='Sidebar-link-container'>
                 <Link className={
-                    this.props.currentPage == 'home' ? 'Leftbar-link active' : 'Leftbar-link'
+                    this.props.currentPage === 'home' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/'>
                     <FontAwesomeIcon className="icon" icon={faHome} />
                     Home
                 </Link>
                 
                 <Link className={
-                    this.props.currentPage == 'play' ? 'Leftbar-link active' : 'Leftbar-link'
+                    this.props.currentPage === 'play' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/play'>  
                     <FontAwesomeIcon className="icon" icon={faPencilAlt} />
                     Play
                 </Link>
 
                 <Link className={
-                    this.props.currentPage == 'discover' ? 'Leftbar-link active' : 'Leftbar-link'
+                    this.props.currentPage === 'discover' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/discover'>
                     <FontAwesomeIcon className="icon" icon={faSearch} />
                     Discover
                 </Link>
 
                 <Link className={
-                    this.props.currentPage == 'community' ? 'Leftbar-link active' : 'Leftbar-link'
+                    this.props.currentPage === 'community' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/community'>
                     <FontAwesomeIcon className="icon" icon={faCommentAlt} />
                     Community
                 </Link>
                 
                 <Link className={
-                    this.props.currentPage == 'howto' ? 'Leftbar-link active' : 'Leftbar-link'
+                    this.props.currentPage === 'howto' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/howto'>
                     <FontAwesomeIcon className="icon" icon={faQuestionCircle} />
                     How to play
                 </Link>
                 </div>
-                <div className='Leftbar-copywrite'>
+                <div className='Sidebar-copywrite'>
                     copywrite @2020 markswinimer
                 </div>
             </div>
         )
     }
 }
-export default Leftbar;
+export default Sidebar;
