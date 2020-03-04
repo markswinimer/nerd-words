@@ -4,6 +4,7 @@ const Library = require('../models/library')
 const router = new express.Router()
 
 router.post('/libraries', async (req, res) => {
+    console.log("--------------IN POST---------")
     const library = new Library(req.body)
 
     try {

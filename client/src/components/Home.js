@@ -1,8 +1,5 @@
 import React from 'react';
 import './Home.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
-
 
 class Home extends React.Component {
     render() {

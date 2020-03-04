@@ -56,7 +56,7 @@ h3 {
     border-top: 1px solid #F8F8F8;
  }
 
-.active {
+.Sidebar-link.active {
     background-color: white;
     color: #c73636;
     border-top: solid 1px white;

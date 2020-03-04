@@ -4,8 +4,6 @@
 
 .Discover {
     padding-top: 2em;
-    max-width: 1000px;
-    margin: auto 2em;
 }
 
 .Discover-title {
@@ -66,13 +64,12 @@
     border-radius: 5px;
 }
 
-.focus .Discover-filter-amount {
-    background-color: #c73636;
-}
-
-.Discover-filter.focus {
+.Discover-filter.active {
     border-bottom: 2px solid #c73636;
     color: #202020;
+}
+.active .Discover-filter-amount {
+    background-color: #c73636;
 }
 
 .Discover-table {

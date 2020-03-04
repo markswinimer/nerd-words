@@ -5,41 +5,36 @@ import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle } from '@
 
 import './Sidebar.css'
 
-const links = [
-    {
-        path: '/',
-        name: 'Home',
-        icon: 'faHome'
-    },
-    {
-        path: '/play',
-        name: 'Play',
-        icon: 'faPencilAlt'
-    },
-    {
-        path: '/discover',
-        name: 'Discover',
-        icon: 'faSearch'
-    },
-    {
-        path: '/community',
-        name: 'Community',
-        icon: 'faCommentAlt'
-    },
-    {
-        path: '/howto',
-        name: 'How to Play',
-        icon: 'faQuestionCircle'
-    },
-]
+// const links = [
+//     {
+//         path: '/',
+//         name: 'Home',
+//         icon: 'faHome'
+//     },
+//     {
+//         path: '/play',
+//         name: 'Play',
+//         icon: 'faPencilAlt'
+//     },
+//     {
+//         path: '/discover',
+//         name: 'Discover',
+//         icon: 'faSearch'
+//     },
+//     {
+//         path: '/community',
+//         name: 'Community',
+//         icon: 'faCommentAlt'
+//     },
+//     {
+//         path: '/howto',
+//         name: 'How to Play',
+//         icon: 'faQuestionCircle'
+//     },
+// ]
 
 class Sidebar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        console.log('location ' + this.props.currentPage)
         return(
             <div className="Sidebar">
                 <div className="Sidebar-user">
