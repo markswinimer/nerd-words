@@ -63,6 +63,17 @@ h3 {
     pointer-events: none;
 }
 
+.Sidebar-link.unavailable {
+    opacity: .4;
+
+}
+.Sidebar-link.unavailable:hover {
+    cursor: not-allowed;
+    color: #808080;
+    background-color: #E0E0E0;
+    border-top: 1px solid silver;
+}
+
 .Sidebar-copywrite {
     margin-top: auto;
 }

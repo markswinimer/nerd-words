@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle, faGamepad } from '@fortawesome/free-solid-svg-icons'
 
 import './Sidebar.css'
 
@@ -52,8 +52,15 @@ class Sidebar extends React.Component {
                 <Link className={
                     this.props.currentPage === 'play' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/play'>  
-                    <FontAwesomeIcon className="icon" icon={faPencilAlt} />
+                    <FontAwesomeIcon className="icon" icon={faGamepad} />
                     Play
+                </Link>
+
+                <Link className={
+                    this.props.currentPage === 'create' ? 'Sidebar-link active' : 'Sidebar-link'
+                } to='/create'>
+                        <FontAwesomeIcon className="icon" icon={faPencilAlt} />
+                    Create
                 </Link>
 
                 <Link className={
@@ -63,19 +70,23 @@ class Sidebar extends React.Component {
                     Discover
                 </Link>
 
-                <Link className={
-                    this.props.currentPage === 'community' ? 'Sidebar-link active' : 'Sidebar-link'
+                <div className={
+                    "Sidebar-link unavailable"
+                    // -- Disabled --
+                    // this.props.currentPage === 'community' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/community'>
                     <FontAwesomeIcon className="icon" icon={faCommentAlt} />
                     Community
-                </Link>
+                </div>
                 
-                <Link className={
-                    this.props.currentPage === 'howto' ? 'Sidebar-link active' : 'Sidebar-link'
+                <div className={
+                    "Sidebar-link unavailable"
+                    // -- Disabled --
+                    // this.props.currentPage === 'howto' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/howto'>
                     <FontAwesomeIcon className="icon" icon={faQuestionCircle} />
                     How to play
-                </Link>
+                </div>
                 </div>
                 <div className='Sidebar-copywrite'>
                     copywrite @2020 markswinimer

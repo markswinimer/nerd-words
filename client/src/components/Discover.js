@@ -1,6 +1,5 @@
 import React from 'react';
 import TableEntry from './TableEntry';
-import Table from './Table';
 import './Discover.css'
 // const fetch = require('node-fetch');
 import fetch from 'node-fetch';
@@ -44,7 +43,8 @@ class Discover extends React.Component {
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            this.storeResults(data)
+            // this.storeResults(data)
+            console.log(data)
         })
         .catch(err => {
             console.log("Request was unsuccesful, error log: " + err)

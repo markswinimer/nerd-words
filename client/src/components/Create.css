@@ -1,0 +1,79 @@
+.Create {
+    width: 800px;
+    max-width: 800px;
+}
+
+.Create-card {
+    margin-top: 2em;
+    border: 1px solid silver;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: row;
+}
+
+.Create-card button {
+    border: none;
+    border-radius: 30px 5px 5px 30px;
+    padding: .5em 1em;
+    font-size: 1em;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+}
+
+.Create-card button.minus{
+    margin-left: auto;
+    width: 50px;
+    border-radius: 5px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-right: none;
+}
+.Create-card button.minus .icon {
+    margin-right: 0;
+}
+
+.Create-card button .icon {
+    font-size: 1.5em;
+}
+
+.CreateForm {
+    padding: 1em 2em;
+    border: 1px solid silver;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    transition: 10s ease-in;
+    display: flex;
+    flex-direction: column;
+}
+
+.CreateForm-info {
+
+}
+
+.CreateForm label {
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.25em;
+    align-items: flex-end;
+}
+
+.CreateForm select {
+    margin-left: auto;
+    margin-right: 24em;
+    width: 200px;
+    font-size: .75em;
+}
+
+.CreateForm input {
+    margin-left: auto;
+    margin-right: 18em;
+    font-size: 1em;
+}

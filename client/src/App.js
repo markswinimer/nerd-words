@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './components/Home';
 import Discover from './components/Discover';
+import Create from './components/Create';
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import {
@@ -20,7 +21,12 @@ const routes = [
   {
     path: '/play',
     sidebar: () => <Sidebar currentPage='play'/>,
-    main: () => <h2>Play</h2>
+    main: () => <h1>Play</h1>
+  },
+  {
+    path: '/create',
+    sidebar: () => <Sidebar currentPage='create'/>,
+    main: () => <Create />
   },
   {
     path: '/discover',
@@ -30,12 +36,12 @@ const routes = [
   {
     path: '/community',
     sidebar: () => <Sidebar currentPage='community'/>,
-    main: () => <h2>Community</h2>
+    main: () => <h1>Community</h1>
   },
   {
     path: '/howto',
     sidebar: () => <Sidebar currentPage='howto'/>,
-    main: () => <h2>How to play</h2>
+    main: () => <h1>How to play</h1>
   },
 ]
 
