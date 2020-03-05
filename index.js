@@ -14,7 +14,6 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/node-reac
 app.use(cors()) 
 app.use(bodyParser.json());
 app.use(libraryRouter);
-app.use('/', libraryRouter)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));

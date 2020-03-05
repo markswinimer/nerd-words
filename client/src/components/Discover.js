@@ -1,8 +1,6 @@
 import React from 'react';
 import TableEntry from './TableEntry';
 import './Discover.css'
-// const fetch = require('node-fetch');
-import fetch from 'node-fetch';
 
 
 
@@ -30,7 +28,7 @@ class Discover extends React.Component {
     }
 
     makeSearch() {
-        let url = "http://localhost:5000/libraries"
+        let url = "/libraries"
 
         if(this.state.activeFilterIndex === 0) {
             console.log('Default...')

@@ -5,6 +5,7 @@ const router = new express.Router()
 
 router.post('/libraries', async (req, res) => {
     console.log("--------------IN POST---------")
+    console.log(req.body)
     const library = new Library(req.body)
 
     try {

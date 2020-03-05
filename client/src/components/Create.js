@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateCard from './CreateCard';
 import WordField from './WordField';
+import axios from 'axios'
 import './Create.css';
 
 
@@ -21,44 +22,42 @@ class Create extends React.Component {
         this.setState({ activeForm: option })
     }
 
-    postNewLibrary() {
+    postNewLibrary () {
+
+
+        // let url = "/libraries"
         let url = "/libraries"
         let payload = {
-            libraryName: "My dogs",
-            authorName: "Mark Swinimer",
-            creationDate: "03/5/2020",
-            wordCount: 7,
-            playCount: 0,
-            wordList: [
-                "Layla",
-                "Rosco",
-                "Ellie May",
-                "Brady",
-                "Buddy",
-                "Helo",
-                "Shadow",
-                "Rosie"
+            "libraryName": "My dogs",
+            "authorName": "Mark Swinimer",
+            "creationDate": "03/4/2020",
+            "wordCount": 444,
+            "playCount": 0,
+            "words": [
+                "buddy",
+                "layla",
+                "rosco",
+                "shadow",
+                "ellie may",
             ]
         }
 
-        let test = JSON.stringify(payload)
-        console.log(test)
-        fetch(url, { 
-            method: 'post',
-            body: JSON.stringify(payload)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(err => {
-            console.log("Unable to create new library, error log: " + err)
-        })
-    }
+        const options = {
+            url: url,
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: payload
+        };
 
+        axios(options)
+            .then(response => {
+                console.log(response.status);
+            })
+        }
     render() {
-
-
         return(
             <div className="Create">
                 <h1>Create</h1>
