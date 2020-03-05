@@ -43,7 +43,7 @@ class Discover extends React.Component {
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            // this.storeResults(data)
+            this.storeResults(data)
             console.log(data)
         })
         .catch(err => {

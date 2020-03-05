@@ -62,9 +62,9 @@ class Create extends React.Component {
         return(
             <div className="Create">
                 <h1>Create</h1>
-                {/* <button onClick={this.postNewLibrary}>
+                <button onClick={this.postNewLibrary}>
                     TEST POST
-                </button> */}
+                </button>
                 <CreateCard
                     id="new"
                     name="New Library"
