@@ -7,7 +7,7 @@
 }
 
 .Discover-title {
-    padding: 1em 6em 2em 4em;
+    padding: 0em 0em 2em 0em;
     display: flex;
     flex-direction: row;
 }
@@ -49,11 +49,8 @@
 
 .Discover-filter:hover {
     color: #202020;
-    background-color: snow;
-}
-
-.Discover-filter:last-child {
-    border-right: none;
+    border-bottom: 2px solid #d87171;
+    cursor: pointer;
 }
 
 .Discover-filter-amount {
@@ -104,7 +101,7 @@
 .authorName {
     flex: 3;
 }
-.date {
+.creationDate {
     flex: 2;
 }
 .wordCount {

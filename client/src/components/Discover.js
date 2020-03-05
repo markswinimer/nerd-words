@@ -15,14 +15,14 @@ class Discover extends React.Component {
             searchStore: undefined,
             activeFilterIndex: 0
         }
-        this.getLibs = this.getLibs.bind(this)
+        this.makeSearch = this.makeSearch.bind(this)
         this.storeResults = this.storeResults.bind(this)
         this.handleToggleFilter = this.handleToggleFilter.bind(this)
     }
 
     componentDidMount() {
         if(!this.searchStore) {
-            this.getLibs()
+            this.makeSearch()
         }
     }
 
@@ -30,9 +30,17 @@ class Discover extends React.Component {
         this.setState({ searchStore: data })
     }
 
-    getLibs() {
-        const url = "http://localhost:5000/libraries"
+    makeSearch() {
+        let url = "http://localhost:5000/libraries"
 
+        if(this.state.activeFilterIndex === 0) {
+            console.log('Default...')
+        } else if(this.state.activeFilterIndex === 1) {
+            url += "/top"
+        } else if(this.state.activeFilterIndex === 2) {
+            url += "/owned"
+        }
+        
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -44,18 +52,20 @@ class Discover extends React.Component {
     }
 
     handleToggleFilter(index) {
-        this.setState({ activeFilterIndex: index })
+        this.setState({ activeFilterIndex: index }, () => {
+            this.makeSearch()
+        })
     }
+
+
 
     render() {
         let tableRows;
-        console.log(this.state.searchResults)
 
         if (this.state.searchStore) {
-            console.log("THIS IS HAPPENING")
             tableRows = this.state.searchStore.map(lib => (
                 <TableEntry 
-                    libraryName={lib.librayName}
+                    libraryName={lib.libraryName}
                     authorName={lib.authorName}
                     creationDate={lib.creationDate}
                     wordCount={lib.wordCount}
@@ -82,9 +92,9 @@ class Discover extends React.Component {
                             <tr className="Discover-table-header">
                                     <th className="libraryName">Collection Name</th>
                                     <th className="authorName">Creator</th>
-                                    <th className="date">Date</th>
+                                    <th className="creationDate">Date</th>
                                     <th className="wordCount">Words</th>
-                                    <th className="playCount">Date</th>
+                                    <th className="playCount">Plays</th>
                                     <th className="sortSpace"></th>
                             </tr>
                         </tbody>

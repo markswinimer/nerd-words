@@ -55,7 +55,7 @@
 .authorName {
     flex: 3;
 }
-.date {
+.creationDate {
     flex: 2;
 }
 .wordCount {

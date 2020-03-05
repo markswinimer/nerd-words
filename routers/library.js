@@ -15,8 +15,30 @@ router.post('/libraries', async (req, res) => {
     }
 })
 
+//Temporary function, will use user auth later
+router.get('/libraries/owned', async (req, res) => {
+    console.log("Get request to 'owned' route [default hard coded]: Mark Swinimer")
+
+    const author = "Mark Swinimer"
+    try {
+        const libraries = await Library.find({ authorName: author })
+        res.send(libraries)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+router.get('/libraries/top', async (req, res) => {
+    console.log("Get request to 'top route'")
+    try {
+        const topLibraries = await Library.find({}).sort('-playCount').limit(10)
+        res.send(topLibraries)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 router.get('/libraries', async (req, res) => {
-    console.log("Made it to all libraries")
+    console.log("Get request to 'all libraries' route")
 
     try {
         const libraries = await Library.find({})
@@ -25,6 +47,8 @@ router.get('/libraries', async (req, res) => {
         res.status(500).send(e)
     }
 })
+
+
 
 router.get('/libraries/:id', async (req, res) => {
     const _id = req.params.id

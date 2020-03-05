@@ -20,6 +20,11 @@ const Library = mongoose.model('Library', {
         required: true,
         default: 0
     },
+    playCount: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     words: {
         type: Array,
         required: true,
