@@ -30,7 +30,7 @@ class Discover extends React.Component {
     }
 
     makeSearch() {
-        let url = "/libraries"
+        let url = "http://localhost:5000/libraries"
 
         if(this.state.activeFilterIndex === 0) {
             console.log('Default...')
