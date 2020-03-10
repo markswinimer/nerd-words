@@ -52,28 +52,3 @@
     display: flex;
     flex-direction: column;
 }
-
-.CreateForm-info {
-
-}
-
-.CreateForm label {
-    margin-bottom: 1em;
-    display: flex;
-    flex-direction: row;
-    font-size: 1.25em;
-    align-items: flex-end;
-}
-
-.CreateForm select {
-    margin-left: auto;
-    margin-right: 24em;
-    width: 200px;
-    font-size: .75em;
-}
-
-.CreateForm input {
-    margin-left: auto;
-    margin-right: 18em;
-    font-size: 1em;
-}
