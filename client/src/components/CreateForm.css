@@ -1,34 +1,29 @@
-.CreateForm-info {}
 
-.CreateForm label {
-    margin-bottom: 1em;
+.CreateForm {
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    transition: 10s ease-in;
     display: flex;
-    flex-direction: row;
-    font-size: 1.25em;
-    align-items: flex-end;
+    flex-direction: column;
 }
 
+.CreateForm label {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25em;
+    /* align-items: flex-end; */
+}
+.CreateForm input {
+    width: 50%;
+    margin-top: .5em;
+    padding-left: .25em;
+    font-size: 1em;
+}
 .CreateForm select {
     margin-left: auto;
     margin-right: 24em;
     width: 200px;
     font-size: .75em;
-}
-
-.CreateForm input {
-    margin-left: auto;
-    margin-right: 18em;
-    padding-left: .25em;
-    font-size: 1em;
-}
-
-.CreateForm .WordField {
-    margin: 0;
-    height: 40px;
-    max-width: 500px;
-    border: none;
-    border-bottom: 1px solid silver;
-    margin-bottom: 1em;
 }
 
 .CreateForm-add-word {
@@ -57,4 +52,72 @@
     font-size: 4.25em;
 }
 
+.WordList {
+    margin-bottom: 2em;
+    padding: 2em 0em;
+    overflow: auto;
+   -webkit-column-count: 3;
+      -moz-column-count: 3;
+           column-count: 3;
 
+   -webkit-column-gap: 40px;
+      -moz-column-gap: 40px;
+           column-gap: 40px;
+
+}
+
+.WordList .WordField {
+    width: 100%;
+    margin: 0;
+    padding-bottom: .5em;
+    max-width: 500px;
+    border: none;
+    border-bottom: 1px solid silver;
+    margin-bottom: 1em;
+    display: flex;
+}
+
+.CreateForm-submit button {
+    border: none;
+    border-radius: 5px;
+    padding: .5em 1em;
+    font-size: 1em;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    margin-bottom: 1em;
+}
+
+.CreateForm-description-box {
+    font-size: 1em;
+    resize: none;
+    border: 1px solid silver;
+    margin-top: 1em;
+    width: 50%;
+    min-height: 100px;
+    height: auto;
+}
+
+.CreateForm-option {
+    display: flex;
+    flex-direction: row;
+}
+.CreateForm-option div {
+    border: none;
+    border-radius: 5px;
+    padding: 1em 1em;
+    font-size: 1em;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+}

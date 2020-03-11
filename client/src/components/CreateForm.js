@@ -1,25 +1,26 @@
 import React from 'react';
 import InputField from './sub-components/InputField';
-import DropDownField from './sub-components/DropdownField';
+import DropDownField from './sub-components/DropDownField';
 import WordField from './sub-components/WordField';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-
+import LibraryPreview from './LibraryPreview';
+import NewLibraryForm from './NewLibraryForm';
+import AddWordsForm from './AddWordsForm';
+import axios from 'axios';
 import './CreateForm.css';
+import { platform } from 'os';
 
 class CreateForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            maxLibrarySize: 20,
-            library: {
-                libraryName: undefined,
-                authorName: undefined,
-                wordLibrary: []
-            }
+            activeForm: false,
+            currentWordValue: "",
+            library: undefined
         }
         this.handleChange = this.handleChange.bind(this)
+        this.postNewLibrary = this.postNewLibrary.bind(this)
+        this.switchEditMode = this.switchEditMode.bind(this)
+        this.loadEditForm = this.loadEditForm.bind(this)
     }
 
     handleChange(event) {
@@ -30,58 +31,75 @@ class CreateForm extends React.Component {
         this.setState({ library: editLibrary })
     }
 
+    switchEditMode(event) {
+        this.setState({ 
+            activeForm: event.target.id
+        })
+    }
+
+    postNewLibrary(payload) {
+        let url = "/libraries"
+        
+        const options = {
+            url: url,
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: payload
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response);
+                this.setState({ 
+                    library: response.data,
+                    activeForm: "edit"
+                })
+            })
+    }
+
+
+    loadEditForm() {
+        let id = "5e66ce6f3df09970e8150888"
+        let url = "/libraries/" + id 
+        console.log(url)
+        const options = {
+            url: url,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: id
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    library: response.data,
+                    activeForm: "edit"
+                })
+            })
+        console.log("HIMMIMIM")
+
+    }
 
     render() {
-        let words = []
-        for(let i = 0; i < this.props.librarySize; i++ ) {
-            words.push(
-                <WordField
-                    id="Library Name"
-                    name="libraryName"
-                    type="text"
-                    value="ok"
-                />
-            )
-        }
+       
 
     return(
             <div className="CreateForm">
-                    <InputField
-                        id="Library Name"
-                        name="libraryName"
-                        type="text"
-                        value={this.state.library.libraryName}
-                        handleChange={this.handleChange}
-                    />
-                    <InputField
-                        id="Author"
-                        name="authorName"
-                        type="text"
-                        value={this.state.library.authorName}
-                        handleChange={this.handleChange}
-                    />
-                    <DropDownField
-                        id="Library Size"
-                        name="librarySize"
-                        type="text"
-                        // value={this.state.library.maxLibrarySize}
-                        handleChange={this.handleChange}
-                    />
-                    <h1>Words</h1>
-                    <div className="CreateForm-add-word">
-                        <input
-                            id="0"
-                            name="Main-input"
-                            type='text'
-                            className="CreateForm-addword"
-                        />
-                        <button>
-                        <FontAwesomeIcon className="icon" icon={faPlusSquare} />
-                        </button>
-                    </div>
-                    
-                    {words}
+                <div className="CreateForm-option">
+                    <div onClick={this.switchEditMode} id="create">Create New Library</div>
+                    <div onClick={this.loadEditForm} id="edit">Edit Existing Library</div>
                 </div>
+            {this.state.activeForm === "create" ? <NewLibraryForm postNewLibrary={this.postNewLibrary} /> : <LibraryPreview />}
+
+            {this.state.activeForm === "edit" ? <AddWordsForm library={this.state.library} id="5e66ce6f3df09970e8150888" /> : null}
+            </div>
         )
     }
 }

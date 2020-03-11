@@ -1,24 +1,21 @@
 import React from 'react'
 
-class DropDownField extends React.Component {
-    render() {
-        const { props } = this
-        return (
-            <label>{props.id}
-                <select
-                    id={props.id}
-                    name={props.name}
-                    type='text'
-                    // value={props.value}
-                    onChange={props.handleChange}
-                >
-                    <option>Small</option>
-                    <option>Medium</option>
-                    <option>Large</option>
-                </select>
-            </label>
-        )
-    }
+const DropDownField = props => {
+    return (
+        <label>{props.id}
+            <select
+                id={props.id}
+                name={props.name}
+                type='text'
+                value={props.value}
+                onChange={props.handleChange}
+            >
+                <option value={10}>Small</option>
+                <option value={30}>Medium</option>
+                <option value={60}>Large</option>
+            </select>
+        </label>
+    )
 }
 
 export default DropDownField;

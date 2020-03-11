@@ -8,7 +8,17 @@ const Library = mongoose.model('Library', {
     },
     authorName: {
         type: String,
-        required: true,
+        default: "Default Account",
+        trim: true,
+    },
+    // authorName: {
+    //     type: String,
+    //     required: true,
+    //     trim: true,
+    // },
+    description: {
+        type: String,
+        required: false,
         trim: true,
     },
     creationDate: {
@@ -17,18 +27,14 @@ const Library = mongoose.model('Library', {
     },
     wordCount: {
         type: Number,
-        required: true,
         default: 0
     },
     playCount: {
         type: Number,
-        required: true,
         default: 0
     },
     words: {
         type: Array,
-        required: true,
-        minLength: 1
     }
 })
 

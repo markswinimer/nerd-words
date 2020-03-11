@@ -3,7 +3,7 @@ import React from 'react'
 const InputField = props => {
     
     return (
-        <label>{props.id}
+        <label>{props.label}
             <input
                 id={props.id}
                 name={props.name}

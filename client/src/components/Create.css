@@ -43,12 +43,31 @@
     font-size: 1.5em;
 }
 
-.CreateForm {
-    padding: 1em 2em;
-    border: 1px solid silver;
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-    transition: 10s ease-in;
+
+.Create-options {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+.Create-options div {
+    margin-right: 1.5em;
+    border: none;
+    border-radius: 5px;
+    padding: .5em 1em;
+    font-size: 1em;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1em;
+    min-width: 100px;
+    padding: 1em 1em; 
+}
+
+.Create-options .unselected {
+    background-color: silver;
+    color: #939393;
 }

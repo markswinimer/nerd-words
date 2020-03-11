@@ -1,0 +1,16 @@
+.NewLibraryForm {
+    
+}
+
+.NewLibraryForm button {
+    border: none;
+    margin-top: 1em;
+    border-radius: 10px;
+    padding: .5em 1em;
+    font-size: 1em;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
