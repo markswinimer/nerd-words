@@ -5,9 +5,15 @@ import WordField from './sub-components/WordField';
 import LibraryPreview from './LibraryPreview';
 import NewLibraryForm from './NewLibraryForm';
 import AddWordsForm from './AddWordsForm';
+import TableEntry from './TableEntry';
+import LibraryChooser from './LibraryChooser';
 import axios from 'axios';
 import './CreateForm.css';
 import { platform } from 'os';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
+
 
 class CreateForm extends React.Component {
     constructor(props) {
@@ -96,12 +102,39 @@ class CreateForm extends React.Component {
                     <div onClick={this.switchEditMode} id="create">Create New Library</div>
                     <div onClick={this.loadEditForm} id="edit">Edit Existing Library</div>
                 </div>
-            {this.state.activeForm === "create" ? <NewLibraryForm postNewLibrary={this.postNewLibrary} /> : <LibraryPreview />}
+            {this.state.activeForm === "create" ? <NewLibraryForm postNewLibrary={this.postNewLibrary} /> : null}
+            {this.state.activeForm === "preview" ? <LibraryPreview /> : null }
 
+            {this.state.activeForm === "edit" ? <LibraryChooser /> : null}
             {this.state.activeForm === "edit" ? <AddWordsForm library={this.state.library} id="5e66ce6f3df09970e8150888" /> : null}
+            
             </div>
         )
     }
+}
+
+const ChooseLibrary = props => {
+    
+    return(
+        <div className="CreateForm-choose">
+            <FontAwesomeIcon className="arrow" icon={faAngleUp} />
+            <div className="CreateForm-entries">
+            <tr className="TableEntry">
+                <td className="libraryName">All About Words{props.libraryName}</td>
+                <td className="creationDate">03/02/2020{props.creationDate}</td>
+                <td className="wordCount"> 20{props.wordCount}</td>
+                <td className="playCount">{props.playCount}</td>
+                <td className="sortSpace">
+                    <button className="TableEntry-button icon">
+                        <FontAwesomeIcon className="icon" icon={faPencilAlt} />
+                    </button>
+                </td>
+            </tr>
+            </div>
+            <FontAwesomeIcon className="arrow" icon={faAngleDown} />
+
+        </div>
+    )
 }
 
 export default CreateForm;
