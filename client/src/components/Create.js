@@ -2,7 +2,36 @@ import React from 'react';
 import CreateCard from './CreateCard';
 import CreateForm from './CreateForm';
 import axios from 'axios'
+import styled from 'styled-components'
+
 import './Create.css';
+
+
+
+const StyledChooseMode = styled.div`
+    display: flex;
+    flex-direction: row;
+`
+const Button = styled.button`
+    border: none;
+    border-radius: 5px;
+    padding: 1em 1em;
+    font-size: 1em;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+`
+
+const StyledCreate = styled.div`
+    width: 800px;
+    max-width: 800px;
+`
 
 
 class Create extends React.Component {
@@ -10,7 +39,7 @@ class Create extends React.Component {
         super(props);
         this.state = {
             // State
-            activeForm: "new",
+            createMode: "choose",
             maxLibrarySize: 20,
             newLibrary: {
                 libraryName: undefined,
@@ -19,6 +48,7 @@ class Create extends React.Component {
             }
         }
         this.expandOption = this.expandOption.bind(this);
+        this.switchEditMode = this.switchEditMode.bind(this);
     }
 
     expandOption(option) {
@@ -26,43 +56,36 @@ class Create extends React.Component {
         this.setState({ activeForm: option })
     }
 
+    switchEditMode(event) {
+        this.setState({
+            createMode: event.target.id
+        })
+    }
+    
+
     render() {
         return(
-            <div className="Create">
+            <StyledCreate>
                 <h1>Create</h1>
-                <p>Creating new word libraries is easy. Follow these steps to start making one right now!</p>
-{/* 
-                <div className="Create-options">
-                    <div>Create New Library</div>
-                    <div className="unselected">Edit Existing Library</div>
-                </div> */}
 
-                {/* <CreateCard
-                    id="new"
-                    name="New Library"
-                    onClick={this.expandOption}
-
-                /> */}
-                {this.state.activeForm === "new" ? <CreateForm/> : null}
-                {/* <CreateCard
-                    id="manage"
-                    name="Edit and Manage My Libraries"
-                    onClick={this.expandOption}
-
-                />
-                {this.state.activeForm === "manage" ? <CreateForm /> : null}
-                <CreateCard
-                    id="favorites"
-                    name="View My Favorites"
-                    onClick={this.expandOption}
-
-                />
-                {this.state.activeForm === "favorites" ? <CreateForm /> : null} */}
-
-                
-            </div>
+                {this.state.createMode === "choose"
+                    ?   <ChooseMode switchEditMode={this.switchEditMode} />
+                    :   <CreateForm activeForm={this.state.createMode} /> 
+                }
+            </StyledCreate>
         )
     }
+}
+
+const ChooseMode = props => {
+    return(
+        <StyledChooseMode>
+            <p>Creating new word libraries is easy. Follow these steps to start making one right now!</p>
+
+            <Button id="create" onClick={props.switchEditMode}>Create New Library</Button>
+            <Button id="edit" onClick={props.switchEditMode}>Edit Existing Library</Button>
+        </StyledChooseMode>
+    )
 }
 
 export default Create;

@@ -98,15 +98,11 @@ class CreateForm extends React.Component {
 
     return(
             <div className="CreateForm">
-                <div className="CreateForm-option">
-                    <div onClick={this.switchEditMode} id="create">Create New Library</div>
-                    <div onClick={this.loadEditForm} id="edit">Edit Existing Library</div>
-                </div>
-            {this.state.activeForm === "create" ? <NewLibraryForm postNewLibrary={this.postNewLibrary} /> : null}
-            {this.state.activeForm === "preview" ? <LibraryPreview /> : null }
+            {this.props.activeForm === "create" ? <NewLibraryForm postNewLibrary={this.postNewLibrary} /> : null}
+            {this.props.activeForm === "preview" ? <LibraryPreview /> : null }
 
-            {this.state.activeForm === "edit" ? <LibraryChooser /> : null}
-            {this.state.activeForm === "edit" ? <AddWordsForm library={this.state.library} id="5e66ce6f3df09970e8150888" /> : null}
+            {this.props.activeForm === "edit" ? <LibraryChooser /> : null}
+            {this.props.activeForm === "edit" ? <AddWordsForm library={this.state.library} id="5e66ce6f3df09970e8150888" /> : null}
             
             </div>
         )
