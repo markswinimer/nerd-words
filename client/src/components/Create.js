@@ -1,12 +1,11 @@
 import React from 'react';
-import CreateCard from './CreateCard';
 import CreateForm from './CreateForm';
-import axios from 'axios'
-import styled from 'styled-components'
+import AddWordsForm from './AddWordsForm';
+import LibrarySelector from './LibrarySelector';
+import NewLibraryForm from './NewLibraryForm';
 
-import './Create.css';
-
-
+import axios from 'axios';
+import styled from 'styled-components';
 
 const StyledChooseMode = styled.div`
     display: flex;
@@ -33,45 +32,105 @@ const StyledCreate = styled.div`
     max-width: 800px;
 `
 
-
 class Create extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // State
-            createMode: "choose",
-            maxLibrarySize: 20,
-            newLibrary: {
-                libraryName: undefined,
-                authorName: undefined,
-                wordLibrary: []
-            }
+            chooseMode: true,
+            activeForm: null,
+            library: null
         }
-        this.expandOption = this.expandOption.bind(this);
-        this.switchEditMode = this.switchEditMode.bind(this);
+        this.switchCreateMode = this.switchCreateMode.bind(this);
+        this.postNewLibrary = this.postNewLibrary.bind(this);
+        this.loadEditForm = this.loadEditForm.bind(this);
     }
 
-    expandOption(option) {
-        console.log(option)
-        this.setState({ activeForm: option })
-    }
-
-    switchEditMode(event) {
+    switchCreateMode(event) {
         this.setState({
-            createMode: event.target.id
+            chooseMode: false,
+            activeForm: event.target.id
         })
     }
-    
 
+
+    postNewLibrary(payload) {
+        let url = "/libraries"
+
+        const options = {
+            url: url,
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: payload
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response);
+                this.setState({
+                    library: response.data,
+                    activeForm: "addWords"
+                })
+            })
+    }
+
+    loadEditForm() {
+        let id = "5e66ce6f3df09970e8150888"
+        let url = "/libraries/" + id
+        console.log(url)
+        const options = {
+            url: url,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: id
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    library: response.data,
+                    activeForm: "edit"
+                })
+            })
+    }
+
+
+    
     render() {
         return(
             <StyledCreate>
                 <h1>Create</h1>
 
-                {this.state.createMode === "choose"
-                    ?   <ChooseMode switchEditMode={this.switchEditMode} />
-                    :   <CreateForm activeForm={this.state.createMode} /> 
+                {this.state.chooseMode === true
+                    ?   <ChooseMode switchCreateMode={this.switchCreateMode} />
+                    :   null 
                 }
+
+                {this.state.activeForm === "createNew"
+                    ?   <NewLibraryForm 
+                            postNewLibrary={this.postNewLibrary}
+                        />
+                    :   null
+                }
+
+                {this.state.activeForm === "editExisting"
+                    ?   <LibrarySelector />
+                    :   null
+                }
+
+                {this.state.activeForm === "addWords"
+                    ?   <AddWordsForm
+                            library={this.state.library}
+                        />
+                    :   null
+                }
+
             </StyledCreate>
         )
     }
@@ -82,8 +141,8 @@ const ChooseMode = props => {
         <StyledChooseMode>
             <p>Creating new word libraries is easy. Follow these steps to start making one right now!</p>
 
-            <Button id="create" onClick={props.switchEditMode}>Create New Library</Button>
-            <Button id="edit" onClick={props.switchEditMode}>Edit Existing Library</Button>
+            <Button id="createNew" onClick={props.switchCreateMode}>Create New Library</Button>
+            <Button id="editExisting" onClick={props.switchCreateMode}>Edit Existing Library</Button>
         </StyledChooseMode>
     )
 }

@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
-import './LibraryChooser.css';
+import './LibrarySelector.css';
 
-class LibraryChooser extends React.Component {
+class LibrarySelector extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -53,7 +53,7 @@ class LibraryChooser extends React.Component {
             />
         ))
         return(
-            <div className="LibraryChooser">
+            <div className="LibrarySelector">
                 <FontAwesomeIcon className="icon" icon={faAngleUp} />
                 <div className="CreateForm-entries">
                     {userLibrariesList}
@@ -77,4 +77,4 @@ const UserLibraryEntry = props => {
     )
 }
 
-export default LibraryChooser;
+export default LibrarySelector;

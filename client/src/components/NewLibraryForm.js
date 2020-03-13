@@ -62,7 +62,7 @@ class NewLibraryForm extends React.Component {
                     handleChange={this.handleChange}
                 />
 
-                <button>Next Step</button>
+                <button>Create Library</button>
             </form>
         )
     }

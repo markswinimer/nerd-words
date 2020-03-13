@@ -5,15 +5,23 @@ import WordField from './sub-components/WordField';
 import LibraryPreview from './LibraryPreview';
 import NewLibraryForm from './NewLibraryForm';
 import AddWordsForm from './AddWordsForm';
-import TableEntry from './TableEntry';
-import LibraryChooser from './LibraryChooser';
+import LibrarySelector from './LibrarySelector';
 import axios from 'axios';
+import styled from 'styled-components';
 import './CreateForm.css';
 import { platform } from 'os';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
+
+const StyledCreateForm = styled.div`
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    transition: 10s ease-in;
+    display: flex;
+    flex-direction: column;
+`
 
 class CreateForm extends React.Component {
     constructor(props) {
@@ -97,40 +105,17 @@ class CreateForm extends React.Component {
        
 
     return(
-            <div className="CreateForm">
+        <StyledCreateForm>
             {this.props.activeForm === "create" ? <NewLibraryForm postNewLibrary={this.postNewLibrary} /> : null}
-            {this.props.activeForm === "preview" ? <LibraryPreview /> : null }
+            {this.props.activeForm === "preview" ? <LibraryPreview /> : null}
 
-            {this.props.activeForm === "edit" ? <LibraryChooser /> : null}
+            {this.props.activeForm === "edit" ? <LibrarySelector /> : null}
             {this.props.activeForm === "edit" ? <AddWordsForm library={this.state.library} id="5e66ce6f3df09970e8150888" /> : null}
-            
-            </div>
-        )
-    }
-}
 
-const ChooseLibrary = props => {
-    
-    return(
-        <div className="CreateForm-choose">
-            <FontAwesomeIcon className="arrow" icon={faAngleUp} />
-            <div className="CreateForm-entries">
-            <tr className="TableEntry">
-                <td className="libraryName">All About Words{props.libraryName}</td>
-                <td className="creationDate">03/02/2020{props.creationDate}</td>
-                <td className="wordCount"> 20{props.wordCount}</td>
-                <td className="playCount">{props.playCount}</td>
-                <td className="sortSpace">
-                    <button className="TableEntry-button icon">
-                        <FontAwesomeIcon className="icon" icon={faPencilAlt} />
-                    </button>
-                </td>
-            </tr>
-            </div>
-            <FontAwesomeIcon className="arrow" icon={faAngleDown} />
-
-        </div>
+        </StyledCreateForm>
     )
-}
+    }
+    }
+
 
 export default CreateForm;

@@ -37,7 +37,7 @@ class AddWordsForm extends React.Component {
 
 
     render() {
-        let words;
+        let words = [];
         console.log(this.props)
         let libraryLoaded = this.props.library.words
             words = libraryLoaded.map(word => (
