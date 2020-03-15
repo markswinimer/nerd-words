@@ -21,6 +21,13 @@ const StyledCreateForm = styled.div`
     transition: 10s ease-in;
     display: flex;
     flex-direction: column;
+
+    input {        
+        width: 50%;
+        margin-top: .5em;
+        padding-left: .25em;
+        font-size: 1em;
+    }
 `
 
 class CreateForm extends React.Component {

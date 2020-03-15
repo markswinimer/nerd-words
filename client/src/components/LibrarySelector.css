@@ -1,19 +1,22 @@
-.LibraryChooser {
+.LibrarySelector {
     display: flex;
     flex-direction: column;
 }
 
-.LibraryChooser-entries {
+.LibrarySelector-entries {
     display: flex;
     flex-direction: column;
     overflow: scroll;
     max-height: 300px;
 }
 
-.LibraryChooser .icon {
-    margin: .2em auto;
-    font-size: 2em;
-    color: #c73636;
+.LibrarySelector .icon {
+    font-size: 1em;
+}
+
+.LibrarySelector .iconArrow {
+    font-size: 1.5em;
+    margin: .5em auto;
 }
 
 .UserLibraryEntry {
@@ -27,17 +30,48 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: .25em 2em;
+    padding: .25em 2em .25 1em;
     border: 1px solid silver;
     border-radius: 8px;
     margin-bottom: .25em;
     height: 50px;
     max-width: 100%;
+    font-size: 1em;
+    cursor: pointer;
 }
 
-.UserLibraryEntry {
+.UserLibraryEntry-info:hover {
+    background-color: #c73636;
+    color: white;
+}
+
+.UserLibraryEntry div {
     flex: 1
 }
 .UserLibraryEntry .icon {
     padding: 0 1em;
+    margin-right: 1em;
+}
+
+.UserLibraryEntry-legend {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .25em 2em .25 1em;
+    border: 1px solid silver;
+    border-radius: 8px;
+    margin-bottom: .25em;
+    min-height: 30px;
+    max-width: 100%;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #F5F5F5;
+    padding-left: 4em;
+    position: sticky;
+}
+.UserLibraryEntry-legend div {
+    flex: 1;
+    font-weight: bold;
 }

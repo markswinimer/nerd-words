@@ -16,6 +16,7 @@ class LibrarySelector extends React.Component {
         }
 
         this.getUserLibraries = this.getUserLibraries.bind(this)
+        this.handleChoice = this.handleChoice.bind(this)
     }
 
     componentDidMount() {
@@ -43,6 +44,10 @@ class LibrarySelector extends React.Component {
                 })
         }
 
+        handleChoice(id) {
+            this.props.loadEditForm(id)
+        }
+
     render() {
 
         let userLibrariesList = [];
@@ -50,31 +55,42 @@ class LibrarySelector extends React.Component {
             <UserLibraryEntry
                 libraryName={library.libraryName}
                 wordCount={library.words.length}
+                _id={library._id}
+                setLibrary={this.handleChoice}
             />
         ))
         return(
             <div className="LibrarySelector">
-                <FontAwesomeIcon className="icon" icon={faAngleUp} />
+                <h2>Choose a library to edit</h2>
+                <p>You can only edit libraries you've created.</p>
+                <FontAwesomeIcon className="iconArrow" icon={faAngleUp} />
+                <div className="UserLibraryEntry-legend">
+                    <div>Library Name</div>
+                    <div>Word Count</div>
+                </div>
                 <div className="CreateForm-entries">
                     {userLibrariesList}
                 </div>
-                <FontAwesomeIcon className="icon" icon={faAngleDown} />
+                <FontAwesomeIcon className="iconArrow" icon={faAngleDown} />
             </div>
         )
     }
 }
 
-const UserLibraryEntry = props => {
-    return(
-        <div className="UserLibraryEntry">
-            <div className="UserLibraryEntry-info">
-                <div>Library: {props.libraryName}</div>
-                <div>Word Count: {props.wordCount}</div>
-            </div>
-            <FontAwesomeIcon className="icon" icon={faPencilAlt} />
+class UserLibraryEntry extends React.Component {
+    handleClick = () => this.props.setLibrary(this.props._id)
 
-        </div>
-    )
+    render() {
+        return(
+            <div className="UserLibraryEntry">
+                <div className="UserLibraryEntry-info" onClick={this.handleClick}>
+                    <FontAwesomeIcon className="icon" icon={faPencilAlt} />
+                        <div>{this.props.libraryName}</div>
+                        <div>{this.props.wordCount}</div>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default LibrarySelector;

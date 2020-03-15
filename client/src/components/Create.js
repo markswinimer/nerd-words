@@ -9,11 +9,12 @@ import styled from 'styled-components';
 
 const StyledChooseMode = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 `
+
 const Button = styled.button`
     border: none;
-    border-radius: 5px;
+    border-radius: {standard-radius};
     padding: 1em 1em;
     font-size: 1em;
     background-color: #c73636;
@@ -23,13 +24,16 @@ const Button = styled.button`
     align-items: center;
     text-align: center;
     margin-top: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 0em;
     margin-right: 1em;
+    width: 50%;
 `
 
 const StyledCreate = styled.div`
     width: 800px;
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
 `
 
 class Create extends React.Component {
@@ -37,6 +41,7 @@ class Create extends React.Component {
         super(props);
         this.state = {
             chooseMode: true,
+            previewLibrary: false,
             activeForm: null,
             library: null
         }
@@ -52,6 +57,9 @@ class Create extends React.Component {
         })
     }
 
+    setLibrary(library) {
+        this.setState({ library: library })
+    }
 
     postNewLibrary(payload) {
         let url = "/libraries"
@@ -76,8 +84,10 @@ class Create extends React.Component {
             })
     }
 
-    loadEditForm() {
-        let id = "5e66ce6f3df09970e8150888"
+    loadEditForm(id) {
+        if(!id) {
+           let id = "5e66ce6f3df09970e8150888"
+        }
         let url = "/libraries/" + id
         console.log(url)
         const options = {
@@ -95,17 +105,20 @@ class Create extends React.Component {
                 console.log(response.data);
                 this.setState({
                     library: response.data,
-                    activeForm: "edit"
+                    activeForm: "addWords"
                 })
             })
     }
-
-
     
     render() {
         return(
             <StyledCreate>
                 <h1>Create</h1>
+
+                {this.state.previewLibrary === false
+                    ? <div></div>
+                    : null
+                }
 
                 {this.state.chooseMode === true
                     ?   <ChooseMode switchCreateMode={this.switchCreateMode} />
@@ -120,7 +133,9 @@ class Create extends React.Component {
                 }
 
                 {this.state.activeForm === "editExisting"
-                    ?   <LibrarySelector />
+                    ?   <LibrarySelector
+                            loadEditForm={this.loadEditForm}
+                        />
                     :   null
                 }
 

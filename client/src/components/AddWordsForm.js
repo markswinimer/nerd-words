@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import WordField from './sub-components/WordField';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -29,12 +30,38 @@ class AddWordsForm extends React.Component {
         // current use is to get base functionality
         let editLibrary = this.state.library
         editLibrary.words.push(this.state.currentWordValue)
+        this.postNewWord(this.state.library._id)
         this.setState({
             currentWordValue: "",
             library: editLibrary
         })
     }
 
+    postNewWord(id) {
+        console.log(id)
+        let url = "/libraries/" + id
+        let word = {
+            word: this.state.currentWordValue
+        }
+        const options = {
+            url: url,
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: word
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response);
+                this.setState({
+                    library: response.data,
+                    currentWord: ""
+            })
+        })
+    }
 
     render() {
         let words = [];

@@ -81,31 +81,37 @@ router.delete('/libraries/:id', async (req, res) => {
 
 router.patch('/libraries/:id', async (req, res) => {
     const updates = Object.keys(req.body)
-    // const allowedUpdates = ['name', 'email', 'password', 'age']
-    // const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-    // // This code block exists to provide information if an invalid value is given
-    // if (!isValidOperation) {
-    //     return res.status(400).send({ error: 'Invald Requests given' })
-    // }
+    console.log("--------------IN PATCH---------")
+    console.log(req.body)
+    console.log(updates)
+    const allowedUpdates = ['word']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+    // This code block exists to provide information if an invalid value is given
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invald Requests given' })
+    }
+    try {
+        console.log(req.params.id)
+        const library = await Library.findById(req.params.id)
+        console.log(library)
+        // this method, as opposed to the one commented out below, does not bypass the 'pre' method
+        // in the model
+        updates.forEach((update) => {
+            library[update] = req.body[update]
+        }
+        console.log(library)
+        await library.save()
+        // 3rd argument is { options }, new: true sends back the updated object not the found one
+        // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
-    // try {
-    //     const user = await User.findById(req.params.id)
-    //     // this method, as opposed to the one commented out below, does not bypass the 'pre' method
-    //     // in the model
-    //     updates.forEach((update) => user[update] = req.body[update])
-
-    //     await user.save()
-    //     // 3rd argument is { options }, new: true sends back the updated object not the found one
-    //     // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-
-    //     if (!user) {
-    //         return res.status(404).send()
-    //     }
-    //     res.send(user)
-    // } catch (e) {
-    //     // could have a server connection/directory issue or a validation issue due to the runValidators option
-    //     res.status(400).send(e)
-    // }
+        if (!library) {
+            return res.status(404).send()
+        }
+        res.send(user)
+    } catch (e) {
+        // could have a server connection/directory issue or a validation issue due to the runValidators option
+        res.status(400).send(e)
+    }
 })
 
 module.exports = router
