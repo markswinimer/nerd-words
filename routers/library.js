@@ -99,6 +99,13 @@ router.patch('/libraries/:id', async (req, res) => {
         updates.forEach((update) => {
             library[update] = req.body[update]
         }
+
+
+        // This is where I left off: I'm trying to get the database to save each individual word as you submit them via the form. 
+        // Here, the update methods are validated and compared in order to update the correct values
+        // Next: update the word array to include the new word and send back the updated word array.
+        // Consider only sending back the updated word array as nothing else will have been changed.
+
         console.log(library)
         await library.save()
         // 3rd argument is { options }, new: true sends back the updated object not the found one
