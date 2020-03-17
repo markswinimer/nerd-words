@@ -1,11 +1,17 @@
-.AddWordsForm input {
-    margin-right: 1em;
+.AddWordsForm-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1em;
 }
-.AddWordsForm button {
+.AddWordsForm-form input {
+    margin-right: .75em;
+}
+.AddWordsForm-form button {
     border: none;
-    height: 40px;
 }
 
-button.icon {
-    height: 430px;
+.AddWordsForm-form .icon {
+    font-size: 3.3em;
+    color: #c73636;
 }

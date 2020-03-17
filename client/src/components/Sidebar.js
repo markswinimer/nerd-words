@@ -73,15 +73,6 @@ class Sidebar extends React.Component {
                 <div className={
                     "Sidebar-link unavailable"
                     // -- Disabled --
-                    // this.props.currentPage === 'community' ? 'Sidebar-link active' : 'Sidebar-link'
-                } to='/community'>
-                    <FontAwesomeIcon className="icon" icon={faCommentAlt} />
-                    Community
-                </div>
-                
-                <div className={
-                    "Sidebar-link unavailable"
-                    // -- Disabled --
                     // this.props.currentPage === 'howto' ? 'Sidebar-link active' : 'Sidebar-link'
                 } to='/howto'>
                     <FontAwesomeIcon className="icon" icon={faQuestionCircle} />

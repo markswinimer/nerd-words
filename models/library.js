@@ -20,6 +20,7 @@ const Library = mongoose.model('Library', {
         type: String,
         required: false,
         trim: true,
+        default: "No description provided"
     },
     creationDate: {
         type: String,

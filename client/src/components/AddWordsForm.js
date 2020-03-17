@@ -1,4 +1,5 @@
 import React from 'react';
+import LibraryPreview from './LibraryPreview';
 import axios from 'axios';
 import WordField from './sub-components/WordField';
 
@@ -80,11 +81,9 @@ class AddWordsForm extends React.Component {
 
         return(
             <div className="AddWordsForm">
-                <p>Your library has been loaded.</p>
-                {/* {this.state.library.wordLibrary.length < 1 ? <p>Your library is empy, add some words!</p> : null} */}
-           
+            <LibraryPreview library={this.state.library}/>
             <h2>Add Words</h2>
-            <form onSubmit={this.handleWordSubmit} className="AddWordsForm">
+            <form onSubmit={this.handleWordSubmit} className="AddWordsForm-form">
                 <input
                     autoComplete="off"
 

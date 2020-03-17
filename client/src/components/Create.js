@@ -2,6 +2,7 @@ import React from 'react';
 import CreateForm from './CreateForm';
 import AddWordsForm from './AddWordsForm';
 import LibrarySelector from './LibrarySelector';
+import LibraryPreview from './LibraryPreview';
 import NewLibraryForm from './NewLibraryForm';
 
 import axios from 'axios';
@@ -113,12 +114,6 @@ class Create extends React.Component {
     render() {
         return(
             <StyledCreate>
-                <h1>Create</h1>
-
-                {this.state.previewLibrary === false
-                    ? <div></div>
-                    : null
-                }
 
                 {this.state.chooseMode === true
                     ?   <ChooseMode switchCreateMode={this.switchCreateMode} />
@@ -154,6 +149,7 @@ class Create extends React.Component {
 const ChooseMode = props => {
     return(
         <StyledChooseMode>
+            <h1>Create</h1>
             <p>Creating new word libraries is easy. Follow these steps to start making one right now!</p>
 
             <Button id="createNew" onClick={props.switchCreateMode}>Create New Library</Button>
