@@ -83,38 +83,36 @@ router.patch('/libraries/:id', async (req, res) => {
     const updates = Object.keys(req.body)
     console.log("--------------IN PATCH---------")
     console.log(req.body)
-    console.log(updates)
-    const allowedUpdates = ['word']
+    console.log("updates " + updates)
+    const allowedUpdates = ['words']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+    
     // This code block exists to provide information if an invalid value is given
     if (!isValidOperation) {
         return res.status(400).send({ error: 'Invald Requests given' })
     }
+
     try {
-        console.log(req.params.id)
         const library = await Library.findById(req.params.id)
         console.log(library)
-        // this method, as opposed to the one commented out below, does not bypass the 'pre' method
-        // in the model
-        updates.forEach((update) => {
-            library[update] = req.body[update]
-        }
 
+        updates.forEach((update) => {
+            library[update].push(req.body[update])
+        })
 
         // This is where I left off: I'm trying to get the database to save each individual word as you submit them via the form. 
         // Here, the update methods are validated and compared in order to update the correct values
         // Next: update the word array to include the new word and send back the updated word array.
         // Consider only sending back the updated word array as nothing else will have been changed.
 
-        console.log(library)
         await library.save()
         // 3rd argument is { options }, new: true sends back the updated object not the found one
-        // const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        // const library = await Library.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
         if (!library) {
             return res.status(404).send()
         }
-        res.send(user)
+        res.send(library.words)
     } catch (e) {
         // could have a server connection/directory issue or a validation issue due to the runValidators option
         res.status(400).send(e)

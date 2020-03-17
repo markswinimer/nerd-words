@@ -6,6 +6,8 @@ const TextAreaField = props => {
             id={props.id}
             name={props.name}
             type='text'
+            autoComplete="off"
+            
             onChange={props.handleChange}
         >{props.value}
         </textarea>

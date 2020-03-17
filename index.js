@@ -17,11 +17,13 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/node-reac
 app.use(cors()) 
 app.use(bodyParser.json());
 app.use(libraryRouter);
+// { useUnifiedTopology: true }
+// { useNewUrlParser: true }
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
-
     const path = require('path');
+    
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })

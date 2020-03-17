@@ -1,0 +1,11 @@
+.AddWordsForm input {
+    margin-right: 1em;
+}
+.AddWordsForm button {
+    border: none;
+    height: 40px;
+}
+
+button.icon {
+    height: 430px;
+}

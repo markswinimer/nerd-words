@@ -4,7 +4,7 @@ const WordField = props => {
     
     return(
         <input 
-            autocomplete="off"
+            autoComplete="off"
             
             id={props.id}
             name={props.name}

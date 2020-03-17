@@ -5,6 +5,8 @@ import WordField from './sub-components/WordField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
+import './AddWords.css'
+
 class AddWordsForm extends React.Component {
     constructor(props) {
         super(props);
@@ -38,10 +40,9 @@ class AddWordsForm extends React.Component {
     }
 
     postNewWord(id) {
-        console.log(id)
         let url = "/libraries/" + id
         let word = {
-            word: this.state.currentWordValue
+            words: this.state.currentWordValue
         }
         const options = {
             url: url,
@@ -55,9 +56,11 @@ class AddWordsForm extends React.Component {
 
         axios(options)
             .then(response => {
-                console.log(response);
+                let library = this.state.library
+                library.words = response.data
+
                 this.setState({
-                    library: response.data,
+                    library: library,
                     currentWord: ""
             })
         })
@@ -65,7 +68,6 @@ class AddWordsForm extends React.Component {
 
     render() {
         let words = [];
-        console.log(this.props)
         let libraryLoaded = this.props.library.words
             words = libraryLoaded.map(word => (
                 <WordField

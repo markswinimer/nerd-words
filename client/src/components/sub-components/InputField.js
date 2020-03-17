@@ -8,6 +8,8 @@ const InputField = props => {
                 id={props.id}
                 name={props.name}
                 type='text'
+                autoComplete="off"
+
                 value={props.value}
                 onChange={props.handleChange}
             />

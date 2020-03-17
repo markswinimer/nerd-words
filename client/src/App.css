@@ -71,3 +71,10 @@ ul {
    padding: 2em 17em 5em 15em;
    width: 100%;
  }
+
+ input {
+   height: 25px;
+   font-size: 1.25em;
+   margin-top: 1em;
+  padding: .1em 0 .2em .5em;
+  }
