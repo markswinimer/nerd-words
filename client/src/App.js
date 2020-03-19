@@ -4,6 +4,8 @@ import Discover from './components/Discover';
 import Create from './components/Create';
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
+import Play from './components/Play';
+
 import {
   BrowserRouter as Router,
   Route
@@ -21,7 +23,7 @@ const routes = [
   {
     path: '/play',
     sidebar: () => <Sidebar currentPage='play'/>,
-    main: () => <h1>Play</h1>
+    main: () => <Play />
   },
   {
     path: '/create',
