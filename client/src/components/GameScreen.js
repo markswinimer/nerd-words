@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faGlasses, faAngleDown, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
 
 import LibraryPreview from './LibraryPreview';
 
@@ -12,8 +12,7 @@ const StyledGameScreen = styled.div`
 const DeckInfo = styled.div`
     display: flex;
     flex-direction: row;
-    margin-top: 1em;
-    
+    margin-top: 1em; 
 `
 
 const Indicator = styled.div`
@@ -29,7 +28,7 @@ const Label = styled.div`
     border: none;
     background-color: #c73636;
     padding: .75em 1.25em;
-    border-radius: 0px 10px 0 0px;
+    border-radius: 0px 5px 0 0px;
     color: white;
     font-size: 1em;
 `
@@ -40,10 +39,12 @@ const DataDisplay = styled.div`
     border-bottom: 3px solid #c73636;
     border-right: 4px solid #c73636;
     padding: .75em 1.25em;
+    display: flex;
+    justify-content: flex-end;
     border-radius: 0 10px 0px 0;
     color: #c73636;
     font-weight: bold;
-    
+    width: 20px;
 `
 const ViewDiscarded = styled.div`
     background-color: white;
@@ -52,11 +53,20 @@ const ViewDiscarded = styled.div`
     color: #c73636;
     font-weight: bold;
     font-size: 2em;
+    padding-left: .5em;
 
     .icon {
         height: 100%;
+        cursor: pointer;
+        transition: .2s ease-in-out;
+
+        :hover {
+            font-size: 1.25em;
+            height: 120%;
+        }
     }
 `
+
 
 const Deck = styled.div`
 
@@ -72,10 +82,30 @@ const Card = styled.div`
     display: flex;
     align-items: center;
     justify-content: middle;
-
+    text-align: center;
+    padding: 1em;
+    box-sizing: border-box;
 `
+const CardBack = styled(Card)`
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    justify-content: center;
+
+    .icon {
+        font-size: 3em;
+        margin: 0 .25em;
+    }
+`
+
+const Logo = styled.div`
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Roboto Condensed';
+`
+
 const Word = styled.h3`
-    color: #101010;
+    color: #303030;
     font-size: 4em;
     margin: auto;
     padding-right: 20px;
@@ -95,9 +125,27 @@ const Control = styled.button`
     color: white;
     font-size: 1em;
     flex: ${props => props.sub ? "1" : "2" };
-    margin-left: ${props => props.sub ? "0" : "1em" };
+    margin-left: ${props => props.sub ? "0" : ".5em" };
     font-weight: bold;
     cursor: pointer;
+
+    :hover {
+        background-color: #c73636;
+        color: white;
+    }
+`
+
+const RefreshDeck = styled(Control)`
+    flex: none;
+    margin-right: .5em;
+    margin-left: none;
+    padding: none;
+    width: auto;
+    
+    :hover {
+        background-color: #c73636;
+        color: white;
+    }
 `
 
 export default class GameScreen extends React.Component {
@@ -111,14 +159,27 @@ export default class GameScreen extends React.Component {
         }
         this.nextCard = this.nextCard.bind(this)
         this.shuffleDeck = this.shuffleDeck.bind(this)
+        this.refreshDeck = this.refreshDeck.bind(this)
     }
 
     componentDidMount() {
-        let shuffledDeck = this.shuffleDeck(this.props.gameData.library.words)
+        let shuffledDeck = this.props.gameData.library.words;
+        this.shuffleDeck(shuffledDeck)
 
         this.setState({ drawPile: shuffledDeck })
     }
     
+    refreshDeck() {
+
+        const newDeck = this.shuffleDeck(this.state.library.words)
+        
+        this.setState({ 
+            drawPile: newDeck,
+            discardPile: [],
+            currentWord: undefined
+        })
+    }
+
     shuffleDeck(deck) {
         let j, x;
         for (let i = deck.length - 1; i > 0; i--) {
@@ -143,11 +204,10 @@ export default class GameScreen extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         return(
             <StyledGameScreen>
-                
-                {/* <LibraryPreview library={this.props.gameData.library} /> */}
-                
+
                 <DeckInfo>
 
                     <Indicator>
@@ -165,10 +225,20 @@ export default class GameScreen extends React.Component {
                 </DeckInfo>
 
                 <Deck>
-                    <Card active={this.state.currentWord}><Word>{this.state.currentWord}</Word></Card>
+                    {this.state.currentWord 
+                    ?   <Card active={this.state.currentWord}><Word>{this.state.currentWord}</Word></Card>
+                    :   <CardBack active={this.state.currentWord}>
+                            <Logo>Nerd</Logo>
+                            <FontAwesomeIcon className="icon" icon={faGlasses} />
+                            <Logo>Words</Logo>
+                        </CardBack> 
+                    }
                 </Deck>
 
                 <DrawControls>
+                    <RefreshDeck sub onClick={this.refreshDeck}>
+                        <FontAwesomeIcon  className="icon" icon={faRedoAlt} />
+                    </RefreshDeck>
                     <Control sub>Previous</Control>
                     <Control disabled={this.state.drawPile.length === 0} onClick={this.nextCard}>Draw Next</Control>
                 </DrawControls>

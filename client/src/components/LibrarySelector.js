@@ -170,7 +170,6 @@ class UserLibraryEntry extends React.Component {
 
     render() {
         let selected = this.props.selectedLibraryID === this.props._id ? SelectedLibraryEntryRow : LibraryEntryRow; 
-        console.log("SELECTED: " + selected)
         return(
             <StyledLibraryEntry>
                 <LibraryEntryRow as={selected} size={this.props.size} onClick={this.handleClick}>
