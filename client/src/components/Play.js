@@ -4,20 +4,24 @@ import styled from 'styled-components';
 import GameScreen from './GameScreen';
 import GameSetup from './GameSetup';
 
+import { seedGame } from './seedLibrary';
+
 const StyledPlay = styled.div`
 
 `
+
 
 class Play extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             gameData: undefined,
-            gameInProgress: false
+            gameInProgress: false,
         }
         this.selectNumPlayers = this.selectNumPlayers.bind(this)
         this.createGame = this.createGame.bind(this)
     }
+
 
     selectNumPlayers(e) {
         this.setState({ numPlayers: e.target.id })
@@ -28,10 +32,12 @@ class Play extends React.Component {
     }
 
     render() {
+
         return(
             <StyledPlay>
-                { this.state.gameInProgress 
-                ? <GameScreen gameData={this.state.gameData} />
+                { !this.state.gameInProgress 
+                ? <GameScreen gameData={seedGame} />
+                // ? <GameScreen gameData={this.state.gameData} />
                 : <GameSetup createGame={this.createGame} /> }   
 
             </StyledPlay>
