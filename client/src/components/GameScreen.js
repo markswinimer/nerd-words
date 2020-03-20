@@ -13,7 +13,7 @@ const DeckInfo = styled.div`
 `
 
 const Indicator = styled.div`
-
+    
 `
 
 export default class GameScreen extends React.Component {

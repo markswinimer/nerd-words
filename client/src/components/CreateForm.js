@@ -1,19 +1,12 @@
 import React from 'react';
-import InputField from './sub-components/InputField';
-import DropDownField from './sub-components/DropDownField';
-import WordField from './sub-components/WordField';
+import axios from 'axios';
+import styled from 'styled-components';
+
 import LibraryPreview from './LibraryPreview';
 import NewLibraryForm from './NewLibraryForm';
 import AddWordsForm from './AddWordsForm';
 import LibrarySelector from './LibrarySelector';
-import axios from 'axios';
-import styled from 'styled-components';
 import './CreateForm.css';
-import { platform } from 'os';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
-
 
 const StyledCreateForm = styled.div`
     border-top: none;
