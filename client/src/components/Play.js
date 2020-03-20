@@ -35,9 +35,9 @@ class Play extends React.Component {
 
         return(
             <StyledPlay>
-                { !this.state.gameInProgress 
-                ? <GameScreen gameData={seedGame} />
-                // ? <GameScreen gameData={this.state.gameData} />
+                {this.state.gameInProgress 
+                // ? <GameScreen gameData={seedGame} />
+                ? <GameScreen gameData={this.state.gameData} />
                 : <GameSetup createGame={this.createGame} /> }   
 
             </StyledPlay>
