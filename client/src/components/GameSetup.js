@@ -91,12 +91,10 @@ class GameSetup extends React.Component {
     }
 
     selectNumPlayers(e) {
-        console.log(e.target.id)
-        this.setState({ numPlayers: e.target.id })
+        this.setState({ numPlayers: parseInt(e.target.id) })
     }
 
     handleSubmit() {
-        console.log(this.state)
         this.props.createGame(this.state)
     }
 
@@ -105,7 +103,6 @@ class GameSetup extends React.Component {
             let id = "5e66ce6f3df09970e8150888"
         }
         let url = "/libraries/" + id
-        console.log(url)
         const options = {
             url: url,
             method: 'GET',
@@ -169,9 +166,9 @@ const DropDownField = props => {
 const RadioField = props => {
 
     let fieldGen = [];
-    
+
     for(let i = 1; i <= props.maxPlayers; i++) {
-        if(i == props.selectedId) {
+        if(i === props.selectedId) {
             fieldGen.push(
                 <SelectedRadioOption onClick={props.handleClick} id={i}>{i}</SelectedRadioOption>
             )

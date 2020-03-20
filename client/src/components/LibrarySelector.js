@@ -41,9 +41,10 @@ const LibraryEntryRow = styled.div`
     font-size: 1em;
     cursor: pointer;
 
+
     :hover {
-    background-color: #c73636;
-    color: white;
+        background-color: #c73636;
+     color: white;
     }
 
     div {
@@ -53,6 +54,12 @@ const LibraryEntryRow = styled.div`
         padding: 0 1em;
         margin-right: 1em;
     }
+`
+
+const SelectedLibraryEntryRow = styled(LibraryEntryRow)`
+    background-color: #c73636;
+    color: white;    
+    pointer-events: none;
 `
 
 const LibraryLegend = styled.div`
@@ -84,7 +91,8 @@ class LibrarySelector extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            userLibraries : [],
+            userLibraries: [],
+            selectedLibraryID: undefined,
             user: "Default User"
         }
 
@@ -110,15 +118,22 @@ class LibrarySelector extends React.Component {
 
             axios(options)
                 .then(response => {
-                    console.log(response.data);
+
+                    // Filters out libraries with 0 words
+                    // Should this be in the api? probably.
+                    const hasWords = response.data.filter(library => library.words.length > 0);
+                    
                     this.setState({
-                        userLibraries: response.data
+                        userLibraries: hasWords
                     })
                 })
         }
 
         handleChoice(id) {
-            this.props.loadEditForm(id)
+            // this.props.loadEditForm(id)
+            this.setState({ selectedLibraryID: id }, () => {
+                this.props.loadEditForm(id)
+            })
         }
 
     render() {
@@ -131,6 +146,7 @@ class LibrarySelector extends React.Component {
                 _id={library._id}
                 setLibrary={this.handleChoice}
                 size={this.props.size}
+                selectedLibraryID={this.state.selectedLibraryID}
             />
         ))
         return(
@@ -153,9 +169,11 @@ class UserLibraryEntry extends React.Component {
     handleClick = () => this.props.setLibrary(this.props._id)
 
     render() {
+        let selected = this.props.selectedLibraryID === this.props._id ? SelectedLibraryEntryRow : LibraryEntryRow; 
+        console.log("SELECTED: " + selected)
         return(
             <StyledLibraryEntry>
-                <LibraryEntryRow size={this.props.size} onClick={this.handleClick}>
+                <LibraryEntryRow as={selected} size={this.props.size} onClick={this.handleClick}>
                     <FontAwesomeIcon className="icon" icon={faPencilAlt} />
                         <div>{this.props.libraryName}</div>
                         <div>{this.props.wordCount}</div>

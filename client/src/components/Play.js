@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import GameScreen from './GameScreen';
 import GameSetup from './GameSetup';
 
 const StyledPlay = styled.div`
@@ -12,29 +13,28 @@ class Play extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            gameMode: 0,
-            numPlayers: 1,
-            library: null
+            gameData: undefined,
+            gameInProgress: false
         }
         this.selectNumPlayers = this.selectNumPlayers.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.createGame = this.createGame.bind(this)
     }
 
     selectNumPlayers(e) {
-        console.log(e.target.id)
         this.setState({ numPlayers: e.target.id })
     }
 
-    handleSubmit() {
-        console.log(this.state)
+    createGame(gameData) {
+        this.setState({ gameData: gameData, gameInProgress: true })
     }
 
     render() {
         return(
             <StyledPlay>
-                <h1>Play</h1>
+                { this.state.gameInProgress 
+                ? <GameScreen gameData={this.state.gameData} />
+                : <GameSetup createGame={this.createGame} /> }   
 
-                <GameSetup createGame={this.createGame} />
             </StyledPlay>
         )
     }

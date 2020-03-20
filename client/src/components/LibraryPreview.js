@@ -81,20 +81,7 @@ const DescriptionContainer = styled.div`
 class LibraryPreview extends React.Component {
 
     render() {
-        // const library = {
-        //     libraryName: "The Magic of the Sea",
-        //     authorName: "Mark Swinimer",
-        //     wordCount: "20",
-        //     numFavorites: 1,
-        //     numPlays: 4,
-        //     description: "This library contains a lot of words about the sea. There are many unbelievable things in the sea; things that are scary and things that are beautiful.",
-        //     words: [
-        //         "One", "Two", "Apple",
-        //         // "One", "Two", "Lemon",
-        //         // "One", "Two", "Lemon",
-        //         "One", "Two", "Apple",
-        //     ]
-        // }
+ 
         const { library } = this.props
         let words = library.words.slice(0, 5).map(word => (
             <p>{word}</p>
