@@ -1,89 +1,101 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import Home from './components/Home';
 import Discover from './components/Discover';
 import Create from './components/Create';
 import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
+// import Menu from './components/Menu/Menu'
 import Play from './components/Play';
+
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from './global';
+import { theme } from './theme';
+
+import { Burger, Menu } from './components';
 
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
 
+
 import './App.css';
+
 
 const routes = [
   {
     path: '/',
     exact: true,
-    sidebar: () => <Sidebar currentPage='home'/>,
+    menu: () => <Menu currentPage='home'/>,
     main: () => <Home />
   },
   {
     path: '/play',
-    sidebar: () => <Sidebar currentPage='play'/>,
+    menu: () => <Menu currentPage='play'/>,
     main: () => <Play />
   },
   {
     path: '/create',
-    sidebar: () => <Sidebar currentPage='create'/>,
+    menu: () => <Menu currentPage='create'/>,
     main: () => <Create />
   },
   {
     path: '/discover',
-    sidebar: () => <Sidebar currentPage='discover'/>,
+    menu: () => <Menu currentPage='discover'/>,
     main: () => <Discover />
   },
   {
     path: '/community',
-    sidebar: () => <Sidebar currentPage='community'/>,
+    menu: () => <Menu currentPage='community'/>,
     main: () => <h1>Community</h1>
   },
   {
     path: '/howto',
-    sidebar: () => <Sidebar currentPage='howto'/>,
+    menu: () => <Menu currentPage='howto'/>,
     main: () => <h1>How to play</h1>
   },
 ]
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // state
-    }
-  }
+function App() {
+  const [open, setOpen] = useState(false);
 
-  render() {
     return(
-      <Router>
-        <div className='App'>
-        <Navbar />
-          <div className='Main'>
-            {routes.map((route, index) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                exact={route.exact}
-                component={route.sidebar}
-              />
-            ))}
-            <div className="Container">
-            {routes.map((route, index) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                exact={route.exact}
-                component={route.main}
-              />
-            ))}
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Router>
+          <div className='App'>
+          <Navbar />
+
+          {/* <div>
+              <Burger open={open} setOpen={setOpen}/>
+              <Menu open={open} setOpen={setOpen}/>
+          </div> */}
+
+            <div className='Main'>
+              {routes.map((route, index) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  exact={route.exact}
+                  component={route.menu}
+                />
+              ))}
+              <div className="Container">
+              {routes.map((route, index) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  exact={route.exact}
+                  component={route.main}
+                />
+              ))}
+              </div>
+              </div>
             </div>
-            </div>
-          </div>
-      </Router>
+        </Router>
+      </ThemeProvider>
+
     )
-  }
 }
 
 export default App;
