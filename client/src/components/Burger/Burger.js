@@ -2,9 +2,10 @@
 import React from 'react';
 import { StyledBurger } from './Burger.styled';
 
-const Burger = () => {
+const Burger = ({ open, setOpen }) => {
+
     return (
-        <StyledBurger>
+        <StyledBurger open={open} onClick={() => setOpen(!open)}>
             <div />
             <div />
             <div />

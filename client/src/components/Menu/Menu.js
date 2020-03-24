@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle, faGamepad } from '@fortawesome/free-solid-svg-icons'
 
 import { StyledMenu, StyledLink } from './Menu.styled';
 
-class Menu extends React.Component {
-    render() {
+const Menu = ({ currentPage, open }) => {
+
         return(
-            <StyledMenu >
+            <StyledMenu open={open}>
 
                 <div className="user">
                     <h3 id="name">Mark Swinimer</h3>
@@ -18,28 +17,28 @@ class Menu extends React.Component {
                 
                 <div>
                     <StyledLink className={
-                        this.props.currentPage === 'home' ? 'Menu-link active' : 'Menu-link'
+                        currentPage === 'home' ? 'Menu-link active' : 'Menu-link'
                     } to='/'>
                         <FontAwesomeIcon className="icon" icon={faHome} />
                         Home
                     </StyledLink>
                     
                     <StyledLink className={
-                        this.props.currentPage === 'play' ? 'Menu-link active' : 'Menu-link'
+                        currentPage === 'play' ? 'Menu-link active' : 'Menu-link'
                     } to='/play'>  
                         <FontAwesomeIcon className="icon" icon={faGamepad} />
                         Play
                     </StyledLink>
 
                     <StyledLink className={
-                        this.props.currentPage === 'create' ? 'Menu-link active' : 'Menu-link'
+                        currentPage === 'create' ? 'Menu-link active' : 'Menu-link'
                     } to='/create'>
                             <FontAwesomeIcon className="icon" icon={faPencilAlt} />
                         Create
                     </StyledLink>
 
                     <StyledLink className={
-                        this.props.currentPage === 'discover' ? 'Menu-link active' : 'Menu-link'
+                        currentPage === 'discover' ? 'Menu-link active' : 'Menu-link'
                     } to='/discover'>
                         <FontAwesomeIcon className="icon" icon={faSearch} />
                         Discover
@@ -57,5 +56,4 @@ class Menu extends React.Component {
             </StyledMenu>
         )
     }
-}
 export default Menu;

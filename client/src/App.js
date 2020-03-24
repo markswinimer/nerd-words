@@ -26,32 +26,27 @@ const routes = [
   {
     path: '/',
     exact: true,
-    menu: () => <Menu currentPage='home'/>,
+    currentPage: 'home',
     main: () => <Home />
   },
   {
     path: '/play',
-    menu: () => <Menu currentPage='play'/>,
+    currentPage: 'play',
     main: () => <Play />
   },
   {
     path: '/create',
-    menu: () => <Menu currentPage='create'/>,
+    currentPage: 'create',
     main: () => <Create />
   },
   {
     path: '/discover',
-    menu: () => <Menu currentPage='discover'/>,
+    currentPage: 'discover',
     main: () => <Discover />
   },
   {
-    path: '/community',
-    menu: () => <Menu currentPage='community'/>,
-    main: () => <h1>Community</h1>
-  },
-  {
     path: '/howto',
-    menu: () => <Menu currentPage='howto'/>,
+    currentPage: 'howto',
     main: () => <h1>How to play</h1>
   },
 ]
@@ -66,10 +61,9 @@ function App() {
           <div className='App'>
           <Navbar />
 
-          {/* <div>
+          <div>
               <Burger open={open} setOpen={setOpen}/>
-              <Menu open={open} setOpen={setOpen}/>
-          </div> */}
+          </div>
 
             <div className='Main'>
               {routes.map((route, index) => (
@@ -77,7 +71,10 @@ function App() {
                   key={route.path}
                   path={route.path}
                   exact={route.exact}
-                  component={route.menu}
+                  component={() => <Menu 
+                      currentPage={route.currentPage} 
+                      open={open} 
+                    />}
                 />
               ))}
               <div className="Container">

@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 
 export const StyledMenu = styled.nav`
     width: 15em;
-    min-width: 15em;
     height: 100%;
     background-color: ${({ theme }) => theme.primaryBackground};
     display: flex;
     flex-direction: column;
 
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+        width: 100%;
+        flex-direction: column;
+    }
     .user {
       padding-left: 1em;
       padding: 2em 0em 3em 1em;
