@@ -10,6 +10,7 @@ export const StyledMenu = styled.nav`
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
         transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+        height: ${({ open }) => open ? 'auto' : '0%'};
         width: 100%;
         flex-direction: column;
     }

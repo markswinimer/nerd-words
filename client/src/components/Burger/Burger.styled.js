@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const StyledBurger = styled.button`
   position: absolute;
-  top: 2%;
-  right: 2rem;
-  display: flex;
+  top: 1em;
+  right: 1rem;
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 2rem;
@@ -28,4 +28,7 @@ export const StyledBurger = styled.button`
     position: relative;
     transform-origin: 1px;
   }
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        display: flex;
+    }
 `;

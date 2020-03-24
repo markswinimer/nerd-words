@@ -27,5 +27,5 @@ export const theme = {
     primaryBackgroundDark: '#808080',
     
 
-    mobile: '600px'
+    mobile: '650px'
 }
