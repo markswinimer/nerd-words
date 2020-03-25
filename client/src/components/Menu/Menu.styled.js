@@ -7,11 +7,13 @@ export const StyledMenu = styled.nav`
     height: 100%;
     background-color: ${({ theme }) => theme.primaryBackground};
     display: flex;
+
     flex-direction: column;
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
         transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
         height: ${({ open }) => open ? '0%' : 'auto'};
+        display: ${({ open }) => open ? 'flex' : 'none'};
         width: 100%;
         flex-direction: column;
     }
@@ -78,9 +80,6 @@ export const StyledMenuLink = styled(Link)`
     font-family: 'Roboto Condensed';
     transition: .1s ease-in;
     background-color: ${props => props.primary === "small" ? "25px" : "50px"};
-    /* height: ${props => props.size === "small" ? "25px" : "50px"};
-    height: ${props => props.size === "small" ? "25px" : "50px"};
-    height: ${props => props.size === "small" ? "25px" : "50px"}; */
     background-color: #E0E0E0;
 
     :hover {
