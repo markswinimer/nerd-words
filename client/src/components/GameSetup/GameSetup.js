@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 
-import LibrarySelector from '../LibrarySelector';
+import { LibrarySelector } from '../../components';
 import { StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
 
 
@@ -87,8 +86,8 @@ const DropDownField = props => {
                 value={props.value}
                 onChange={props.handleChange}
             >
+                <option value="cardDraw">Default (Card Draw)</option>
                 <option value="cardDraw">Card Draw</option>
-                <option value="taboo">Taboo</option>
             </select>
         </StyledDropDownField>
     )

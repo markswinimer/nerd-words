@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledGameSetup = styled.div`
-
+    
+    div:first-child h2 {
+        margin-top: 0em;
+    }
 `
 
 export const StyledRadioField = styled.div`
@@ -48,7 +51,9 @@ export const Option = styled.div`
     h2 {
         margin-right: 1em;
     }
+
 `
+
 export const StyledDropDownField = styled.div`
 
     select {
@@ -59,7 +64,6 @@ export const StyledDropDownField = styled.div`
 
 export const SubmitButton = styled.button`
     border: none;
-    border-radius: {standard-radius};
     padding: 1em 1em;
     font-size: 1em;
     background-color: #c73636;

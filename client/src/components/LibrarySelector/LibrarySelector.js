@@ -6,7 +6,7 @@ import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg
 
 import { 
     LibraryLegend, SelectedLibraryEntryRow, LibraryEntryRow, 
-    StyledLibraryEntry, StyledLibrarySelector } 
+    StyledLibraryEntry, StyledLibrarySelector, Entries } 
 from './LibrarySelector.styled'
 
 export default class LibrarySelector extends React.Component {
@@ -78,9 +78,9 @@ export default class LibrarySelector extends React.Component {
                     <div>Library Name</div>
                     <div>Word Count</div>
                 </LibraryLegend>
-                <div className="CreateForm-entries">
+                <Entries>
                     {userLibrariesList}
-                </div>
+                </Entries>
                 <FontAwesomeIcon className="iconArrow" icon={faAngleDown} />
             </StyledLibrarySelector>
         )
@@ -95,7 +95,6 @@ class UserLibraryEntry extends React.Component {
         return(
             <StyledLibraryEntry>
                 <LibraryEntryRow as={selected} size={this.props.size} onClick={this.handleClick}>
-                    <FontAwesomeIcon className="icon" icon={faPencilAlt} />
                         <div>{this.props.libraryName}</div>
                         <div>{this.props.wordCount}</div>
                 </LibraryEntryRow>

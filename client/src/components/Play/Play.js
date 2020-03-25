@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { GameScreen } from '../../components';
-import GameSetup from '../GameSetup/GameSetup';
+import { GameScreen, GameSetup } from '../';
 
 const StyledPlay = styled.div`
 

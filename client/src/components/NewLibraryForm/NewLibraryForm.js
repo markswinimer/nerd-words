@@ -2,10 +2,9 @@ import React from 'react';
 import InputField from '../sub-components/InputField';
 import TextAreaField from '../sub-components/TextAreaField';
 
-import { StyledNewLibraryForm } from './NewLibraryForm.styled';
-import './NewLibraryForm.css';
+import { Form, FormButton } from './NewLibraryForm.styled';
 
-class NewLibraryForm extends React.Component {
+export default class NewLibraryForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -36,7 +35,7 @@ class NewLibraryForm extends React.Component {
 
     render() {   
         return (
-            <form onSubmit={this.handleSubmit} className="NewLibraryForm">
+            <Form onSubmit={this.handleSubmit}>
 
                 <h2>Let's start by choosing a name: </h2>
                 <p>Not just any old name.
@@ -61,9 +60,8 @@ class NewLibraryForm extends React.Component {
                     handleChange={this.handleChange}
                 />
 
-                <button>Create Library</button>
-            </form>
+                <FormButton>Create Library</FormButton>
+            </Form>
         )
     }
 }
-export default NewLibraryForm;

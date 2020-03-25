@@ -5,7 +5,6 @@ import { DetailsContainer, StyledLibraryPreview, LibraryDetails, WordsPreview, D
 class LibraryPreview extends React.Component {
 
     render() {
- 
         const { library } = this.props
         let words = library.words.slice(0, 5).map(word => (
             <p>{word}</p>
