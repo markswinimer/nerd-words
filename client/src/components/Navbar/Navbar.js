@@ -1,16 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Oleo+Script:400,700|Raleway|Roboto|Roboto+Condensed&display=swap');
+import React from 'react';
+import styled from 'styled-components';
 
-
-.Navbar {
+const StyledNavbar = styled.div` 
     background-color: whitesmoke;
     display: flex;
     flex-direction: row;
     padding: .75rem 5rem .75rem 1em;
     align-items: center;
     border-bottom: 2px solid #d87171;
-}
 
-.Navbar-logo {
+    .links {
+        margin-left: auto;
+    }
+`
+const Logo = styled.div`
     width: 40px;
     height: 40px;
     padding: 1px 2px 3px 1px;
@@ -22,15 +25,22 @@
     line-height: 40px;
     text-align: center;
     margin-right: .3em;
-}
+`
 
-.Navbar-title {
+const Title = styled.div`
     font-size: 1.8em;
     font-family: "Roboto Condensed";
     font-weight: bold;
     color: #303030;
-    /* font-family: 'Oleo Script', sans-serif; */
+`
+const Navbar = () => {
+    return(
+        <StyledNavbar>
+            <Logo>N</Logo>
+            <Title>Nerd Words</Title>
+            <div className='links'></div>
+        </StyledNavbar>
+    )
 }
-.Navbar-links {
-    margin-left: auto;
-}
+
+export default Navbar;

@@ -1,6 +1,8 @@
 import React from 'react';
-import InputField from './sub-components/InputField';
-import TextAreaField from './sub-components/TextAreaField';
+import InputField from '../sub-components/InputField';
+import TextAreaField from '../sub-components/TextAreaField';
+
+import { StyledNewLibraryForm } from './NewLibraryForm.styled';
 import './NewLibraryForm.css';
 
 class NewLibraryForm extends React.Component {

@@ -1,4 +1,3 @@
-// Burger.js
 import React from 'react';
 import { StyledBurger } from './Burger.styled';
 

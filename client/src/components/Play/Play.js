@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import GameScreen from './GameScreen';
-import GameSetup from './GameSetup';
-
-import { seedGame } from './seedLibrary';
+import { GameScreen } from '../../components';
+import GameSetup from '../GameSetup/GameSetup';
 
 const StyledPlay = styled.div`
 
 `
 
-
-class Play extends React.Component {
+export default class Play extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -33,16 +30,14 @@ class Play extends React.Component {
 
     render() {
 
-        return(
+        return (
             <StyledPlay>
-                {this.state.gameInProgress 
-                // ? <GameScreen gameData={seedGame} />
-                ? <GameScreen gameData={this.state.gameData} />
-                : <GameSetup createGame={this.createGame} /> }   
+                {this.state.gameInProgress
+                    // ? <GameScreen gameData={seedGame} />
+                    ? <GameScreen gameData={this.state.gameData} />
+                    : <GameSetup createGame={this.createGame} />}
 
             </StyledPlay>
         )
     }
 }
-
-export default Play;

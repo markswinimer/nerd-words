@@ -1,40 +1,11 @@
 import React from 'react';
-import AddWordsForm from './AddWordsForm';
-import LibrarySelector from './LibrarySelector';
-import NewLibraryForm from './NewLibraryForm';
-import './CreateForm.css';
+import NewLibraryForm from '../NewLibraryForm/NewLibraryForm';
+
+import { AddWordsForm } from '../../components'
+import { LibrarySelector } from '../../components'
 
 import axios from 'axios';
-import styled from 'styled-components';
-
-const StyledChooseMode = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
-const Button = styled.button`
-    border: none;
-    border-radius: {standard-radius};
-    padding: 1em 1em;
-    font-size: 1em;
-    background-color: #c73636;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 0em;
-    margin-right: 1em;
-    width: 50%;
-`
-
-const StyledCreate = styled.div`
-    width: 800px;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-`
+import { Button, StyledChooseMode, StyledCreate } from './Create.styled' 
 
 class Create extends React.Component {
     constructor(props) {

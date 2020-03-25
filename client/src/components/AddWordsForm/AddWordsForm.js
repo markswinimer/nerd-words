@@ -1,14 +1,14 @@
 import React from 'react';
-import LibraryPreview from './LibraryPreview';
+import LibraryPreview from '../LibraryPreview';
 import axios from 'axios';
-import WordField from './sub-components/WordField';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusSquare, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
+import { StyledForm } from './AddWordsForm.styled'
 import './AddWords.css'
 
-class AddWordsForm extends React.Component {
+export default class AddWordsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -112,4 +112,17 @@ class AddWordsForm extends React.Component {
     }
 }
 
-export default AddWordsForm;
+const WordField = props => {
+    return (
+        <input
+            autoComplete="off"
+
+            id={props.id}
+            name={props.name}
+            type='text'
+            className="WordField"
+            value={props.value}
+        // onChange={props.handleChange}
+        />
+    )
+}

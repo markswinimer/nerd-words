@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 
-import Home from './components/Home';
-import Discover from './components/Discover';
-import Create from './components/Create';
-import Navbar from './components/Navbar'
-// import Menu from './components/Menu/Menu'
-import Play from './components/Play';
+import Home from './components/Home/Home';
+import Discover from './components/Discover/Discover';
 
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
@@ -13,6 +9,10 @@ import { GlobalStyles } from './global';
 import { theme } from './theme';
 
 import { Burger, Menu } from './components';
+import { Create } from './components';
+import { Play } from './components';
+import { Navbar } from './components';
+
 
 import {
   BrowserRouter as Router,

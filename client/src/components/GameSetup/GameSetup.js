@@ -2,81 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import LibrarySelector from './LibrarySelector';
+import LibrarySelector from '../LibrarySelector';
+import { StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
 
 
-const StyledGameSetup = styled.div`
-
-`
-
-const StyledRadioField = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    input {
-        height: 25px;
-    }
-`
-
-const RadioOption = styled.div`
-    height: 25px;
-    width: 25px;
-    border-radius: 5px;
-    border: 1px solid #c73636;
-    background-color: white;
-    color: #c73636;
-    line-height: 25px;
-    text-align: center;
-    margin-right: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .1s ease-in-out;
-
-    :hover {
-        color: white;
-        background-color: #c73636;
-    }
-`
-
-const SelectedRadioOption = styled(RadioOption)`
-    border: 1px solid #c73636;
-    background-color: #c73636;
-    color: white;
-    pointer-events: none;
-`
-
-const Option = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-
-    h2 {
-        margin-right: 1em;
-    }
-`
-const StyledDropDownField = styled.div`
-
-    select {
-        font-size: 1em;
-        min-width: 300px;
-    }
-`
-
-const SubmitButton = styled.button`
-    border: none;
-    border-radius: {standard-radius};
-    padding: 1em 1em;
-    font-size: 1em;
-    background-color: #c73636;
-    color: white;
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 0em;
-    margin-right: 1em;
-    width: 50%;
-`
-
-class GameSetup extends React.Component {
+export default class GameSetup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -185,5 +115,3 @@ const RadioField = props => {
         </StyledRadioField>
     )
 }
-
-export default GameSetup;
