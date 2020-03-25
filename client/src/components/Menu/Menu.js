@@ -3,57 +3,68 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle, faGamepad } from '@fortawesome/free-solid-svg-icons'
 
-import { StyledMenu, StyledLink } from './Menu.styled';
+import { StyledMenu, StyledMenuLink } from './Menu.styled';
 
-const Menu = ({ currentPage, open }) => {
+const Menu = ({ currentPage, open, setOpen }) => {
 
-        return(
-            <StyledMenu open={open}>
+    return (
+        <StyledMenu open={open}>
 
-                <div className="user">
-                    <h3 id="name">Mark Swinimer</h3>
-                    <p>Account | Log Out</p>
-                </div>
-                
-                <div>
-                    <StyledLink className={
-                        currentPage === 'home' ? 'Menu-link active' : 'Menu-link'
-                    } to='/'>
-                        <FontAwesomeIcon className="icon" icon={faHome} />
-                        Home
-                    </StyledLink>
-                    
-                    <StyledLink className={
-                        currentPage === 'play' ? 'Menu-link active' : 'Menu-link'
-                    } to='/play'>  
-                        <FontAwesomeIcon className="icon" icon={faGamepad} />
-                        Play
-                    </StyledLink>
+            <div className="user">
+                <h3 id="name">Mark Swinimer</h3>
+                <p>Account | Log Out</p>
+            </div>
 
-                    <StyledLink className={
-                        currentPage === 'create' ? 'Menu-link active' : 'Menu-link'
-                    } to='/create'>
-                            <FontAwesomeIcon className="icon" icon={faPencilAlt} />
-                        Create
-                    </StyledLink>
-
-                    <StyledLink className={
-                        currentPage === 'discover' ? 'Menu-link active' : 'Menu-link'
-                    } to='/discover'>
-                        <FontAwesomeIcon className="icon" icon={faSearch} />
-                        Discover
-                    </StyledLink>
-
-                    <div className={
-                        "Menu-link unavailable"
-                        // -- Disabled --
-                        // this.props.currentPage === 'howto' ? 'Menu-link active' : 'Menu-link'
-                    } to='/howto'>
-                        <FontAwesomeIcon className="icon" icon={faQuestionCircle} />
-                        How to play
-                    </div>
-                </div>
-            </StyledMenu>
-        )
-    }
+            <div>
+                <MenuLink
+                    currentPage={currentPage}
+                    name="Home"
+                    path="/"
+                    icon={faHome}
+                    setOpen={open}
+                />
+                <MenuLink
+                    currentPage={currentPage}
+                    name="Play"
+                    path="/play"
+                    icon={faGamepad}
+                    setOpen={open}
+                />
+                <MenuLink
+                    currentPage={currentPage}
+                    name="Create"
+                    path="/create"
+                    icon={faPencilAlt}
+                    setOpen={open}
+                />
+                <MenuLink
+                    currentPage={currentPage}
+                    name="Discover"
+                    path="/discover"
+                    icon={faSearch}
+                    setOpen={open}
+                />
+                {/* <MenuLink
+                    currentPage={currentPage}
+                    name="howto"
+                    icon={faHome}
+                    setOpen={open}
+                /> */}
+            </div>
+        </StyledMenu>
+    )
+}
 export default Menu;
+
+const MenuLink = props => {
+    console.log(props.currentPage)
+    return (
+        <StyledMenuLink
+            active={props.currentPage === props.path}
+            to={props.path}
+            setOpen={props.open}>
+            <FontAwesomeIcon className="icon" icon={props.icon} />
+            {props.name}
+        </StyledMenuLink>
+    )
+}

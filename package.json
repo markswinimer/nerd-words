@@ -31,12 +31,12 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "mongoose": "^5.9.2",
     "node-fetch": "^2.6.0",
+    "react-media": "^1.10.0",
     "react-router-dom": "^5.1.2",
     "react-table": "^7.0.0-rc.16",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.7",
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
   }

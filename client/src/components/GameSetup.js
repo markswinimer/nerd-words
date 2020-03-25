@@ -8,6 +8,7 @@ import LibrarySelector from './LibrarySelector';
 const StyledGameSetup = styled.div`
 
 `
+
 const StyledRadioField = styled.div`
     display: flex;
     flex-direction: row;
@@ -42,7 +43,6 @@ const SelectedRadioOption = styled(RadioOption)`
     background-color: #c73636;
     color: white;
     pointer-events: none;
-    disabled: true;
 `
 
 const Option = styled.div`

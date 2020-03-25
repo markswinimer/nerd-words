@@ -8,7 +8,6 @@ class Navbar extends React.Component {
                 <div className='Navbar-logo'>N</div>
                 <div className='Navbar-title'>Nerd Words</div>
                 <div className='Navbar-links'>
-                    Home
                 </div>
             </div>
         )

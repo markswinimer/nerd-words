@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const StyledMenu = styled.nav`
     width: 15em;
+    min-width: 15em;
     height: 100%;
     background-color: ${({ theme }) => theme.primaryBackground};
     display: flex;
@@ -14,6 +15,7 @@ export const StyledMenu = styled.nav`
         width: 100%;
         flex-direction: column;
     }
+
     .user {
       padding-left: 1em;
       padding: 2em 0em 3em 1em;
@@ -29,57 +31,42 @@ export const StyledMenu = styled.nav`
         margin-bottom: .2em;
     }
 
- .icon {
-    margin-right: .5em;
-    font-size: 1.75em;
+  .icon {
+      margin-right: .5em;
+      font-size: 1.75em;
+  }
+
+  .Menu-link {
+      color: #808080;
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      vertical-align: middle;
+      align-items: center;
+      height: 4em;
+      padding-left: 1em;
+      background-color: #E0E0E0;
+      border-top: 1px solid silver;
+      font-family: 'Roboto Condensed';
+      transition: .1s ease-in;
+  }
+
+
+  .Menu-link:hover {
+      background-color: #F8F8F8;
+      color: #d87171;
+      border-top: 1px solid #F8F8F8;
+  }
+
+  .Menu-link.active {
+      background-color: white;
+      color: #c73636;
+      border-top: solid 1px white;
+      pointer-events: none;
+  }
 }
-
-.Menu-link {
-    color: #808080;
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    vertical-align: middle;
-    align-items: center;
-    height: 4em;
-    padding-left: 1em;
-    background-color: #E0E0E0;
-    border-top: 1px solid silver;
-    font-family: 'Roboto Condensed';
-    transition: .1s ease-in;
-}
-
-
-.Menu-link:hover {
-    background-color: #F8F8F8;
-    color: #d87171;
-    border-top: 1px solid #F8F8F8;
- }
-
-.Menu-link.active {
-    background-color: white;
-    color: #c73636;
-    border-top: solid 1px white;
-    pointer-events: none;
-}
-
-.Menu-link.unavailable {
-    opacity: .4;
-
-}
-.Menu-link.unavailable:hover {
-    cursor: not-allowed;
-    color: #808080;
-    background-color: #E0E0E0;
-    border-top: 1px solid silver;
-}
-
-.Menu-copywrite {
-    margin-top: auto;
-}
-
 `
-export const StyledLink = styled(Link)`
+export const StyledMenuLink = styled(Link)`
     color: #808080;
     display: flex;
     flex-direction: row;
@@ -88,23 +75,26 @@ export const StyledLink = styled(Link)`
     align-items: center;
     height: 4em;
     padding-left: 1em;
-    background-color: #E0E0E0;
     border-top: 1px solid silver;
     font-family: 'Roboto Condensed';
     transition: .1s ease-in;
+    background-color: ${props => props.primary === "small" ? "25px" : "50px"};
+    height: ${props => props.size === "small" ? "25px" : "50px"};
+    height: ${props => props.size === "small" ? "25px" : "50px"};
+    height: ${props => props.size === "small" ? "25px" : "50px"};
+    background-color: #E0E0E0;
 
     :hover {
       background-color: #F8F8F8;
       color: #d87171;
       border-top: 1px solid #F8F8F8;
     }
-    .active {
+    ${({ active }) => active && `
       background-color: white;
       color: #c73636;
       border-top: solid 1px white;
       pointer-events: none;
-    }
-
+    `}
 `
 
 // export const StyledMenu = styled.nav`
