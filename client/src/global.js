@@ -40,16 +40,8 @@ export const GlobalStyles = createGlobalStyle`
 
     .Container {
         overflow: scroll;
-        padding: 2em 17em 5em 15em;
-        width: 100%;
-    }
-
-    @media only screen and (max-width: 1300px) {
-        .Container {
-            padding: 2em 2em 5em 1em;
-            margin: 0 auto;
-            width: auto;
-        }
+        padding: 2em 2em;
+        width: 900px;
     }
 
     @media only screen and (max-width: 600px) {
@@ -58,5 +50,11 @@ export const GlobalStyles = createGlobalStyle`
             display: flex;
             flex-direction: column;
         }
+        .Container {
+            height: 100%;
+            overflow: auto;
+            padding: 2em 2em;
+            width: 100%;
+    }
     }
 `

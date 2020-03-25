@@ -11,7 +11,7 @@ export const StyledMenu = styled.nav`
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
         transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
-        height: ${({ open }) => open ? 'auto' : '0%'};
+        height: ${({ open }) => open ? '0%' : 'auto'};
         width: 100%;
         flex-direction: column;
     }
@@ -64,7 +64,6 @@ export const StyledMenu = styled.nav`
       border-top: solid 1px white;
       pointer-events: none;
   }
-}
 `
 export const StyledMenuLink = styled(Link)`
     color: #808080;
@@ -79,9 +78,9 @@ export const StyledMenuLink = styled(Link)`
     font-family: 'Roboto Condensed';
     transition: .1s ease-in;
     background-color: ${props => props.primary === "small" ? "25px" : "50px"};
+    /* height: ${props => props.size === "small" ? "25px" : "50px"};
     height: ${props => props.size === "small" ? "25px" : "50px"};
-    height: ${props => props.size === "small" ? "25px" : "50px"};
-    height: ${props => props.size === "small" ? "25px" : "50px"};
+    height: ${props => props.size === "small" ? "25px" : "50px"}; */
     background-color: #E0E0E0;
 
     :hover {

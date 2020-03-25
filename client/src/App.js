@@ -80,7 +80,7 @@ function App() {
                     />}
                 />
               ))}
-                <div className="Content">
+                <div className="Container">
                 {routes.map((route, index) => (
                   <Route
                     key={route.path}
