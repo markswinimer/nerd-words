@@ -76,7 +76,7 @@ function App() {
                   component={() => <Menu 
                       currentPage={route.currentPage} 
                       open={open} 
-                      setOpen={open} 
+                      setOpen={setOpen} 
                     />}
                 />
               ))}

@@ -5,7 +5,7 @@ import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle, faGamepa
 
 import { StyledMenu, StyledMenuLink } from './Menu.styled';
 
-const Menu = ({ currentPage, open, setOpen }) => {
+const Menu = ({ currentPage, open, setOpen, toggleMenu }) => {
 
     return (
         <StyledMenu open={open}>
@@ -21,34 +21,34 @@ const Menu = ({ currentPage, open, setOpen }) => {
                     name="Home"
                     path="/"
                     icon={faHome}
-                    setOpen={open}
+                    setOpen={setOpen}
                 />
                 <MenuLink
                     currentPage={currentPage}
                     name="Play"
                     path="/play"
                     icon={faGamepad}
-                    setOpen={open}
+                    setOpen={setOpen}
                 />
                 <MenuLink
                     currentPage={currentPage}
                     name="Create"
                     path="/create"
                     icon={faPencilAlt}
-                    setOpen={open}
+                    setOpen={setOpen}
                 />
                 <MenuLink
                     currentPage={currentPage}
                     name="Discover"
                     path="/discover"
                     icon={faSearch}
-                    setOpen={open}
+                    setOpen={setOpen}
                 />
                 {/* <MenuLink
                     currentPage={currentPage}
                     name="howto"
                     icon={faHome}
-                    setOpen={open}
+                    setOpen={setOpen}
                 /> */}
             </div>
         </StyledMenu>
@@ -57,12 +57,11 @@ const Menu = ({ currentPage, open, setOpen }) => {
 export default Menu;
 
 const MenuLink = props => {
-    console.log(props.currentPage)
     return (
         <StyledMenuLink
             active={props.currentPage === props.path}
             to={props.path}
-            setOpen={props.open}>
+            onClick={() => props.setOpen(props.open)}>
             <FontAwesomeIcon className="icon" icon={props.icon} />
             {props.name}
         </StyledMenuLink>

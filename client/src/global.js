@@ -39,7 +39,6 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .Container {
-        overflow: scroll;
         padding: 2em 4em;
         width: 900px;
     }
