@@ -52,6 +52,13 @@ export const Option = styled.div`
         margin-right: 1em;
     }
 
+    @media only screen and (max-width: 600px) {
+        flex-direction: column;
+
+        h2  {
+            margin-bottom: .5em;
+        }
+    }
 `
 
 export const StyledDropDownField = styled.div`
@@ -63,7 +70,7 @@ export const StyledDropDownField = styled.div`
 `
 
 export const SubmitButton = styled.button`
-    border: none;
+    /* border: none;
     padding: 1em 1em;
     font-size: 1em;
     background-color: #c73636;
@@ -72,5 +79,5 @@ export const SubmitButton = styled.button`
     margin-top: 1em;
     margin-bottom: 0em;
     margin-right: 1em;
-    width: 50%;
+    width: 50%; */
 `

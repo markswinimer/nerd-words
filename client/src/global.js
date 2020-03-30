@@ -43,7 +43,27 @@ export const GlobalStyles = createGlobalStyle`
         width: 900px;
     }
 
+    button {
+        border: none;
+        padding: 1em 1em;
+        font-size: 1em;
+        background-color: #c73636;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        margin-top: 1em;
+        margin-bottom: 0em;
+        margin-right: 1em;
+        border-radius: 3px;
+        min-width: 200px;
+    }
+
     @media only screen and (max-width: 600px) {
+        button {
+            width: 100%;
+        }
         .Main {
             height: 100%;
             display: flex;
@@ -54,6 +74,6 @@ export const GlobalStyles = createGlobalStyle`
             overflow: auto;
             padding: 2em 2em;
             width: 100%;
-    }
+        }
     }
 `

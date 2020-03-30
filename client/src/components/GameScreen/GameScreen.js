@@ -6,7 +6,7 @@ import {
 } from './GameScreen.styled';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlasses, faAngleDown, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
+import { faGlasses, faAngleDown, faRedoAlt, faCog, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 export default class GameScreen extends React.Component {
     constructor(props) {
@@ -79,7 +79,7 @@ export default class GameScreen extends React.Component {
                         <Label>Discarded</Label>
                         <DataDisplay>{this.state.discardPile.length}</DataDisplay>
                         <ViewDiscarded>
-                            <FontAwesomeIcon className="icon" icon={faAngleDown} />
+                            <FontAwesomeIcon className="icon" icon={faEllipsisH} />
                         </ViewDiscarded>
                     </Indicator>
                 </DeckInfo>
@@ -96,9 +96,9 @@ export default class GameScreen extends React.Component {
                 </Deck>
 
                 <DrawControls>
-                    <RefreshDeck sub onClick={this.refreshDeck}>
+                    {/* <RefreshDeck sub onClick={this.refreshDeck}>
                         <FontAwesomeIcon className="icon" icon={faRedoAlt} />
-                    </RefreshDeck>
+                    </RefreshDeck> */}
                     <Control sub>Previous</Control>
                     <Control disabled={this.state.drawPile.length === 0} onClick={this.nextCard}>Draw Next</Control>
                 </DrawControls>

@@ -76,7 +76,6 @@ class Discover extends React.Component {
             <div className="Discover">
                 <div className="Discover-title">
                     <h1>Word Libraries</h1>
-                    <button>+ Create</button>
                 </div>
                 <div className="Discover-filter-container">
                     <FilterToggle name="All" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter}/>

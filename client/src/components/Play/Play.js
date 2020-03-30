@@ -28,14 +28,46 @@ export default class Play extends React.Component {
     }
 
     render() {
-
+        console.log(this.state.gameData)
+        const seedGameData = {
+            maxPlayers: 5,
+            gameMode: 0,
+            numPlayers: 3,
+            library: {
+                authorName: "Bernie Sanders",
+                description: "No description provided",
+                creationDate: "02/2/2020",
+                wordCount: 90,
+                playCount: 88,
+                words: [
+                "Two",
+                "Swiimer",
+                "Mark",
+                "four",
+                "asdasd",
+                "asdads",
+                "Mark",
+                "six",
+                "asddas",
+                "five",
+                "Swon",
+                "asd",
+                "asdasd",
+                "asddasasd",
+                "asdas",
+                "asddas"
+                ],
+            _id: "5e603bd6db1e0f7e3747dd78"
+        }
+    }
         return (
             <StyledPlay>
                 {this.state.gameInProgress
-                    // ? <GameScreen gameData={seedGame} />
-                    ? <GameScreen gameData={this.state.gameData} />
-                    : <GameSetup createGame={this.createGame} />}
-
+                    ? <GameSetup createGame={this.createGame} />
+                    : <GameScreen gameData={seedGameData} />
+                    // ? <GameScreen gameData={this.state.gameData} />
+                    // : <GameSetup createGame={this.createGame} />
+                }
             </StyledPlay>
         )
     }
