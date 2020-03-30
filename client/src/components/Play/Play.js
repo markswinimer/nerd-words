@@ -63,10 +63,10 @@ export default class Play extends React.Component {
         return (
             <StyledPlay>
                 {this.state.gameInProgress
-                    ? <GameSetup createGame={this.createGame} />
-                    : <GameScreen gameData={seedGameData} />
-                    // ? <GameScreen gameData={this.state.gameData} />
-                    // : <GameSetup createGame={this.createGame} />
+                    // ? <GameSetup createGame={this.createGame} />
+                    // : <GameScreen gameData={seedGameData} />
+                    ? <GameScreen gameData={this.state.gameData} />
+                    : <GameSetup createGame={this.createGame} />
                 }
             </StyledPlay>
         )
