@@ -3,24 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import './TableEntry.css';
 
+import { StyledTableEntry, EntryLabel } from './TableEntry.styled';
+
 class TableEntry extends React.Component {
     render() {
         const { libraryName, authorName, creationDate, wordCount, playCount } = this.props;
 
         return(
-            <tr className="TableEntry">
-                <td className="libraryName">{libraryName}</td>
-                <td className="authorName">{authorName}</td>
-                <td className="creationDate">{creationDate}</td>
-                <td className="wordCount">{wordCount}</td>
-                <td className="playCount">{playCount}</td>
+            <StyledTableEntry>
+                <EntryLabel className="libraryName">{libraryName}</EntryLabel>
+                <EntryLabel className="authorName">{authorName}</EntryLabel>
+                <EntryLabel className="creationDate">{creationDate}</EntryLabel>
+                <EntryLabel className="wordCount">{wordCount}</EntryLabel>
+                <EntryLabel className="playCount">{playCount}</EntryLabel>
                 <td className="sortSpace">
                     <button className="TableEntry-button icon">
                         <FontAwesomeIcon className="icon" icon={faStar} />
                     </button>
                     <button className="TableEntry-button">View</button>
                 </td>
-            </tr>
+            </StyledTableEntry>
         )
     }
 }

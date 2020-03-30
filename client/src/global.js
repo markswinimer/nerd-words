@@ -39,8 +39,8 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .Container {
-        padding: 2em 4em;
-        width: 900px;
+        padding: 2em 5em 2em 4em;
+        width: 1200px;
     }
 
     button {

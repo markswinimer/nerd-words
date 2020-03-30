@@ -1,9 +1,7 @@
 import React from 'react';
 import TableEntry from './TableEntry';
-import './Discover.css'
 
-
-
+import { SearchFilter, SearchResultsTable, TableHeader, StyledFilterToggle, FilterResultsCount, StyledDiscover } from './Discover.styled';
 
 class Discover extends React.Component {
     constructor(props) {
@@ -73,27 +71,28 @@ class Discover extends React.Component {
         }
 
         return(
-            <div className="Discover">
-                <div className="Discover-title">
-                    <h1>Word Libraries</h1>
-                </div>
-                <div className="Discover-filter-container">
+            <StyledDiscover>
+                <h1>Word Libraries</h1>
+                <label>Search
+                    <input/>
+                </label>
+                <SearchFilter>
                     <FilterToggle name="All" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter}/>
                     <FilterToggle name="Top" index={1} count={10} isActive={this.state.activeFilterIndex === 1} onClick={this.handleToggleFilter}/>
                     <FilterToggle name="Owned" index={2} count={13} isActive={this.state.activeFilterIndex === 2} onClick={this.handleToggleFilter}/>
-                </div>
+                </SearchFilter>
 
-                <div className="Discover-table">
+                <SearchResultsTable>
                     <table>
                         <tbody>
-                            <tr className="Discover-table-header">
+                            <TableHeader>
                                     <th className="libraryName">Collection Name</th>
                                     <th className="authorName">Creator</th>
                                     <th className="creationDate">Date</th>
                                     <th className="wordCount">Words</th>
                                     <th className="playCount">Plays</th>
                                     <th className="sortSpace"></th>
-                            </tr>
+                            </TableHeader>
                         </tbody>
                     </table>
                     <table>
@@ -101,8 +100,8 @@ class Discover extends React.Component {
                             {tableRows}
                         </tbody>
                     </table>
-                </div>
-            </div>
+                </SearchResultsTable>
+            </StyledDiscover>
         )
     }
 }
@@ -111,14 +110,13 @@ class FilterToggle extends React.Component {
     handleClick = () => this.props.onClick(this.props.index)
     render() {
         return(
-            <div className={
-                this.props.isActive ? 'Discover-filter active' : 'Discover-filter unselected'
-                } 
+            <StyledFilterToggle
+                active={this.props.isActive ? true : false}
                 onClick={this.handleClick}
             >
                 {this.props.name}
-                <div className="Discover-filter-amount">{this.props.count}</div>
-            </div>
+                <FilterResultsCount>{this.props.count}</FilterResultsCount>
+            </StyledFilterToggle>
         )
     }
 }
