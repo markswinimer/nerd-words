@@ -2,7 +2,7 @@ import React from 'react';
 import TableEntry from './TableEntry';
 
 import { SearchFilter, SearchResultsTable, StyledFilterToggle, FilterResultsCount, StyledDiscover } from './Discover.styled';
-import { TableHeader, StyledTableEntry, EntryLabel, EntryButtons, Button } from './TableEntry.styled';
+import { TableHeader, TableFooter, Entries, EntryLabel, EntryButtons, Button } from './TableEntry.styled';
 
 
 class Discover extends React.Component {
@@ -85,31 +85,28 @@ class Discover extends React.Component {
                 </SearchFilter>
 
                 <SearchResultsTable>
-                    <table>
-                        <tbody>
-                            <TableHeader legend>
-                                <EntryLabel large className="libraryName">Library Name</EntryLabel>
-                                <EntryLabel medium className="authorName">Author</EntryLabel>
-                                {/* <EntryLabel className="creationDate">Created on</EntryLabel> */}
-                                <EntryLabel small className="wordCount">Words</EntryLabel>
-                                <EntryLabel small className="playCount">Plays</EntryLabel>
-                                <EntryButtons medium></EntryButtons>
-                            </TableHeader>
-                            {/* <TableHeader>
-                                    <th className="libraryName">Collection Name</th>
-                                    <th className="authorName">Creator</th>
-                                    <th className="creationDate">Date</th>
-                                    <th className="wordCount">Words</th>
-                                    <th className="playCount">Plays</th>
-                                    <th className="sortSpace"></th>
-                            </TableHeader> */}
-                        </tbody>
-                    </table>
-                    <table>
-                        <tbody>
+                    <div>
+                        <TableHeader legend>
+                            <EntryLabel large className="libraryName">Library Name</EntryLabel>
+                            <EntryLabel medium className="authorName">Author</EntryLabel>
+                            {/* <EntryLabel className="creationDate">Created on</EntryLabel> */}
+                            <EntryLabel small className="wordCount">Words</EntryLabel>
+                            <EntryLabel small className="playCount">Plays</EntryLabel>
+                            <EntryButtons medium></EntryButtons>
+                        </TableHeader>
+                        {/* <TableHeader>
+                                <th className="libraryName">Collection Name</th>
+                                <th className="authorName">Creator</th>
+                                <th className="creationDate">Date</th>
+                                <th className="wordCount">Words</th>
+                                <th className="playCount">Plays</th>
+                                <th className="sortSpace"></th>
+                        </TableHeader> */}
+                    </div>
+                    <Entries>
                             {tableRows}
-                        </tbody>
-                    </table>
+                    </Entries>
+                    <TableFooter></TableFooter>
                 </SearchResultsTable>
             </StyledDiscover>
         )

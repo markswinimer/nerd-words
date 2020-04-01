@@ -11,6 +11,7 @@ const Menu = ({ currentPage, open, setOpen, toggleMenu }) => {
         <StyledMenu open={open}>
 
             <div className="user">
+                <p>Hello,</p>
                 <h3 id="name">Mark Swinimer</h3>
                 <p>Account | Log Out</p>
             </div>

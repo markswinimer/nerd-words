@@ -22,12 +22,19 @@ export const StyledMenu = styled.nav`
       padding-left: 1em;
       padding: 2em 0em 3em 1em;
       background-color: #F5F5F5;
-      color: #A9A9A9;
       font-size: .8em;
+      font-family: 'Roboto';
+
       #name {
+        color: #c73636;
         font-size: 1.5em;
-        font-family: 'Raleway';
+        font-family: 'Roboto';
+        margin-bottom: 1em;
       } 
+      p {
+        margin-top: .25em;
+        margin-bottom: .25em;
+      }
     }
     h3 { 
         margin-bottom: .2em;
@@ -79,7 +86,6 @@ export const StyledMenuLink = styled(Link)`
     border-top: 1px solid silver;
     font-family: 'Roboto Condensed';
     transition: .1s ease-in;
-    background-color: ${props => props.primary === "small" ? "25px" : "50px"};
     background-color: #E0E0E0;
 
     :hover {
@@ -91,6 +97,9 @@ export const StyledMenuLink = styled(Link)`
       background-color: white;
       color: #c73636;
       border-top: solid 1px white;
+      border-bottom: solid 4px #c73636;
+      padding-top: 4px;
+      padding-bottom: 4px;
       pointer-events: none;
     `}
 `

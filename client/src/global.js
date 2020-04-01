@@ -28,11 +28,9 @@ export const GlobalStyles = createGlobalStyle`
 
         text-rendering: optimizeLegibility;
     }
-
     table {
         width: 100%;
     }
-
     .App {
         width: 100vw;
     }
@@ -41,17 +39,14 @@ export const GlobalStyles = createGlobalStyle`
         display: flex;
         flex-direction: row;
     }
-
     .Container {
         height: 100vh;
         overflow: scroll;
         padding: 2em 5em 2em 4em;
-        width: 1200px;
-        padding-right: 5em; /* Increase/decrease this value for cross-browser compatibility */
-        box-sizing: content-box; /* So the width will be 100% + 17px */
-
+        width: 100vw;
+        padding-right: 5em; /* Hide the scroll bard, mac issues */
+        box-sizing: content-box; /*     ^^^      ^^^     ^^^    */
     }
-
     button {
         border: none;
         padding: 1em 1em;

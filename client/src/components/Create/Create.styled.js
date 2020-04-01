@@ -6,7 +6,7 @@ export const StyledChooseMode = styled.div`
 `
 
 export const Button = styled.button`
-
+    max-width: 300px;
 `
 
 export const StyledCreate = styled.div`

@@ -76,15 +76,15 @@ export const LibraryLegend = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    padding: .25em 2em .25 1em;
-    border: 1px solid silver;
+    /* border: 1px solid silver; */
     border-radius: 8px;
     margin-bottom: .25em;
-    min-height: 30px;
+    min-height: 40px;
     max-width: 100%;
     font-size: 1em;
     cursor: pointer;
-    background-color: #F5F5F5;
+    background-color: ${({ theme }) => theme.primaryDark};
+    color: white;
     padding-left: 2em;
     position: sticky;
     padding-right: 3em;

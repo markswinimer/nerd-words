@@ -11,10 +11,10 @@ export const StyledTableEntry = styled.div`
     margin-bottom: .25em;
     height: 50px;
     max-width: 100%;
+    color: ${({ theme }) => theme.primaryTextColorDark};
 
     td {
         font-family: "Roboto Condensed";
-        color: ${({ theme }) => theme.primaryTextColorDark};
         text-align: left;
     }
 
@@ -44,6 +44,10 @@ export const StyledTableEntry = styled.div`
 export const TableHeader = styled(StyledTableEntry)`
     margin-top: 1em;
     font-weight: bold;
+    border: none;
+    background-color: ${({ theme }) => theme.primaryDark};
+    color: white;
+    max-height: 30px;
 `
 
 export const EntryLabel = styled.td`
@@ -81,33 +85,26 @@ export const Button = styled.div`
         margin-right: 1em;
     }
 `
-export const TableEntry = styled.div`
+export const Entries = styled.div`
+    height: 40vh;
+    overflow: scroll;
+    padding-right: .5em;
+    margin: 0;
 
-.TableEntry .icon {
-    font-size: 1em;
-    margin-right: 0;
-}
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 7px;
+    } 
 
-.TableEntry-button {
-    padding: .5em .5em;
-    margin-right: 1em;
-    border: none;
-    background-color: #d87171;
-    color: white;
-    border-radius: 10px;
-    font-size: 1em;
-}
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+`
 
-.TableEntry-button.icon {
-    padding: .5em .5em;
-    margin-right: 1em;
-}
-
-
-.sortSpace {
-    flex: 2;
-    display: flex;
-    flex-direction: row;
-}
-
+export const TableFooter = styled(TableHeader)`
+    margin: 0;
+    padding: 0;
+    height: 15px;
 `

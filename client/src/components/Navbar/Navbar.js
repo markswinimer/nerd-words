@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledNavbar = styled.div` 
-    background-color: whitesmoke;
+    background-color: #c73636;
     display: flex;
     flex-direction: row;
     padding: .75rem 5rem .75rem 1em;
     align-items: center;
-    border-bottom: 2px solid #d87171;
+    border-bottom: 1px solid #d87171;
+    color: white;
 
     .links {
         margin-left: auto;
@@ -19,7 +20,8 @@ const Logo = styled.div`
     padding: 1px 2px 3px 1px;
     border-radius: 3px;
     background-color: #c73636;
-    color: #fafafa;
+    background-color: #fafafa;
+    color: #c73636;
     font-family: 'Oleo Script', sans-serif;
     font-size: 30px;
     line-height: 40px;
@@ -31,7 +33,6 @@ const Title = styled.div`
     font-size: 1.8em;
     font-family: "Roboto Condensed";
     font-weight: bold;
-    color: #303030;
 `
 const Navbar = () => {
     return(
