@@ -17,16 +17,15 @@ export const SearchFilter = styled.div`
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid silver;
-    padding: 0 4em;
+    justify-content: center;
 `
 
 export const StyledFilterToggle = styled.div`
     flex: 1;
     display: flex;
+    justify-content: center;
     height: 40px;
     padding-bottom: .5em;
-    align-items: center;
-    margin-right: 4em;
     font-weight: bold;
     border-bottom: ${props => props.active ? "#2px solid #c73636" : "none"};
     color: ${props => props.active ? "#202020" : "#707070"};

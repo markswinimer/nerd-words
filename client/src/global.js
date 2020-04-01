@@ -40,10 +40,10 @@ export const GlobalStyles = createGlobalStyle`
         flex-direction: row;
     }
     .Container {
-        height: 100vh;
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: none;
+        flex-grow: 1;
         padding: 2em 5em 2em 4em;
-        width: 100vw;
         padding-right: 5em; /* Hide the scroll bard, mac issues */
         box-sizing: content-box; /*     ^^^      ^^^     ^^^    */
     }
@@ -76,8 +76,7 @@ export const GlobalStyles = createGlobalStyle`
         .Container {
             height: 100%;
             overflow: auto;
-            padding: 2em 2em;
-            width: 100%;
+            padding: 2em 1em;
         }
     }
 `

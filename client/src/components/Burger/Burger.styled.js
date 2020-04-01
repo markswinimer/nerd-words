@@ -22,7 +22,7 @@ export const StyledBurger = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background: ${({ theme }) => theme.primaryDark};
+    background: white;
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
