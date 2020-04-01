@@ -33,7 +33,7 @@ export const StyledTableEntry = styled.div`
     .playCount {
         flex: 1;
     }  
-    @media only screen and (max-width: 900px) {
+    @media (max-width: ${({ theme }) => theme.mobile}) {
         .playCount {
             display: none;
             font-weight:bold;

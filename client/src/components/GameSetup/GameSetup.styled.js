@@ -52,7 +52,7 @@ export const Option = styled.div`
         margin-right: 1em;
     }
 
-    @media only screen and (max-width: 600px) {
+    @media (max-width: ${({ theme }) => theme.mobile}) {
         flex-direction: column;
 
         h2  {

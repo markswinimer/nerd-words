@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export const StyledMenu = styled.nav`
     width: 15em;
     min-width: 15em;
-    height: 100%;
-    background-color: ${({ theme }) => theme.primaryBackground};
+    height: 100vh;
+    background-color: ${({ theme }) => theme.primaryBackgroundLight};
     display: flex;
 
     flex-direction: column;

@@ -29,6 +29,10 @@ export const GlobalStyles = createGlobalStyle`
         text-rendering: optimizeLegibility;
     }
 
+    table {
+        width: 100%;
+    }
+
     .App {
         width: 100vw;
     }
@@ -39,8 +43,13 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     .Container {
+        height: 100vh;
+        overflow: scroll;
         padding: 2em 5em 2em 4em;
         width: 1200px;
+        padding-right: 5em; /* Increase/decrease this value for cross-browser compatibility */
+        box-sizing: content-box; /* So the width will be 100% + 17px */
+
     }
 
     button {
@@ -60,7 +69,7 @@ export const GlobalStyles = createGlobalStyle`
         min-width: 200px;
     }
 
-    @media only screen and (max-width: 600px) {
+    @media (max-width: ${({ theme }) => theme.mobile}) {
         button {
             width: 100%;
         }
