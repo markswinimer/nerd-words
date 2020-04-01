@@ -16,6 +16,7 @@ export const theme = {
     primaryHover: '#c73636',
 
     primaryTextColor: '#202020',
+    primaryTextColorDark: '#101010',
     primaryTextColorOnGray: '#303030',
     primaryTextColorOnGrayDark: '#E0E0E0',
 

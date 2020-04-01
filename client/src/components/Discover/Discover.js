@@ -1,7 +1,9 @@
 import React from 'react';
 import TableEntry from './TableEntry';
 
-import { SearchFilter, SearchResultsTable, TableHeader, StyledFilterToggle, FilterResultsCount, StyledDiscover } from './Discover.styled';
+import { SearchFilter, SearchResultsTable, StyledFilterToggle, FilterResultsCount, StyledDiscover } from './Discover.styled';
+import { TableHeader, StyledTableEntry, EntryLabel, EntryButtons, Button } from './TableEntry.styled';
+
 
 class Discover extends React.Component {
     constructor(props) {
@@ -85,14 +87,22 @@ class Discover extends React.Component {
                 <SearchResultsTable>
                     <table>
                         <tbody>
-                            <TableHeader>
+                            <TableHeader legend>
+                                <EntryLabel large className="libraryName">Library Name</EntryLabel>
+                                <EntryLabel medium className="authorName">Author</EntryLabel>
+                                {/* <EntryLabel className="creationDate">Created on</EntryLabel> */}
+                                <EntryLabel small className="wordCount">Words</EntryLabel>
+                                <EntryLabel small className="playCount">Plays</EntryLabel>
+                                <EntryButtons medium></EntryButtons>
+                            </TableHeader>
+                            {/* <TableHeader>
                                     <th className="libraryName">Collection Name</th>
                                     <th className="authorName">Creator</th>
                                     <th className="creationDate">Date</th>
                                     <th className="wordCount">Words</th>
                                     <th className="playCount">Plays</th>
                                     <th className="sortSpace"></th>
-                            </TableHeader>
+                            </TableHeader> */}
                         </tbody>
                     </table>
                     <table>
