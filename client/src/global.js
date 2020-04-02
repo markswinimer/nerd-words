@@ -5,9 +5,13 @@ export const GlobalStyles = createGlobalStyle`
     html, body {
         margin: 0;
         padding: 0;
+        font-family: "Roboto";
     }
     *, *::after, *::before {
         box-sizing: border-box;
+    }
+    a {
+        text-decoration: none;
     }
     ul {
         padding: 1em 0em 0em 2em;
@@ -18,10 +22,10 @@ export const GlobalStyles = createGlobalStyle`
         padding: .1em 0 .2em .5em;
     }
     body {
-        height: 100vh;
+        overflow: scroll;
+        max-height: 100vh;
         display: flex;
         flex-direction: row;
-        
         font-family: ${({ theme }) => theme.primaryFont};
         background: ${({ theme }) => theme.primaryBackground};
         color: ${({ theme }) => theme.primaryTextColor};
@@ -33,9 +37,12 @@ export const GlobalStyles = createGlobalStyle`
     }
     .App {
         width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
     .Main {
-        height: 100%;
+        flex-grow: 1;
         display: flex;
         flex-direction: row;
     }
@@ -65,22 +72,16 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
-        
-        html { 
-            height: 100vh;
-        }
-
         button {
             width: 100%;
+            max-width: 100%;
         }
         .Main {
-            height: 100%;
             display: flex;
             flex-direction: column;
         }
         .Container {
-            height: 100%;
-            /* overflow: auto; */
+            overflow: auto;
             padding: 2em 1em;
         }
     }

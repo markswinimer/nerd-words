@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-
-
 export const Form = styled.form`
 
     input {
@@ -13,7 +11,7 @@ export const Form = styled.form`
 `
 
 export const FormButton = styled.button`
-    border: none;
+    /* border: none;
     margin-top: 1em;
     border-radius: 10px;
     padding: .5em 1em;
@@ -22,5 +20,5 @@ export const FormButton = styled.button`
     color: white;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center; */
     `

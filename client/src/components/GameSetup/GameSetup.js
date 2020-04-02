@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { LibrarySelector } from '../../components';
+import { SelectorLite } from '../../components';
 import { SelectorContainer, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
 
 
@@ -70,7 +70,7 @@ export default class GameSetup extends React.Component {
 
                 <SelectorContainer>
                     <h2>Select Library </h2>
-                    <LibrarySelector size="small" loadEditForm={this.selectLibrary}/>
+                    <SelectorLite loadEditForm={this.selectLibrary}/>
                 </SelectorContainer>
 
                 <SubmitButton onClick={this.handleSubmit}>Create Game</SubmitButton>
@@ -117,3 +117,4 @@ const RadioField = props => {
         </StyledRadioField>
     )
 }
+

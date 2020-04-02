@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledGameSetup = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 80vh;
 
     div:first-child h2 {
         margin-top: 0em;
@@ -15,13 +15,20 @@ export const StyledGameSetup = styled.div`
 `
 
 export const SelectorContainer = styled.div`
-    flex-grow: auto;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+    h2 {
+        margin-top: .5em;
+        margin-bottom: 0;
+    }
 `
 
 export const Option = styled.div`
-    flex: 1;
     display: flex;
     flex-direction: row;
+    flex: 1;
     align-items: baseline;
 
     h2 {
@@ -83,14 +90,6 @@ export const StyledDropDownField = styled.div`
 `
 
 export const SubmitButton = styled.button`
-    /* border: none;
-    padding: 1em 1em;
-    font-size: 1em;
-    background-color: #c73636;
-    color: white;
+    margin-top: 0;
     text-align: center;
-    margin-top: 1em;
-    margin-bottom: 0em;
-    margin-right: 1em;
-    width: 50%; */
 `

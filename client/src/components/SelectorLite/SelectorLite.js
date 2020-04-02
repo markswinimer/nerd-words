@@ -7,9 +7,9 @@ import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg
 import { 
     LibraryLegend, SelectedLibraryEntryRow, LibraryEntryRow, 
     StyledLibraryEntry, StyledLibrarySelector, Entries } 
-from './LibrarySelector.styled'
+from './SelectorLite.styled'
 
-export default class LibrarySelector extends React.Component {
+export default class SelectorLite extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -72,17 +72,9 @@ export default class LibrarySelector extends React.Component {
             />
         ))
         return(
-            <StyledLibrarySelector size={this.props.size}>
-                <FontAwesomeIcon className="iconArrow" icon={faAngleUp} />
-                <LibraryLegend>
-                    <div>Library Name</div>
-                    <div>Word Count</div>
-                </LibraryLegend>
                 <Entries size={this.props.size}>
                     {userLibrariesList}
                 </Entries>
-                <FontAwesomeIcon className="iconArrow" icon={faAngleDown} />
-            </StyledLibrarySelector>
         )
     }
 }

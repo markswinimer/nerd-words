@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { GameScreen, GameSetup } from '../';
 
 const StyledPlay = styled.div`
-
+    height: 100%;
 `
 
 export default class Play extends React.Component {

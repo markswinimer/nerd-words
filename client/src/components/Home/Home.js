@@ -1,17 +1,22 @@
 import React from 'react';
-import './Home.css';
+import styled from 'styled-components';
+
+const StyledHome = styled.div`
+    h1 {
+        margin: 0;
+    }
+`
 
 class Home extends React.Component {
     render() {
         return(
-            <div className="Home">
+            <StyledHome>
                 {/* <div className="popout-container">
                     <div className="popout">
 
                     </div>
                 </div> */}
 
-                <div className="text-container">
                     <h1>Welcome to Nerd Words</h1>
                     <p>Welcome to <strong>Nerd Words</strong>, the 'pictionary' and other word game deck builder.</p>
                     <p>This application was designed with nerds and genre enthusiasts in mind. Have you and your friends ever spent hours discussing which game of thrones character was the most devisive? Which final fantasy character has the pointiest hair? 
@@ -47,8 +52,7 @@ class Home extends React.Component {
                     </ul>
 
                     <p>Continue to create and use your favorite libraries and they may end up here.</p>
-                </div>
-            </div>
+            </StyledHome>
         )
     }
 }

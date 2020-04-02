@@ -18,7 +18,8 @@ export const StyledLibrarySelector = styled.div`
 `
 
 export const Entries = styled.div`
-    overflow: scroll;
+    overflow: auto;
+    flex: 1;
     padding-right: .5em;
     /* max-height: ${props => props.size}vh; */
     ::-webkit-scrollbar {

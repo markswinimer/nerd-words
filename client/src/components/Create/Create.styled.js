@@ -6,7 +6,9 @@ export const StyledChooseMode = styled.div`
 `
 
 export const Button = styled.button`
-    max-width: 300px;
+
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+    }
 `
 
 export const StyledCreate = styled.div`

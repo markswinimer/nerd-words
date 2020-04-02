@@ -5,5 +5,6 @@ export { default as Play } from './Play';
 export { default as Navbar } from './Navbar';
 export { default as AddWordsForm } from './AddWordsForm';
 export { default as LibrarySelector } from './LibrarySelector';
+export { default as SelectorLite } from './SelectorLite';
 export { default as GameScreen } from './GameScreen';
 export { default as GameSetup } from './GameSetup';
