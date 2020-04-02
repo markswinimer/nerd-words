@@ -65,6 +65,11 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
+        
+        html { 
+            height: 100vh;
+        }
+
         button {
             width: 100%;
         }
@@ -75,7 +80,7 @@ export const GlobalStyles = createGlobalStyle`
         }
         .Container {
             height: 100%;
-            overflow: auto;
+            /* overflow: auto; */
             padding: 2em 1em;
         }
     }

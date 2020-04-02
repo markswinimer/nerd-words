@@ -3,10 +3,9 @@ import styled from 'styled-components';
 export const StyledLibrarySelector = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 100%;
+    width: 100%;
     /* max-width: ${props => props.size === "small" ? "75%" : "auto"}; */
-    max-height: 300px;
-    padding-right: 1em;
+    /* max-height: 300px; */
     
     .icon {
         font-size: 1em;
@@ -29,6 +28,14 @@ export const Entries = styled.div`
         border-radius: 4px;
         background-color: rgba(0, 0, 0, .5);
         box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        padding-right: 0;
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+        ::-webkit-scrollbar { 
+            display: none;  /* Safari and Chrome */
+        }
     }
 `
 

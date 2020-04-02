@@ -1,9 +1,39 @@
 import styled from 'styled-components';
 
 export const StyledGameSetup = styled.div`
-    
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
     div:first-child h2 {
         margin-top: 0em;
+    }
+
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        
+    }
+`
+
+export const SelectorContainer = styled.div`
+    flex-grow: auto;
+`
+
+export const Option = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    h2 {
+        margin-right: 1em;
+    }
+
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        flex-direction: column;
+
+        h2  {
+            margin-bottom: .5em;
+        }
     }
 `
 
@@ -43,23 +73,6 @@ export const SelectedRadioOption = styled(RadioOption)`
     pointer-events: none;
 `
 
-export const Option = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-
-    h2 {
-        margin-right: 1em;
-    }
-
-    @media (max-width: ${({ theme }) => theme.mobile}) {
-        flex-direction: column;
-
-        h2  {
-            margin-bottom: .5em;
-        }
-    }
-`
 
 export const StyledDropDownField = styled.div`
 
