@@ -32,6 +32,24 @@ export const GlobalStyles = createGlobalStyle`
 
         text-rendering: optimizeLegibility;
     }
+    h1, h2, h3, h4, h5, p {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        /* font-size: 100%; */
+        /* font: inherit; */
+        vertical-align: baseline;
+    }
+    h1 {
+
+    }
+
+    h4 {
+        font-size: 1em;
+    }
+    p {
+        margin-top: 1em;
+    }
     table {
         width: 100%;
     }

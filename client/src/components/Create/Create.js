@@ -1,8 +1,9 @@
 import React from 'react';
 import NewLibraryForm from '../NewLibraryForm/NewLibraryForm';
 
-import { AddWordsForm } from '../../components'
+import { ViewLibrary } from '../../components'
 import { LibrarySelector } from '../../components'
+import { seedGameData } from '../../seed'
 
 import axios from 'axios';
 import { Button, StyledChooseMode, StyledCreate } from './Create.styled' 
@@ -11,9 +12,11 @@ class Create extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            chooseMode: true,
+            // chooseMode: true,
+            chooseMode: false,
             previewLibrary: false,
-            activeForm: null,
+            // activeForm: null,
+            activeForm: "viewLibrary",
             library: null
         }
         this.switchCreateMode = this.switchCreateMode.bind(this);
@@ -82,6 +85,7 @@ class Create extends React.Component {
     }
     
     render() {
+
         return(
             <StyledCreate>
 
@@ -104,9 +108,9 @@ class Create extends React.Component {
                     :   null
                 }
 
-                {this.state.activeForm === "addWords"
-                    ?   <AddWordsForm
-                            library={this.state.library}
+                {this.state.activeForm === "viewLibrary"
+                    ?   <ViewLibrary
+                        library={seedGameData.library}
                         />
                     :   null
                 }
