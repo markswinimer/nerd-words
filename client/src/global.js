@@ -22,8 +22,6 @@ export const GlobalStyles = createGlobalStyle`
         padding: .1em 0 .2em .5em;
     }
     body {
-        overflow: scroll;
-        max-height: 100vh;
         display: flex;
         flex-direction: row;
         font-family: ${({ theme }) => theme.primaryFont};
@@ -32,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
 
         text-rendering: optimizeLegibility;
     }
-    h1, h2, h3, h4, h5, p {
+    h1, h2, h3, h4, h5, p, input {
         margin: 0;
         padding: 0;
         border: 0;
@@ -55,7 +53,8 @@ export const GlobalStyles = createGlobalStyle`
     }
     .App {
         width: 100vw;
-        height: 100vh;
+        max-height: 100vh;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
     }
@@ -63,12 +62,13 @@ export const GlobalStyles = createGlobalStyle`
         flex-grow: 1;
         display: flex;
         flex-direction: row;
+        overflow: hidden;
     }
     .Container {
         overflow-y: scroll;
         overflow-x: none;
         flex-grow: 1;
-        padding: 2em 5em 2em 4em;
+        padding: 4em 5em 2em 4em;
         padding-right: 5em; /* Hide the scroll bard, mac issues */
         box-sizing: content-box; /*     ^^^      ^^^     ^^^    */
     }

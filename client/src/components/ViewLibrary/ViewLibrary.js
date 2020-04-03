@@ -3,10 +3,10 @@ import LibraryPreview from '../LibraryPreview';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare, faGamepad, faStar, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 import { StyledViewLibrary, Container, DescriptionField, WordListContainer, LibraryInformation, WordList, StyledWordField,
-    DetailsField, DetailsContainer, Detail } from './ViewLibrary.styled'
+    Scroll, DetailsField, DetailsContainer, Detail } from './ViewLibrary.styled'
 
 export default class ViewLibrary extends React.Component {
     constructor(props) {
@@ -83,16 +83,22 @@ export default class ViewLibrary extends React.Component {
             <StyledViewLibrary>
                 <LibraryInformation>
                     <Container>
-                        <h2>{this.state.library.libraryName}</h2>
+                        
+                        <h1>{this.state.library.libraryName}</h1>
+                        <FontAwesomeIcon className="edit" icon={faEdit} />
                     </Container>
 
                     <DescriptionField>
-                        <h2>Description</h2>
+                        <div>
+                            <h2>Description</h2>
+                            <FontAwesomeIcon className="edit" icon={faEdit} />
+                        </div>
+
                         <p>{this.state.library.description}</p>
                     </DescriptionField>
 
                     <DetailsField>
-                        <h2>Details</h2>
+                            <h2>Details</h2>
                         <DetailsContainer>
                             
                             <div className="column">
@@ -107,6 +113,7 @@ export default class ViewLibrary extends React.Component {
                                 </Detail>
                                 <Detail>
                                     <h4>Words</h4>
+                                    
                                     {this.state.library.wordCount}
                                 </Detail>
                             </div>
@@ -131,11 +138,16 @@ export default class ViewLibrary extends React.Component {
                 <WordListContainer>
                     <Container>
                         <h2>Word Library</h2>
+                        <FontAwesomeIcon className="edit" icon={faEdit} />
+
                     </Container>
 
+                    <Scroll><FontAwesomeIcon className="icon" icon={faChevronUp} /></Scroll>
                     <WordList>
                         {words}
                     </WordList>
+                    <Scroll><FontAwesomeIcon className="icon" icon={faChevronDown} /></Scroll>
+                    
                 </WordListContainer>
 
             {/* <h2>Add Words</h2>

@@ -53,20 +53,6 @@
     font-size: 4.25em;
 }
 
-.WordList {
-    margin-bottom: 2em;
-    padding: 2em 0em;
-    overflow: auto;
-   -webkit-column-count: 3;
-      -moz-column-count: 3;
-           column-count: 3;
-
-   -webkit-column-gap: 40px;
-      -moz-column-gap: 40px;
-           column-gap: 40px;
-
-}
-
 .WordList .WordField {
     width: 100%;
     margin: 0;
