@@ -3,10 +3,12 @@ import LibraryPreview from '../LibraryPreview';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
 
 import { StyledViewLibrary, Container, DescriptionField, WordListContainer, LibraryInformation, WordList, StyledWordField,
-    Scroll, DetailsField, DetailsContainer, Detail } from './ViewLibrary.styled'
+    Scroll, DetailsField, DetailsContainer, Detail,
+    StyledEditableInput, EditToggle
+} from './ViewLibrary.styled'
 
 export default class ViewLibrary extends React.Component {
     constructor(props) {
@@ -14,15 +16,26 @@ export default class ViewLibrary extends React.Component {
         this.state = {
             currentWordValue: "",
             initLibrary: true,
-            library: this.props.library
+            library: this.props.library,
+            edit: {
+                libraryName: false,
+                description: false,
+                wordLibrary: false
+            },
+            libraryName: false,
+
         }
         this.handleWordChange = this.handleWordChange.bind(this)
         this.handleWordSubmit = this.handleWordSubmit.bind(this)
+        this.toggleEdit = this.toggleEdit.bind(this)
+        this.updateField = this.updateField.bind(this)
+
     }
 
     handleWordChange(event) {
-
         const currentWord = event.target.value
+        console.log("WORD = " + this.state.currentWordValue)
+        console.log("WORD = " + currentWord)
         this.setState({ currentWordValue: currentWord })
     }
 
@@ -37,6 +50,19 @@ export default class ViewLibrary extends React.Component {
         this.setState({
             currentWordValue: "",
             library: editLibrary
+        })
+    }
+
+    toggleEdit(e) {
+        let editingValue = ""
+        if(this.state[e.currentTarget.id]) {
+            this.updateField(this.state.library.id)
+        } else {
+            editingValue = this.state.library[e.currentTarget.id]
+        }
+        this.setState({ 
+            [e.currentTarget.id]: !this.state[e.currentTarget.id],
+            currentWordValue: editingValue
         })
     }
 
@@ -58,7 +84,7 @@ export default class ViewLibrary extends React.Component {
         axios(options)
             .then(response => {
                 let library = this.state.library
-                library.words = response.data
+                library.words = response
 
                 this.setState({
                     library: library,
@@ -66,8 +92,36 @@ export default class ViewLibrary extends React.Component {
             })
         })
     }
+    updateField(id) {
+        let url = "/libraries/" + id
+        let libraryName = {
+            libraryName: this.state.currentWordValue
+        }
+        const options = {
+            url: url,
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: libraryName
+        };
+
+        axios(options)
+            .then(response => {
+                let library = this.state.library
+                library.words = response.data
+
+                this.setState({
+                    library: library,
+                    currentWordValue: ""
+                })
+            })
+    }
 
     render() {
+
+        console.log(this.props)
         let words = [];
         let libraryLoaded = this.props.library.words
             words = libraryLoaded.map(word => (
@@ -76,16 +130,37 @@ export default class ViewLibrary extends React.Component {
                     name="libraryName"
                     type="text"
                     value={word}
+                    handleChange={this.handleWordChange}
                 />
             ))
+        
+        
+
 
         return(
             <StyledViewLibrary>
                 <LibraryInformation>
                     <Container>
-                        
-                        <h1>{this.state.library.libraryName}</h1>
-                        <FontAwesomeIcon className="edit" icon={faEdit} />
+
+                        {!this.state.libraryName
+                        ? <h1>{this.state.library.libraryName}</h1>
+                        : <EditableInput
+                                id="libraryName"
+                                type="text"
+                                value={this.state.currentWordValue}
+                                handleChange={this.handleWordChange}
+                            />
+                        }
+
+                        <EditToggle
+                            onClick={this.toggleEdit}
+                            id="libraryName"
+                        >
+                            {this.state.libraryName
+                                ?<FontAwesomeIcon className="save" icon={faSave} />
+                                :<FontAwesomeIcon className="edit" icon={faEdit} />
+                            }
+                        </EditToggle>
                     </Container>
 
                     <DescriptionField>
@@ -187,5 +262,19 @@ const WordField = props => {
             onChange={props.handleChange}>
         </StyledWordField>
 
+    )
+}
+
+const EditableInput = props => {
+    return(
+        <StyledEditableInput
+            autoComplete="off"
+            id={props.id}
+            name={props.name}
+            type='text'
+            value={props.value}
+            onChange={props.handleChange}>
+                
+        </StyledEditableInput>
     )
 }

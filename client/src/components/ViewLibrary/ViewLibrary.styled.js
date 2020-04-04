@@ -13,20 +13,12 @@ export const Container = styled.div`
 
     h1 {
         margin-top: .5em;
+        /* border: 1px solid white; */
     }
     h2 {
         margin-top: 1em;
     }
 
-    .edit {
-        font-size: 1.3em;
-        margin-left: auto;
-        margin-right: .75em;
-        margin-top: .75em;
-        cursor: pointer;
-        :hover {
-        }
-    }
 `
 
 export const DescriptionField = styled(Container)`
@@ -125,4 +117,27 @@ export const Scroll = styled.div`
         border: none;
         border-top: 1px solid silver
     }
+`
+
+export const StyledEditableInput = styled.input`
+        margin-top: .5em;
+        font-size: 2em;
+        font-weight: bold;
+        font-family: "Roboto";
+        height: auto;
+        border-bottom: 2px solid red;
+`
+
+export const EditToggle = styled.div`
+        font-size: 1.3em;
+        color: ${({ theme }) => theme.primaryTextColor};
+        margin-left: auto;
+        margin-right: .75em;
+        margin-top: .75em;
+        cursor: pointer;
+
+        .save {
+         font-size: 1.2em;
+         color: #32cd32;
+        }
 `

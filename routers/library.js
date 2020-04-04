@@ -84,7 +84,7 @@ router.patch('/libraries/:id', async (req, res) => {
     console.log("--------------IN PATCH---------")
     console.log(req.body)
     console.log("updates " + updates)
-    const allowedUpdates = ['words']
+    const allowedUpdates = ['words', 'libraryName']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
     // This code block exists to provide information if an invalid value is given
