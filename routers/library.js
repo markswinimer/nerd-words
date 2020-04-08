@@ -84,7 +84,7 @@ router.patch('/libraries/:id', async (req, res) => {
     console.log("--------------IN PATCH---------")
     console.log(req.body)
     console.log("updates " + updates)
-    const allowedUpdates = ['words', 'libraryName']
+    const allowedUpdates = [ 'libraryName', 'description', 'words']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
     // This code block exists to provide information if an invalid value is given
@@ -94,16 +94,14 @@ router.patch('/libraries/:id', async (req, res) => {
 
     try {
         const library = await Library.findById(req.params.id)
-        console.log(library)
 
         updates.forEach((update) => {
-            library[update].push(req.body[update])
+            if(update === "words") {
+                library[update].push(req.body[update][0])
+            } else {
+                library[update] = req.body[update]
+            }
         })
-
-        // This is where I left off: I'm trying to get the database to save each individual word as you submit them via the form. 
-        // Here, the update methods are validated and compared in order to update the correct values
-        // Next: update the word array to include the new word and send back the updated word array.
-        // Consider only sending back the updated word array as nothing else will have been changed.
 
         await library.save()
         // 3rd argument is { options }, new: true sends back the updated object not the found one
@@ -112,7 +110,14 @@ router.patch('/libraries/:id', async (req, res) => {
         if (!library) {
             return res.status(404).send()
         }
-        res.send(library.words)
+
+        const updateType = Object.keys(req.body)[0]
+        const updateValue = {
+            value: library[updateType],
+            type: updateType
+        }
+
+        res.send(updateValue)
     } catch (e) {
         // could have a server connection/directory issue or a validation issue due to the runValidators option
         res.status(400).send(e)

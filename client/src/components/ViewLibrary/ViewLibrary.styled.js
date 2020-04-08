@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt, faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
 
 export const StyledViewLibrary = styled.div`
     display: flex;
@@ -82,11 +84,89 @@ export const Detail = styled.div`
 export const LibraryInformation = styled.div`
     border: 1px solid silver;
 `
+export const StyledAddWordsForm = styled.div`
+    margin-top: 2em;
+   
+`
+
+export const WordInput = styled.input`
+    border: 1px solid silver;
+    padding: 1em;
+`
+export const WordForm = styled.form`
+    padding-top: 1em;
+    border: 1px solid silver;
+    border-top: none;
+    margin-left: 4em;
+    padding: 1em;
+    background-color: #f3f3f3;
+    display: ${props => !props.hidden ? "none" : "inherit"};
+
+`
+
+export const Title = styled(Container)`
+    padding: 1em 2em;
+    border: 1px solid silver;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+        height: 100%;
+        font-size: 2em;
+        color: ${({ theme }) => theme.primaryDark};
+    }
+    h2 {
+        margin-top: 0;
+        margin-right: 1em;
+    }
+
+    :hover {
+            color: white;
+            background-color: ${({ theme }) => theme.primaryDark};
+        .icon {
+                color: white;
+            }
+    }
+
+`
 
 export const WordListContainer = styled.div`
     margin-top: 2em;
     border: 1px solid silver;
     max-height: 30em;
+`
+export const StyledWordList = styled.div`
+    margin-top: 2em;
+    border: 1px solid silver;
+    max-height: 30em;
+`
+
+export const Toggle = styled.div`
+    display: ${props => props.active ? "flex" : "none" };
+    cursor: pointer;
+`  
+export const WordContainer = styled.form`
+    border-bottom: 1px solid silver;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    h2 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 1.25em;
+        font-weight: normal;
+        width: 250px;
+        min-height: 2em;
+        padding: 0 1.5em;
+    }   
+
+    .icon { 
+        margin-left: 1em;
+    }
 `
 
 export const WordList = styled.div`
@@ -99,7 +179,8 @@ export const StyledWordField = styled.input`
     min-height: 2em;
     padding: 0 1.5em;
     border: none;
-    border-bottom: 1px solid silver;
+    width: 250px;
+    border: ${props => props.editable ? "1px solid red" : "none" };
 
     :last-child {
         border-bottom: none;
@@ -127,8 +208,15 @@ export const StyledEditableInput = styled.input`
         height: auto;
         border-bottom: 2px solid red;
 `
+export const EditableParagraph = styled(StyledEditableInput)`
+        font-size: 1em;
+        font-weight: normal;
+        font-family: "Roboto";
+        height: auto;
+        border-bottom: 2px solid red;
+`
 
-export const EditToggle = styled.div`
+export const StyledEditToggle = styled.div`
         font-size: 1.3em;
         color: ${({ theme }) => theme.primaryTextColor};
         margin-left: auto;

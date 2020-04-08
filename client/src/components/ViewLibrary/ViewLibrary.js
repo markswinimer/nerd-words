@@ -1,13 +1,17 @@
 import React from 'react';
 import LibraryPreview from '../LibraryPreview';
+import EditableInput from './EditableInput';
+import LibraryWordList from './LibraryWordList';
+import EditToggle from './EditToggle';
+import AddWordsForm from './AddWordsForm';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp, faPlusSquare, faMinusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
 
 import { StyledViewLibrary, Container, DescriptionField, WordListContainer, LibraryInformation, WordList, StyledWordField,
-    Scroll, DetailsField, DetailsContainer, Detail,
-    StyledEditableInput, EditToggle
+    Scroll, DetailsField, DetailsContainer, Detail, Title,
+    StyledEditableInput, EditableParagraph
 } from './ViewLibrary.styled'
 
 export default class ViewLibrary extends React.Component {
@@ -17,46 +21,47 @@ export default class ViewLibrary extends React.Component {
             currentWordValue: "",
             initLibrary: true,
             library: this.props.library,
-            edit: {
-                libraryName: false,
-                description: false,
-                wordLibrary: false
-            },
             libraryName: false,
-
+            description: false,
+            wordLibrary: false,
+            addWords: false
         }
         this.handleWordChange = this.handleWordChange.bind(this)
         this.handleWordSubmit = this.handleWordSubmit.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
         this.updateField = this.updateField.bind(this)
+        this.change = this.change.bind(this)
 
     }
 
     handleWordChange(event) {
-        const currentWord = event.target.value
         console.log("WORD = " + this.state.currentWordValue)
+        const currentWord = event.target.value
         console.log("WORD = " + currentWord)
         this.setState({ currentWordValue: currentWord })
+    }
+    change() {
+        console.log("WORD = " + this.state.currentWordValue)
     }
 
     handleWordSubmit(event) {
         event.preventDefault()
-
         // REPLACE with post to word library on back end 
         // current use is to get base functionality
-        let editLibrary = this.state.library
-        editLibrary.words.push(this.state.currentWordValue)
-        this.postNewWord(this.state.library._id)
-        this.setState({
-            currentWordValue: "",
-            library: editLibrary
-        })
+        // let editLibrary = this.state.library
+        // editLibrary.words.push(this.state.currentWordValue)
+        this.postNewWord()
+        // this.setState({
+        //     currentWordValue: "",
+        //     library: editLibrary
+        // })
     }
 
     toggleEdit(e) {
+        console.log("MADE IT + " + e)
         let editingValue = ""
         if(this.state[e.currentTarget.id]) {
-            this.updateField(this.state.library.id)
+            this.updateField(e.currentTarget.id)
         } else {
             editingValue = this.state.library[e.currentTarget.id]
         }
@@ -66,10 +71,12 @@ export default class ViewLibrary extends React.Component {
         })
     }
 
-    postNewWord(id) {
-        let url = "/libraries/" + id
+    postNewWord() {
+        console.log(this.state.currentWordValue)
+
+        let url = "/libraries/" + this.state.library._id
         let word = {
-            words: this.state.currentWordValue
+            words: [this.state.currentWordValue]
         }
         const options = {
             url: url,
@@ -84,18 +91,18 @@ export default class ViewLibrary extends React.Component {
         axios(options)
             .then(response => {
                 let library = this.state.library
-                library.words = response
+                library[response.data.type] = response.data.value
 
                 this.setState({
                     library: library,
-                    currentWord: ""
-            })
+                    currentWordValue: ""
+                })
         })
     }
-    updateField(id) {
-        let url = "/libraries/" + id
-        let libraryName = {
-            libraryName: this.state.currentWordValue
+    updateField(field) {
+        let url = "/libraries/" + this.state.library._id
+        let update = {
+            [field]: this.state.currentWordValue
         }
         const options = {
             url: url,
@@ -104,13 +111,14 @@ export default class ViewLibrary extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
             },
-            data: libraryName
+            data: update
         };
 
         axios(options)
             .then(response => {
+                console.log("__________________> " + response.data.type)
                 let library = this.state.library
-                library.words = response.data
+                library[response.data.type] = response.data.value
 
                 this.setState({
                     library: library,
@@ -120,22 +128,6 @@ export default class ViewLibrary extends React.Component {
     }
 
     render() {
-
-        console.log(this.props)
-        let words = [];
-        let libraryLoaded = this.props.library.words
-            words = libraryLoaded.map(word => (
-                <WordField
-                    id={word}
-                    name="libraryName"
-                    type="text"
-                    value={word}
-                    handleChange={this.handleWordChange}
-                />
-            ))
-        
-        
-
 
         return(
             <StyledViewLibrary>
@@ -147,29 +139,40 @@ export default class ViewLibrary extends React.Component {
                         : <EditableInput
                                 id="libraryName"
                                 type="text"
+                                font={StyledEditableInput}
                                 value={this.state.currentWordValue}
                                 handleChange={this.handleWordChange}
                             />
                         }
 
                         <EditToggle
-                            onClick={this.toggleEdit}
+                            toggleEdit={this.toggleEdit}
                             id="libraryName"
-                        >
-                            {this.state.libraryName
-                                ?<FontAwesomeIcon className="save" icon={faSave} />
-                                :<FontAwesomeIcon className="edit" icon={faEdit} />
-                            }
-                        </EditToggle>
+                            active={this.state.libraryName}
+                        />
                     </Container>
 
                     <DescriptionField>
                         <div>
                             <h2>Description</h2>
-                            <FontAwesomeIcon className="edit" icon={faEdit} />
+                            <EditToggle
+                                toggleEdit={this.toggleEdit}
+                                id="description"
+                                active={this.state.description}
+                            />
                         </div>
 
-                        <p>{this.state.library.description}</p>
+                        {!this.state.description
+                            ? <p>{this.state.library.description}</p>
+                            : <EditableInput
+                                id="description"
+                                type="text"
+                                font={EditableParagraph}
+                                value={this.state.currentWordValue}
+                                handleChange={this.handleWordChange}
+                            />
+                        }
+                        
                     </DescriptionField>
 
                     <DetailsField>
@@ -192,6 +195,8 @@ export default class ViewLibrary extends React.Component {
                                     {this.state.library.wordCount}
                                 </Detail>
                             </div>
+
+
                             <div className="column">
                                 <Detail>
                                     <FontAwesomeIcon className="icon" icon={faGamepad} />
@@ -209,72 +214,24 @@ export default class ViewLibrary extends React.Component {
                         </DetailsContainer>
                     </DetailsField>
                 </LibraryInformation>
+                
+                <AddWordsForm
+                    active={this.state.addWords}
+                    toggleEdit={this.toggleEdit}
+                    currentWord={this.state.currentWordValue}
+                    handleSubmit={this.handleWordSubmit}
+                    handleChange={this.handleWordChange}
+                >
+                                
+                </AddWordsForm>
 
-                <WordListContainer>
-                    <Container>
-                        <h2>Word Library</h2>
-                        <FontAwesomeIcon className="edit" icon={faEdit} />
-
-                    </Container>
-
-                    <Scroll><FontAwesomeIcon className="icon" icon={faChevronUp} /></Scroll>
-                    <WordList>
-                        {words}
-                    </WordList>
-                    <Scroll><FontAwesomeIcon className="icon" icon={faChevronDown} /></Scroll>
-                    
-                </WordListContainer>
-
-            {/* <h2>Add Words</h2>
-            <form onSubmit={this.handleWordSubmit} className="AddWordsForm-form">
-                <input
-                    autoComplete="off"
-
-                    id="0"
-                    name="Main-input"
-                    type='text'
-                    className="CreateForm-addword"
-                    value={this.state.currentWordValue}
-                    onChange={this.handleWordChange}
-                    onSubmit={this.handleWordSubmit}
+                <LibraryWordList
+                    library={this.props.library}
+                    toggleEdit={this.toggleEdit}
+                    active={this.state.wordLibrary}
+                    handleChange={this.handleWordChange}
                 />
-                <button>
-                    <FontAwesomeIcon className="icon" icon={faPlusSquare} />
-                </button>
-            </form>
-
-                <div className="WordList">
-                    {words}
-                </div> */}
             </StyledViewLibrary>
         )
     }
-}
-
-const WordField = props => {
-    return (
-        <StyledWordField
-            autoComplete="off"
-            id={props.id}
-            name={props.name}
-            type='text'
-            value={props.value}
-            onChange={props.handleChange}>
-        </StyledWordField>
-
-    )
-}
-
-const EditableInput = props => {
-    return(
-        <StyledEditableInput
-            autoComplete="off"
-            id={props.id}
-            name={props.name}
-            type='text'
-            value={props.value}
-            onChange={props.handleChange}>
-                
-        </StyledEditableInput>
-    )
 }

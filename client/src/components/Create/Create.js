@@ -13,10 +13,10 @@ class Create extends React.Component {
         super(props);
         this.state = {
             // chooseMode: true,
-            chooseMode: true,
+            chooseMode: false,
             previewLibrary: false,
             // activeForm: null,
-            activeForm: "",
+            activeForm: "viewLibrary",
             library: null
         }
         this.switchCreateMode = this.switchCreateMode.bind(this);
@@ -53,7 +53,7 @@ class Create extends React.Component {
                 console.log(response);
                 this.setState({
                     library: response.data,
-                    activeForm: "addWords"
+                    activeForm: "viewLibrary"
                 })
             })
     }
@@ -110,8 +110,8 @@ class Create extends React.Component {
 
                 {this.state.activeForm === "viewLibrary"
                     ?   <ViewLibrary
-                        // library={seedGameData.library}
-                        library={this.state.library}
+                        library={seedGameData.library}
+                        // library={this.state.library}
                         />
                     :   null
                 }
