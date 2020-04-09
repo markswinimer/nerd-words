@@ -84,7 +84,7 @@ router.patch('/libraries/:id', async (req, res) => {
     console.log("--------------IN PATCH---------")
     console.log(req.body)
     console.log("updates " + updates)
-    const allowedUpdates = [ 'libraryName', 'description', 'words']
+    const allowedUpdates = [ 'libraryName', 'description', 'words', 'word', 'id']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
     // This code block exists to provide information if an invalid value is given
@@ -94,19 +94,26 @@ router.patch('/libraries/:id', async (req, res) => {
 
     try {
         const library = await Library.findById(req.params.id)
+        const updatingOneWord = (updates[0] == "word")
 
-        updates.forEach((update) => {
-            if(update === "words") {
-                library[update].push(req.body[update][0])
-            } else {
-                library[update] = req.body[update]
-            }
-        })
+        if (updatingOneWord) {
+            // Finds entry id and sets it to new word
+            library.words[library.words.indexOf(req.body.id)] = req.body.word
+        } else {
+            updates.forEach((update) => {
+                if(update === "words") {
+                    library[update].push(req.body[update][0])
+                } else {
+                    library[update] = req.body[update]
+                }
+            })
+        }
 
+        library.markModified("words")
         await library.save()
-        // 3rd argument is { options }, new: true sends back the updated object not the found one
-        // const library = await Library.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
+        // 3rd argument is { options }, new: true sends back the updated object not the found one
+        
         if (!library) {
             return res.status(404).send()
         }
@@ -117,10 +124,14 @@ router.patch('/libraries/:id', async (req, res) => {
             type: updateType
         }
 
-        res.send(updateValue)
+        if (updatingOneWord) {
+            res.send(library)
+        } else {
+            res.send(updateValue)
+        }
     } catch (e) {
         // could have a server connection/directory issue or a validation issue due to the runValidators option
-        res.status(400).send(e)
+        res.status(400).send("ERROR HERE + " + e)
     }
 })
 

@@ -31,7 +31,16 @@ export default class LibraryWordList extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         console.log("HIHIHI")
-        this.props.updateWord(this.state.currentWord)
+        const payload = {
+            word: this.state.currentWord,
+            id: this.state.currentWord_id
+        }
+        this.props.updateWord(payload)
+        this.setState({
+            currentWord_id: "",
+            currentWord: "",
+            editing: false
+        })
     }
 
     toggleEdit(e) {
@@ -49,16 +58,6 @@ export default class LibraryWordList extends React.Component {
                 editing: false
             })
         }
-
-        // if (this.state[e.currentTarget.id]) {
-        //     this.updateField(e.currentTarget.id)
-        // } else {
-        //     editingValue = this.state.library[e.currentTarget.id]
-        // }
-        // this.setState({
-        //     [e.currentTarget.id]: !this.state[e.currentTarget.id],
-        //     currentWordValue: editingValue
-        // })
     }
 
     render() {

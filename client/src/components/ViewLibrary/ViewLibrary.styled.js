@@ -159,7 +159,7 @@ export const WordContainer = styled.form`
         align-items: center;
         font-size: 1.25em;
         font-weight: normal;
-        width: 250px;
+        width: 300px;
         min-height: 2em;
         padding: 0 1.5em;
     }   
@@ -179,7 +179,7 @@ export const StyledWordField = styled.input`
     min-height: 2em;
     padding: 0 1.5em;
     border: none;
-    width: 250px;
+    width: 300px;
     border: ${props => props.editable ? "1px solid red" : "none" };
 
     :last-child {

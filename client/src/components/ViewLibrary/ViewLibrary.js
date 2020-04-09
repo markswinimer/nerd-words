@@ -30,6 +30,7 @@ export default class ViewLibrary extends React.Component {
         this.handleWordSubmit = this.handleWordSubmit.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
         this.updateField = this.updateField.bind(this)
+        this.updateWord = this.updateWord.bind(this)
         this.change = this.change.bind(this)
 
     }
@@ -72,6 +73,8 @@ export default class ViewLibrary extends React.Component {
     }
 
     postNewWord() {
+        console.log("UPDATEFIELD")
+
         console.log(this.state.currentWordValue)
 
         let url = "/libraries/" + this.state.library._id
@@ -99,7 +102,9 @@ export default class ViewLibrary extends React.Component {
                 })
         })
     }
+    
     updateField(field) {
+        console.log("UPDATEFIELD")
         let url = "/libraries/" + this.state.library._id
         let update = {
             [field]: this.state.currentWordValue
@@ -123,6 +128,33 @@ export default class ViewLibrary extends React.Component {
                 this.setState({
                     library: library,
                     currentWordValue: ""
+                })
+            })
+    }
+
+    updateWord(payload) {
+        // This function will eventually point to the word list entry in the database once it is independant from the word library entry
+        let url = "/libraries/" + this.state.library._id
+        const options = {
+            url: url,
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: payload
+        };
+
+        axios(options)
+            .then(response => {
+                let library = this.state.library
+                library.words = response.data.words
+                console.log(response.data)
+                
+                this.setState({
+                    library: library,
+                    currentWordValue: "",
+                    // wordLibrary: false
                 })
             })
     }
@@ -230,6 +262,7 @@ export default class ViewLibrary extends React.Component {
                     toggleEdit={this.toggleEdit}
                     active={this.state.wordLibrary}
                     handleChange={this.handleWordChange}
+                    updateWord={this.updateWord}
                 />
             </StyledViewLibrary>
         )
