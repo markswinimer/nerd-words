@@ -24,7 +24,8 @@ export default class ViewLibrary extends React.Component {
             libraryName: false,
             description: false,
             wordLibrary: false,
-            addWords: false
+            addWords: false,
+            authenticatedUser: true
         }
         this.handleWordChange = this.handleWordChange.bind(this)
         this.handleWordSubmit = this.handleWordSubmit.bind(this)
@@ -177,21 +178,28 @@ export default class ViewLibrary extends React.Component {
                             />
                         }
 
-                        <EditToggle
-                            toggleEdit={this.toggleEdit}
-                            id="libraryName"
-                            active={this.state.libraryName}
-                        />
+                        {this.state.authenticatedUser
+                            ? <EditToggle
+                                toggleEdit={this.toggleEdit}
+                                id="libraryName"
+                                active={this.state.libraryName}
+                            />
+                            : null
+                        }
+
                     </Container>
 
                     <DescriptionField>
                         <div>
                             <h2>Description</h2>
-                            <EditToggle
-                                toggleEdit={this.toggleEdit}
-                                id="description"
-                                active={this.state.description}
-                            />
+                            {this.state.authenticatedUser
+                                ? <EditToggle
+                                    toggleEdit={this.toggleEdit}
+                                    id="description"
+                                    active={this.state.description}
+                                />
+                                : null
+                            }
                         </div>
 
                         {!this.state.description
@@ -247,15 +255,16 @@ export default class ViewLibrary extends React.Component {
                     </DetailsField>
                 </LibraryInformation>
                 
-                <AddWordsForm
-                    active={this.state.addWords}
-                    toggleEdit={this.toggleEdit}
-                    currentWord={this.state.currentWordValue}
-                    handleSubmit={this.handleWordSubmit}
-                    handleChange={this.handleWordChange}
-                >
-                                
-                </AddWordsForm>
+                {this.state.authenticatedUser
+                ?   <AddWordsForm
+                        active={this.state.addWords}
+                        toggleEdit={this.toggleEdit}
+                        currentWord={this.state.currentWordValue}
+                        handleSubmit={this.handleWordSubmit}
+                        handleChange={this.handleWordChange}
+                    />
+                : null
+                }
 
                 <LibraryWordList
                     library={this.props.library}
@@ -263,6 +272,7 @@ export default class ViewLibrary extends React.Component {
                     active={this.state.wordLibrary}
                     handleChange={this.handleWordChange}
                     updateWord={this.updateWord}
+                    authenticatedUser={this.state.authenticatedUser}
                 />
             </StyledViewLibrary>
         )

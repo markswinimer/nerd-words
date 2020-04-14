@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from '../sub-components/InputField';
+import EditableInput from './EditableInput';
 import TextAreaField from '../sub-components/TextAreaField';
 
 import { Form, FormButton } from './NewLibraryForm.styled';
@@ -37,24 +37,25 @@ export default class NewLibraryForm extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit}>
 
-                <h2>Let's start by choosing a name: </h2>
+                <h1>Let's start by choosing a name: </h1>
                 <p>Not just any old name.
                     Choose something that will represent the theme of your library.</p>
 
                 <h2>Library Name</h2>
-                <InputField
+                <EditableInput
                     id="Library Name"
                     label=""
                     name="libraryName"
                     type="text"
-                    value={this.state.library.libraryDescription}
+                    value={this.state.library.libraryName}
                     handleChange={this.handleChange}
                 />
 
                 <h2>Description</h2>
-                <TextAreaField
-                    id="needsone"
-                    name="description"
+                <EditableInput
+                    id="Description"
+                    label=""
+                    name="libraryDescription"
                     type="text"
                     value={this.state.library.libraryDescription}
                     handleChange={this.handleChange}

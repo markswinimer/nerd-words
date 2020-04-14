@@ -28,9 +28,10 @@ export const SelectorContainer = styled.div`
 export const Option = styled.div`
     display: flex;
     flex-direction: row;
-    flex: 1;
     align-items: baseline;
-
+    border: 1px solid silver;
+    border-bottom: none;
+    padding: 1em 2em;
     h2 {
         margin-right: 1em;
     }

@@ -41,7 +41,7 @@ export default class GameSetup extends React.Component {
             },
             data: id
         };
-
+        
         axios(options)
             .then(response => {
                 console.log(response.data);

@@ -97,11 +97,15 @@ export default class LibraryWordList extends React.Component {
             <StyledWordList>
                 <Container>
                     <h2>Word Library</h2>
-                    <EditToggle
+                    {this.props.authenticatedUser
+                    ? <EditToggle
                         toggleEdit={this.props.toggleEdit}
                         id="wordLibrary"
                         active={this.props.active}
-                    />
+                     />
+                    : null
+                    }
+
                 </Container>
 
                 <Scroll><FontAwesomeIcon className="icon" icon={faChevronUp} /></Scroll>
