@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import {
     StyledGameScreen, DeckInfo, Indicator, Label, DataDisplay,
     ViewDiscarded, Deck, Card, CardBack, Logo, Word,
@@ -7,15 +9,17 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlasses, faAngleDown, faRedoAlt, faCog, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { constants } from 'crypto';
 
 export default class GameScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            library: this.props.gameData.library,
+            library: undefined,
             drawPile: [],
             discardPile: [],
-            currentWord: undefined
+            currentWord: undefined,
+            gameInProgress: false
         }
         this.nextCard = this.nextCard.bind(this)
         this.shuffleDeck = this.shuffleDeck.bind(this)
@@ -23,14 +27,33 @@ export default class GameScreen extends React.Component {
     }
 
     componentDidMount() {
-        let shuffledDeck = this.props.gameData.library.words;
-        this.shuffleDeck(shuffledDeck)
+        this.loadLibrary(this.props.gameData.library_id)
+    }
 
-        this.setState({ drawPile: shuffledDeck })
+
+    loadLibrary(id) {
+            if (!id) {
+                let id = "5e66ce6f3df09970e8150888"
+            }
+            let url = "/libraries/" + id
+            const options = {
+                url: url,
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data: id
+            };
+
+            axios(options)
+                .then(response => {
+                    let shuffledDeck = this.shuffleDeck(response.data.words)
+                    this.setState({ library: response.data, drawPile: shuffledDeck })
+                })
     }
 
     refreshDeck() {
-
         const newDeck = this.shuffleDeck(this.state.library.words)
 
         this.setState({
@@ -64,7 +87,6 @@ export default class GameScreen extends React.Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <StyledGameScreen>
 

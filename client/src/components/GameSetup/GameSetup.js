@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import LibrarySelector from './LibrarySelector' 
+
 import { SelectorLite } from '../../components';
 import { SelectorContainer, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
 
@@ -11,12 +13,17 @@ export default class GameSetup extends React.Component {
         this.state = {
             maxPlayers: 5,
             gameMode: 0,
-            numPlayers: undefined,
-            library: null
+            numPlayers: null,
+            selectedLibrary: null,
+            libraries: []
         }
         this.selectNumPlayers = this.selectNumPlayers.bind(this)
-        this.selectLibrary = this.selectLibrary.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleLibraryChoice = this.handleLibraryChoice.bind(this)
+    }
+
+    handleLibraryChoice(e) {
+        this.setState({ selectedLibrary: e.currentTarget.id })
     }
 
     selectNumPlayers(e) {
@@ -24,32 +31,24 @@ export default class GameSetup extends React.Component {
     }
 
     handleSubmit() {
-        this.props.createGame(this.state)
+        const gameSetup = {
+            gameMode: this.state.gameMode,
+            numPlayers: this.state.numPlayers,
+            library_id: this.state.selectedLibrary,
+        }
+
+        let isValid = true;
+        for (let [key, value] of Object.entries(gameSetup)) {
+            if(value === null) {
+                isValid = false
+            } 
+        }
+        if(isValid) {
+            console.log('creating game')
+            this.props.createGame(gameSetup)
+        }
     }
 
-    selectLibrary(id) {
-        if (!id) {
-            let id = "5e66ce6f3df09970e8150888"
-        }
-        let url = "/libraries/" + id
-        const options = {
-            url: url,
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            data: id
-        };
-        
-        axios(options)
-            .then(response => {
-                console.log(response.data);
-                this.setState({
-                    library: response.data,
-                })
-            })
-    }
 
     render() {
         return(
@@ -68,10 +67,13 @@ export default class GameSetup extends React.Component {
                     />
                 </Option>
 
-                <SelectorContainer>
-                    <h2>Select Library </h2>
-                    <SelectorLite loadEditForm={this.selectLibrary}/>
-                </SelectorContainer>
+                <LibrarySelector
+                    libraries={this.state.library}
+                    activeLibrary={this.state.wordLibrary}
+                    handleChange={this.handleWordChange}
+                    selectedLibrary={this.state.selectedLibrary}
+                    handleLibraryChoice={this.handleLibraryChoice}
+                />
 
                 <SubmitButton onClick={this.handleSubmit}>Create Game</SubmitButton>
             </StyledGameSetup>

@@ -19,8 +19,9 @@ export const SelectorContainer = styled.div`
     flex-direction: column;
     flex-grow: 1;
     min-height: 0;
+
     h2 {
-        margin-top: .5em;
+        margin-top: 1em;
         margin-bottom: 0;
     }
 `
@@ -30,8 +31,11 @@ export const Option = styled.div`
     flex-direction: row;
     align-items: baseline;
     border: 1px solid silver;
-    border-bottom: none;
     padding: 1em 2em;
+
+    :first-child {
+        border-bottom: none;
+    }
     h2 {
         margin-right: 1em;
     }
@@ -91,6 +95,7 @@ export const StyledDropDownField = styled.div`
 `
 
 export const SubmitButton = styled.button`
-    margin-top: 0;
+    margin: 0;
+    margin-top: 2em;
     text-align: center;
 `
