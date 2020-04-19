@@ -1,57 +1,32 @@
 import styled from 'styled-components'
 
-export const StyledTableEntry = styled.div`
+export const StyledTableRow = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 2em;
-    border: 1px solid silver;
-    border-radius: 8px;
-    margin-bottom: .25em;
-    height: 50px;
-    max-width: 100%;
-    color: ${({ theme }) => theme.primaryTextColorDark};
-
-    td {
-        font-family: "Roboto Condensed";
-        text-align: left;
-    }
-
-    .libraryName {
-        flex: 3;
-    }
-    .authorName {
-        flex: 2;
-    }
-    /* .creationDate {
-        flex: 2;
-    } */
-    .wordCount {
-        flex: 1;
-    }
-    .playCount {
-        flex: 1;
-    }  
-    @media (max-width: ${({ theme }) => theme.mobile}) {
-        .playCount {
-            display: none;
-            font-weight:bold;
-        }  
+    width: 100%;
+    flex: ${props => props.size};
+    padding: 1em 2em;
+    border-bottom: 1px solid silver;
+    :hover {
+    background-color: #f5f5f5;
     }
 `
 
-export const TableHeader = styled(StyledTableEntry)`
+export const Data = styled.div`
+    flex: ${props => props.size};
+
+    :last-child {
+        justify-content: center;
+    }
+`
+
+export const TableHeader = styled(StyledTableRow)`
     margin-top: 1em;
     font-weight: bold;
     border: none;
     background-color: ${({ theme }) => theme.primaryDark};
     color: white;
     max-height: 30px;
-`
-
-export const EntryLabel = styled.td`
-
 `
 
 export const EntryButtons = styled.div`

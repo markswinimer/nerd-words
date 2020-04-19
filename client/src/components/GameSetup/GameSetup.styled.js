@@ -13,7 +13,9 @@ export const StyledGameSetup = styled.div`
         
     }
 `
-
+export const StartButton = styled.button`
+    margin-left: auto;
+`
 export const SelectorContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -30,14 +32,18 @@ export const Option = styled.div`
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    border: 1px solid silver;
+    border-bottom: 1px solid #D3D3D3;
     padding: 1em 2em;
 
     :first-child {
         border-bottom: none;
+
     }
     h2 {
         margin-right: 1em;
+            font-size: 1.5em;
+    font-family: "Roboto Condensed";
+    font-weight: 400;
     }
 
     @media (max-width: ${({ theme }) => theme.mobile}) {

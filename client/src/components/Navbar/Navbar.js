@@ -5,7 +5,7 @@ const StyledNavbar = styled.div`
     background-color: #c73636;
     display: flex;
     flex-direction: row;
-    padding: .75rem 5rem .75rem 1em;
+    padding: .25rem 5rem .25rem 1em;
     align-items: center;
     border-bottom: 1px solid #d87171;
     color: white;
@@ -15,8 +15,8 @@ const StyledNavbar = styled.div`
     }
 `
 const Logo = styled.div`
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     padding: 1px 2px 3px 1px;
     border-radius: 3px;
     background-color: #c73636;
@@ -24,7 +24,7 @@ const Logo = styled.div`
     color: #c73636;
     font-family: 'Oleo Script', sans-serif;
     font-size: 30px;
-    line-height: 40px;
+    line-height: 30px;
     text-align: center;
     margin-right: .3em;
 `

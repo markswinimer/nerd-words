@@ -229,3 +229,68 @@ export const StyledEditToggle = styled.div`
          color: #32cd32;
         }
 `
+
+
+export const Card = styled.div`
+    box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
+    margin-top: 2em;
+    :first-of-type {
+        margin-top: 0;
+    }
+`
+
+
+
+export const Label = styled.div`
+    display: flex;
+    flex-direction: row;
+    background-color: #F8F8F8;
+    background-color: #c73636;
+    color: white;
+    padding: 1rem 2rem;
+    font-family: "Roboto Condensed";
+    font-weight: 400;
+    border-bottom: 1px solid #D3D3D3;
+    padding: 0 0em 1em 2em;
+    border-bottom: 1px solid silver;
+
+    h1 {
+        font-size: 1.75em;
+        margin-top: .5em;
+        /* border: 1px solid white; */
+    }
+    h2 {
+        margin-top: 1em;
+    }
+    p {
+        font-weight: 300;
+        color: #404040;
+        font-size: .6em;
+        margin-top: .2em;
+    }
+    .icon {
+        color: white;
+    }
+`
+
+export const StartLabel = styled(Label)`
+    flex-direction: row;
+    align-items: center;
+`
+
+export const StartButton = styled.button`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    /* border-radius: 5px; */
+    color: white;
+    background-color: #c73636; 
+    padding: .2em 0;
+    font-family: "Roboto Condensed";
+    font-weight: 300;
+    width: 100%;
+    margin: 0;
+    margin-left: 2em;
+    text-align: center;
+
+`

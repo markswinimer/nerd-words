@@ -1,104 +1,104 @@
 import React from 'react';
-import axios from 'axios';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
 
-import { 
-    LibraryLegend, SelectedLibraryEntryRow, LibraryEntryRow, 
-    StyledLibraryEntry, StyledLibrarySelector, Entries } 
-from './LibrarySelector.styled'
+import {
+    StyledWordList, Container, Scroll, WordList, StyledWordField,
+    WordContainer
+} from './LibrarySelector.styled';
 
-export default class LibrarySelector extends React.Component {
+import { Card, Label } from '../../global'
+
+export default class LibraryWordList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            userLibraries: [],
-            selectedLibraryID: undefined,
-            user: "Default User"
+            libraryList: this.props.library,
+            currentWord: "",
+            currentWord_id: "",
+            editing: false,
+            libraries: null,
         }
-
-        this.getUserLibraries = this.getUserLibraries.bind(this)
-        this.handleChoice = this.handleChoice.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
-
     componentDidMount() {
-        this.getUserLibraries()
+        if (!this.libraries) {
+            this.makeSearch()
+        }
     }
 
-    getUserLibraries() {
-            let url = "/libraries"
+    storeResults(results) {
+        this.setState({ libraries: results.libraries })
+    }
 
-            const options = {
-                url: url,
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                }
-            };
-
-            axios(options)
-                .then(response => {
-
-                    // Filters out libraries with 0 words
-                    // Should this be in the api? probably.
-                    const hasWords = response.data.filter(library => library.words.length > 0);
-                    
-                    this.setState({
-                        userLibraries: hasWords
-                    })
-                })
-        }
-
-        handleChoice(id) {
-            // this.props.loadEditForm(id)
-            this.setState({ selectedLibraryID: id }, () => {
-                this.props.loadEditForm(id)
-            })
-        }
-
-    render() {
+    makeSearch() {
+        let url = "/libraries"
         
-        let userLibrariesList = [];
-        userLibrariesList = this.state.userLibraries.map(library => (
-            <UserLibraryEntry
-                libraryName={library.libraryName}
-                wordCount={library.words.length}
-                _id={library._id}
-                setLibrary={this.handleChoice}
-                size={this.props.size}
-                selectedLibraryID={this.state.selectedLibraryID}
-            />
-        ))
-        return(
-            <StyledLibrarySelector size={this.props.size}>
-                <FontAwesomeIcon className="iconArrow" icon={faAngleUp} />
-                <LibraryLegend>
-                    <div>Library Name</div>
-                    <div>Word Count</div>
-                </LibraryLegend>
-                <Entries size={this.props.size}>
-                    {userLibrariesList}
-                </Entries>
-                <FontAwesomeIcon className="iconArrow" icon={faAngleDown} />
-            </StyledLibrarySelector>
-        )
-    }
-}
+        // if (this.state.activeFilterIndex === 2) {
+        //     url += "/owned"
+        // }
 
-class UserLibraryEntry extends React.Component {
-    handleClick = () => this.props.setLibrary(this.props._id)
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const results = { libraries: data }
+                this.storeResults(results)
+                console.log(results)
+            })
+            .catch(err => {
+                console.log("Request was unsuccesful, error log: " + err)
+            })
+    }
+
+    handleChange(event) {
+        console.log("Current WORD = " + this.state.currentWord)
+        const newWord = event.target.value
+        console.log("New = " + newWord)
+        this.setState({ currentWord: newWord })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        console.log("HIHIHI")
+        const payload = {
+            word: this.state.currentWord,
+            id: this.state.currentWord_id
+        }
+        this.props.updateWord(payload)
+        this.setState({
+            currentWord_id: "",
+            currentWord: "",
+            editing: false
+        })
+    }
 
     render() {
-        let selected = this.props.selectedLibraryID === this.props._id ? SelectedLibraryEntryRow : LibraryEntryRow; 
-        return(
-            <StyledLibraryEntry>
-                <LibraryEntryRow as={selected} size={this.props.size} onClick={this.handleClick}>
-                        <div>{this.props.libraryName}</div>
-                        <div>{this.props.wordCount}</div>
-                </LibraryEntryRow>
-            </StyledLibraryEntry>
+        let libraries = [];
+        if (this.state.libraries) {
+            let librariesLoaded = this.state.libraries
+            libraries = librariesLoaded.map(library => (
+                <WordContainer id={library._id} selected={this.props.selectedLibrary === library._id} onClick={this.props.handleLibraryChoice}>
+                    <h2>{library.libraryName}</h2>
+                </WordContainer>
+
+            ))
+        }
+
+        return (
+            <Card>
+                <Label className="Label">
+                    <h2>Choose a library</h2>
+                    <p>Only libraries you've created or favorited will show up.</p>
+                </Label>
+
+                <Scroll><FontAwesomeIcon className="icon" icon={faChevronUp} /></Scroll>
+                <WordList>
+                    {libraries}
+                </WordList>
+                <Scroll><FontAwesomeIcon className="icon" icon={faChevronDown} /></Scroll>
+
+            </Card>
         )
     }
 }

@@ -1,9 +1,12 @@
 import React from 'react';
-import TableEntry from './TableEntry';
+import TableRow from './TableRow';
 
-import { SearchFilter, SearchResultsTable, StyledFilterToggle, FilterResultsCount, StyledDiscover } from './Discover.styled';
-import { TableHeader, TableFooter, Entries, EntryLabel, EntryButtons, Button } from './TableEntry.styled';
-
+import { SearchFilter, SearchResultsTable, StyledFilterToggle, FilterResultsCount, StyledDiscover,
+    TableHead, TableBody, Table, Row, Data, DataHeader, SearchBar, Filters, Filter, OptionFilter
+} from './Discover.styled';
+import { Card, Label, Option } from '../../global';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 class Discover extends React.Component {
     constructor(props) {
@@ -62,7 +65,7 @@ class Discover extends React.Component {
 
         if (this.state.searchStore) {
             tableRows = this.state.searchStore.map(lib => (
-                <TableEntry 
+                <TableRow 
                     libraryName={lib.libraryName}
                     authorName={lib.authorName}
                     creationDate={lib.creationDate}
@@ -74,40 +77,61 @@ class Discover extends React.Component {
 
         return(
             <StyledDiscover>
-                <h1>Word Libraries</h1>
-                <label>Search
-                    <input/>
-                </label>
-                <SearchFilter>
+                <Card>
+
+                <Label>
+                    <h1>Word Libraries</h1>
+                    <p>Search for libraries to favorite and play with.</p>
+                </Label>
+                <Option>
+                    <h2>Search</h2>
+                    <SearchBar/>
+                </Option>
+                <OptionFilter>
+                    <div>
+                        <h3>Filters</h3>
+                        <FontAwesomeIcon className="icon filter" icon={faChevronDown} />
+                    </div>
+
+                    <Filters>
+                        <Filter><input type="radio"/>Created by me</Filter>
+                        <Filter><input type="radio"/>Play Count (> 50)</Filter>
+                        <Filter><input type="radio"/>Favorite Count (> 50)</Filter>
+                    </Filters>
+                </OptionFilter>
+                <Table>
+
+                <TableHead>
+                    <DataHeader size={4}>
+                        Library Name
+                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                    </DataHeader>
+                    <DataHeader size={3}>
+                        Author
+                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                    </DataHeader>
+                    <DataHeader size={2}>
+                        Words
+                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                    </DataHeader>
+                    <DataHeader size={2}>
+                        Plays
+                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                    </DataHeader>
+                    <DataHeader size={2}></DataHeader>
+                </TableHead>
+                <TableBody>
+                    {tableRows}
+                </TableBody>
+                </Table>
+
+                </Card>
+
+                {/* <SearchFilter>
                     <FilterToggle name="All" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter}/>
                     <FilterToggle name="Top" index={1} count={10} isActive={this.state.activeFilterIndex === 1} onClick={this.handleToggleFilter}/>
                     <FilterToggle name="Owned" index={2} count={13} isActive={this.state.activeFilterIndex === 2} onClick={this.handleToggleFilter}/>
-                </SearchFilter>
-
-                <SearchResultsTable>
-                    <div>
-                        <TableHeader legend>
-                            <EntryLabel large className="libraryName">Library Name</EntryLabel>
-                            <EntryLabel medium className="authorName">Author</EntryLabel>
-                            {/* <EntryLabel className="creationDate">Created on</EntryLabel> */}
-                            <EntryLabel small className="wordCount">Words</EntryLabel>
-                            <EntryLabel small className="playCount">Plays</EntryLabel>
-                            <EntryButtons medium></EntryButtons>
-                        </TableHeader>
-                        {/* <TableHeader>
-                                <th className="libraryName">Collection Name</th>
-                                <th className="authorName">Creator</th>
-                                <th className="creationDate">Date</th>
-                                <th className="wordCount">Words</th>
-                                <th className="playCount">Plays</th>
-                                <th className="sortSpace"></th>
-                        </TableHeader> */}
-                    </div>
-                    <Entries>
-                            {tableRows}
-                    </Entries>
-                    <TableFooter></TableFooter>
-                </SearchResultsTable>
+                </SearchFilter> */}
             </StyledDiscover>
         )
     }

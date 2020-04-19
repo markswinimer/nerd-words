@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-import LibrarySelector from './LibrarySelector' 
+import { LibrarySelector } from '../../components';
+import { StartButton, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
+import { Label, Card } from '../../global';
 
-import { SelectorLite } from '../../components';
-import { SelectorContainer, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
-
+import Navbar from '../Navbar';
 
 export default class GameSetup extends React.Component {
     constructor(props) {
@@ -53,20 +53,26 @@ export default class GameSetup extends React.Component {
     render() {
         return(
             <StyledGameSetup>
-                <Option>
-                    <h2>Game Mode: </h2>
-                    <DropDownField/>
-                </Option>
+                <Card>
+                    <Label>
+                        <h2>Game Setup</h2>
+                        <p>Let's get a game started, fill out the options and click play</p>
+                    </Label>
+                    <Option>
+                        <h2>Game Mode: </h2>
+                        <DropDownField/>
+                    </Option>
 
-                <Option>
-                    <h2>Players: </h2>
-                    <RadioField 
-                        selectedId={this.state.numPlayers} 
-                        maxPlayers={this.state.maxPlayers} 
-                        handleClick={this.selectNumPlayers}
-                    />
-                </Option>
-
+                    <Option>
+                        <h2>Players: </h2>
+                        <RadioField 
+                            selectedId={this.state.numPlayers} 
+                            maxPlayers={this.state.maxPlayers} 
+                            handleClick={this.selectNumPlayers}
+                        />
+                    </Option>
+                </Card>
+                <Card>
                 <LibrarySelector
                     libraries={this.state.library}
                     activeLibrary={this.state.wordLibrary}
@@ -74,8 +80,16 @@ export default class GameSetup extends React.Component {
                     selectedLibrary={this.state.selectedLibrary}
                     handleLibraryChoice={this.handleLibraryChoice}
                 />
+                </Card >
+                <Card>
+                    <Label layout="row">
+                        <h2>Start Game</h2>
+                        <StartButton onClick={this.handleSubmit}>Play</StartButton>
+                        {/* <p>Double check your settings and begin playing!</p> */}
+                    </Label>
+                </Card>
 
-                <SubmitButton onClick={this.handleSubmit}>Create Game</SubmitButton>
+                {/* <SubmitButton onClick={this.handleSubmit}>Create Game</SubmitButton> */}
             </StyledGameSetup>
         )
     }

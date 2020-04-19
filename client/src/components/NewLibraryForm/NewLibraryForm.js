@@ -2,7 +2,7 @@ import React from 'react';
 import EditableInput from './EditableInput';
 import TextAreaField from '../sub-components/TextAreaField';
 
-import { Form, FormButton } from './NewLibraryForm.styled';
+import { StartLabel, StartButton, Option, Form, FormButton, Card, Label } from './NewLibraryForm.styled';
 
 export default class NewLibraryForm extends React.Component {
     constructor(props) {
@@ -35,12 +35,14 @@ export default class NewLibraryForm extends React.Component {
 
     render() {   
         return (
+            <Card>
             <Form onSubmit={this.handleSubmit}>
+                <Label>
+                <h1>Create a new Library</h1>
+                <p>Start your new library by choosing a name and description.</p>
+                </Label>
 
-                <h1>Let's start by choosing a name: </h1>
-                <p>Not just any old name.
-                    Choose something that will represent the theme of your library.</p>
-
+                <Option>
                 <h2>Library Name</h2>
                 <EditableInput
                     id="Library Name"
@@ -50,7 +52,8 @@ export default class NewLibraryForm extends React.Component {
                     value={this.state.library.libraryName}
                     handleChange={this.handleChange}
                 />
-
+            </Option>
+            <Option>
                 <h2>Description</h2>
                 <EditableInput
                     id="Description"
@@ -60,9 +63,15 @@ export default class NewLibraryForm extends React.Component {
                     value={this.state.library.libraryDescription}
                     handleChange={this.handleChange}
                 />
+            </Option>
 
-                <FormButton>Create Library</FormButton>
+            <StartLabel>
+                
+                <StartButton>Create</StartButton>
+            </StartLabel>
             </Form>
+            </Card>
+            
         )
     }
 }

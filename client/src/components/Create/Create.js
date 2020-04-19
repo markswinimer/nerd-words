@@ -1,12 +1,13 @@
 import React from 'react';
-import NewLibraryForm from '../NewLibraryForm/NewLibraryForm';
+import axios from 'axios';
 
+import NewLibraryForm from '../NewLibraryForm/NewLibraryForm';
 import { ViewLibrary } from '../../components'
 import { LibrarySelector } from '../../components'
 import { seedGameData } from '../../seed'
 
-import axios from 'axios';
-import { Button, StyledChooseMode, StyledCreate } from './Create.styled' 
+import { Option, Button, StyledChooseMode, StyledCreate } from './Create.styled' 
+import { Card, Label } from '../../global'; 
 
 class Create extends React.Component {
     constructor(props) {
@@ -25,10 +26,18 @@ class Create extends React.Component {
     }
 
     switchCreateMode(event) {
-        this.setState({
-            chooseMode: false,
-            activeForm: event.target.id
-        })
+        console.log(event.target.id)
+        console.log(event.target.id === "editExisting")
+        if(event.target.id === "editExisting") {
+            this.setState({
+                activeForm: event.target.id
+            })
+        } else {
+            this.setState({
+                chooseMode: false,
+                activeForm: event.target.id
+            })
+        }
     }
 
     setLibrary(library) {
@@ -58,10 +67,9 @@ class Create extends React.Component {
             })
     }
 
-    loadEditForm(id) {
-        if(!id) {
-           let id = "5e66ce6f3df09970e8150888"
-        }
+    loadEditForm(event) {
+        let id = event.currentTarget.id
+        console.log("LIBRARY ID : " + event.currentTarget.id)
         let url = "/libraries/" + id
         console.log(url)
         const options = {
@@ -79,6 +87,7 @@ class Create extends React.Component {
                 console.log(response.data);
                 this.setState({
                     library: response.data,
+                    chooseMode: false,
                     activeForm: "viewLibrary"
                 })
             })
@@ -89,7 +98,7 @@ class Create extends React.Component {
         return(
             <StyledCreate>
 
-                {this.state.chooseMode === true
+                {this.state.chooseMode === true || this.state.chooseMode === "editExisting"
                     ?   <ChooseMode switchCreateMode={this.switchCreateMode} />
                     :   null 
                 }
@@ -102,8 +111,8 @@ class Create extends React.Component {
                 }
 
                 {this.state.activeForm === "editExisting"
-                    ?   <LibrarySelector
-                            loadEditForm={this.loadEditForm}
+                    ?   <LibrarySelector className="Card"
+                            handleLibraryChoice={this.loadEditForm}
                         />
                     :   null
                 }
@@ -123,13 +132,23 @@ class Create extends React.Component {
 
 const ChooseMode = props => {
     return(
+        <Card className="Card">
         <StyledChooseMode>
-            <h1>Create</h1>
-            <p>Creating new word libraries is easy. Follow these steps to start making one right now!</p>
+            <Label className="Label">
+                <h1>My Collection</h1>
+                <p>Creating new word libraries is easy. Follow these steps to start making one right now!</p>
+            </Label>
+            <Option>
+                    <h2>Create a New Library</h2>
+                <Button id="createNew" onClick={props.switchCreateMode}>New</Button>
+            </Option>
+            <Option>
+                    <h2>Edit an existing Library</h2>
+                <Button id="editExisting" onClick={props.switchCreateMode}>Edit</Button>
+            </Option>
 
-            <Button id="createNew" onClick={props.switchCreateMode}>Create New Library</Button>
-            <Button id="editExisting" onClick={props.switchCreateMode}>Edit Existing Library</Button>
         </StyledChooseMode>
+        </Card>
     )
 }
 

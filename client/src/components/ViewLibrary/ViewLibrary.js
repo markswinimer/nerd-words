@@ -14,6 +14,8 @@ import { StyledViewLibrary, Container, DescriptionField, WordListContainer, Libr
     StyledEditableInput, EditableParagraph
 } from './ViewLibrary.styled'
 
+import { Label, Card } from './ViewLibrary.styled'
+
 export default class ViewLibrary extends React.Component {
     constructor(props) {
         super(props);
@@ -165,8 +167,9 @@ export default class ViewLibrary extends React.Component {
         return(
             <StyledViewLibrary>
                 <LibraryInformation>
-                    <Container>
 
+                    <Card>
+                        <Label>
                         {!this.state.libraryName
                         ? <h1>{this.state.library.libraryName}</h1>
                         : <EditableInput
@@ -186,8 +189,8 @@ export default class ViewLibrary extends React.Component {
                             />
                             : null
                         }
-
-                    </Container>
+                    </Label>
+                    </Card>
 
                     <DescriptionField>
                         <div>
