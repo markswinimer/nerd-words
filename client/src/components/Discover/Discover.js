@@ -71,6 +71,7 @@ class Discover extends React.Component {
                     creationDate={lib.creationDate}
                     wordCount={lib.wordCount}
                     playCount={lib.playCount}
+                    _id={lib._id}
                 />
             ))
         }

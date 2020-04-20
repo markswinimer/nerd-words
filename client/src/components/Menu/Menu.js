@@ -5,8 +5,7 @@ import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle, faGamepa
 
 import { StyledMenu, StyledMenuLink } from './Menu.styled';
 
-const Menu = ({ currentPage, open, setOpen, toggleMenu }) => {
-
+const Menu = ({ currentPage, open, setOpen, toggleMenu, props }) => {
     return (
         <StyledMenu open={open}>
 

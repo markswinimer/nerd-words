@@ -5,6 +5,7 @@ import LibraryWordList from './LibraryWordList';
 import EditToggle from './EditToggle';
 import AddWordsForm from './AddWordsForm';
 import axios from 'axios';
+import { seedLibrary } from '../../seed'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp, faPlusSquare, faMinusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
@@ -16,14 +17,24 @@ import { StyledViewLibrary, Container, DescriptionField, WordListContainer, Libr
 
 import { Label, Card } from './ViewLibrary.styled'
 
+const emptyLibrary = {
+    libraryName: undefined,
+    authorName: undefined,
+    description: undefined,
+    creationDate: undefined,
+    favoriteCount: undefined,
+    words: [],
+    _id: undefined
+}
+
 export default class ViewLibrary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentWordValue: "",
             initLibrary: true,
-            library: this.props.library,
-            libraryName: false,
+            library: emptyLibrary,
+            libraryName: undefined,
             description: false,
             wordLibrary: false,
             addWords: false,
@@ -39,10 +50,34 @@ export default class ViewLibrary extends React.Component {
     }
 
     handleWordChange(event) {
-        console.log("WORD = " + this.state.currentWordValue)
         const currentWord = event.target.value
-        console.log("WORD = " + currentWord)
         this.setState({ currentWordValue: currentWord })
+    }
+
+    componentDidMount() {
+        const { match: { params } } = this.props;
+
+        let id = params.id.slice(1)
+        let url = "/libraries/" + id
+        const options = {
+            url: url,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: id
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    library: response.data,
+                    chooseMode: false,
+                    activeForm: "viewLibrary"
+                })
+            })
     }
     change() {
         console.log("WORD = " + this.state.currentWordValue)
@@ -123,7 +158,7 @@ export default class ViewLibrary extends React.Component {
         };
 
         axios(options)
-            .then(response => {
+            .then(response => { 
                 console.log("__________________> " + response.data.type)
                 let library = this.state.library
                 library[response.data.type] = response.data.value
@@ -270,7 +305,7 @@ export default class ViewLibrary extends React.Component {
                 }
 
                 <LibraryWordList
-                    library={this.props.library}
+                    library={this.state.library}
                     toggleEdit={this.toggleEdit}
                     active={this.state.wordLibrary}
                     handleChange={this.handleWordChange}

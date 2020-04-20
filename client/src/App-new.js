@@ -14,10 +14,9 @@ import { Play } from './components';
 import { Navbar } from './components';
 import ViewLibrary from './components/ViewLibrary/ViewLibrary';
 
-
 import {
   BrowserRouter as Router,
-  Route
+  Route, Switch
 } from 'react-router-dom'
 
 const routes = [
@@ -25,32 +24,32 @@ const routes = [
     path: '/',
     exact: true,
     currentPage: '/',
-    main: ({ match }) => <Home match={match}/>
+    main: () => <Home />
   },
   {
     path: '/play',
     currentPage: '/play',
-    main: ({ match }) => <Play match={match}/>
+    main: () => <Play />
   },
   {
     path: '/create',
     currentPage: '/create',
-    main: ({ match }) => <Create match={match}/>
+    main: () => <Create />
   },
   {
-    path: '/library/:id',
-    currentPage: '/create',
-    main: ({ match }) => <ViewLibrary match={match}/>
+    path: '/library/:libraryId',
+    currentPage: '/library',
+    main: <ViewLibrary />
   },
   {
     path: '/discover',
     currentPage: '/discover',
-    main: ({ match }) => <Discover match={match}/>
+    main: () => <Discover />
   },
   {
     path: '/howto',
     currentPage: '/howto',
-    main: ({ match }) => <h1>How to play</h1>
+    main: () => <h1>How to play</h1>
   },
 ]
 
@@ -61,7 +60,7 @@ function App() {
     return(
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <Router>
+        <Switch>
           <div className='App'>
           <Navbar />
 
@@ -69,7 +68,49 @@ function App() {
               <Burger open={open} setOpen={setOpen}/>
           </div>
 
-            <div className='Main'>
+          <div className="Main">
+              {/* <Menu
+                // currentPage={}
+                open={open}
+                setOpen={setOpen}
+              /> */}
+            <div className="Container">
+              <Route exact path="/library/:id">
+                  <Menu
+                    // currentPage={}
+                    open={open}
+                    setOpen={setOpen}
+                  />
+                <ViewLibrary />
+              </Route>
+
+              <Route exact path="/library">
+                <ViewLibrary />
+              </Route>
+
+              <Route exact path="/create">
+                <Create />
+              </Route>
+
+              <Route exact path="/play">
+                <Play />
+              </Route>
+
+              <Route exact path="/discover">
+                <Discover />
+              </Route>
+
+              <Route exact path="/">
+                <Home />
+              </Route>
+
+              {/*     path: '/library/:libraryId',
+    currentPage: '/library',
+    main: <ViewLibrary />
+  }, */}
+      </div>
+          </div>
+{/*           
               {routes.map((route, index) => (
                 <Route
                   key={route.path}
@@ -91,10 +132,9 @@ function App() {
                     component={route.main}
                   />
                 ))}
-                </div>
+                </div> */}
               </div>
-            </div>
-        </Router>
+        </Switch>
       </ThemeProvider>
 
     )

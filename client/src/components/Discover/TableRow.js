@@ -6,11 +6,10 @@ import { Data, DataClickable } from './Discover.styled';
 
 export default class TableRow extends React.Component {
     render() {
-        const { libraryName, authorName, creationDate, wordCount, playCount } = this.props;
-
+        const { libraryName, authorName, creationDate, wordCount, playCount, _id } = this.props;
         return(
             <StyledTableRow>
-                <DataClickable size={4} className="libraryName"><Link to="/library">{libraryName}</Link></DataClickable>
+                <DataClickable size={4} className="libraryName"><Link to={`/library/:${_id}`}>{libraryName}</Link></DataClickable>
                 <Data size={3} className="authorName">{authorName}</Data>
                 {/* <Data className="creationDate">{creationDate}</Data> */}
                 <Data size={2} className="wordCount">{wordCount}</Data>
