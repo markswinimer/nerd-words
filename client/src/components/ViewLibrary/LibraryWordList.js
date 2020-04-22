@@ -1,11 +1,14 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import EditToggle from './EditToggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-import { StyledWordList, Container, Scroll, WordList, StyledWordField,
-    WordContainer, Toggle
+import { Scroll, WordList, StyledWordField,
+    WordContainer, Toggle, NameLabel
 } from './ViewLibrary.styled';
+import { Card } from '../../global';
 
 export default class LibraryWordList extends React.Component {
     constructor(props) {
@@ -72,6 +75,7 @@ export default class LibraryWordList extends React.Component {
                 {this.state.currentWord_id !== word 
                     ?   <h2>{word}</h2>
                     :   <WordField
+                            key={uuidv4()}
                             id={word}
                             name="libraryName"
                             type="text"
@@ -94,8 +98,8 @@ export default class LibraryWordList extends React.Component {
         }
 
         return(
-            <StyledWordList>
-                <Container>
+            <Card>
+                <NameLabel>
                     <h2>Word Library</h2>
                     {this.props.authenticatedUser
                     ? <EditToggle
@@ -106,15 +110,14 @@ export default class LibraryWordList extends React.Component {
                     : null
                     }
 
-                </Container>
-
+                </NameLabel>
                 <Scroll><FontAwesomeIcon className="icon" icon={faChevronUp} /></Scroll>
                 <WordList>
                     {words}
                 </WordList>
                 <Scroll><FontAwesomeIcon className="icon" icon={faChevronDown} /></Scroll>
 
-            </StyledWordList>
+            </Card>
         )
     }
 }
@@ -123,6 +126,7 @@ const WordField = props => {
     return (
         <StyledWordField
             autoComplete="off"
+            key={uuidv4()}
             id={props.id}
             name={props.name}
             type='text'

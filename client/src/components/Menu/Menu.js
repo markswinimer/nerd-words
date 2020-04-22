@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faPencilAlt, faSearch, faCommentAlt, faQuestionCircle, faGamepad } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faPencilAlt, faSearch, faGamepad } from '@fortawesome/free-solid-svg-icons'
 
 import { StyledMenu, StyledMenuLink } from './Menu.styled';
 
-const Menu = ({ currentPage, open, setOpen, toggleMenu, props }) => {
+const Menu = ({ currentPage, open, setOpen }) => {
     return (
         <StyledMenu open={open}>
 
@@ -44,12 +44,6 @@ const Menu = ({ currentPage, open, setOpen, toggleMenu, props }) => {
                     icon={faSearch}
                     setOpen={setOpen}
                 />
-                {/* <MenuLink
-                    currentPage={currentPage}
-                    name="howto"
-                    icon={faHome}
-                    setOpen={setOpen}
-                /> */}
             </div>
         </StyledMenu>
     )

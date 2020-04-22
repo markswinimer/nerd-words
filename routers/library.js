@@ -10,7 +10,7 @@ router.post('/libraries', async (req, res) => {
 
     try {
         await library.save()
-        res.status(201).send(library)
+        res.status(201).send(library._id)
     } catch (e) {
         res.status(400).send()
     }

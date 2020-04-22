@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 import { LibrarySelector } from '../../components';
-import { StartButton, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, SubmitButton, Option } from './GameSetup.styled'
+import { StartButton, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, Option } from './GameSetup.styled'
 import { Label, Card } from '../../global';
-
-import Navbar from '../Navbar';
 
 export default class GameSetup extends React.Component {
     constructor(props) {
@@ -19,11 +18,11 @@ export default class GameSetup extends React.Component {
         }
         this.selectNumPlayers = this.selectNumPlayers.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleLibraryChoice = this.handleLibraryChoice.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
     }
 
-    handleLibraryChoice(e) {
-        this.setState({ selectedLibrary: e.currentTarget.id })
+    handleSelect(id) {
+        this.setState({ selectedLibrary: id })
     }
 
     selectNumPlayers(e) {
@@ -74,11 +73,8 @@ export default class GameSetup extends React.Component {
                 </Card>
                 <Card>
                 <LibrarySelector
-                    libraries={this.state.library}
-                    activeLibrary={this.state.wordLibrary}
-                    handleChange={this.handleWordChange}
+                    handleSelect={this.handleSelect}
                     selectedLibrary={this.state.selectedLibrary}
-                    handleLibraryChoice={this.handleLibraryChoice}
                 />
                 </Card >
                 <Card>
@@ -122,7 +118,7 @@ const RadioField = props => {
             )
         } else {
             fieldGen.push(
-                <RadioOption onClick={props.handleClick} id={i}>{i}</RadioOption>
+                <RadioOption onClick={props.handleClick} key={uuidv4()} id={i}>{i}</RadioOption>
             )
         }
     }

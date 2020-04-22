@@ -48,7 +48,7 @@ export const Card = styled.div`
 
 export const Label = styled.div`
     display: flex;
-    flex-direction: ${props => props.layout == "row" ? "row" : "column"};
+    flex-direction: ${props => props.layout === "row" ? "row" : "column"};
     background-color: #F8F8F8;
     padding: 1rem 2rem;
     font-family: "Roboto Condensed";

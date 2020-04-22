@@ -1,25 +1,29 @@
 import React from 'react';
 import TableRow from './TableRow';
 
-import { SearchFilter, SearchResultsTable, StyledFilterToggle, FilterResultsCount, StyledDiscover,
-    TableHead, TableBody, Table, Row, Data, DataHeader, SearchBar, Filters, Filter, OptionFilter
+// A simple component that shows the pathname of the current location
+
+import { StyledFilter, StyledDiscover,
+    TableHead, TableBody, Table, DataHeader, SearchBar, ToggleFilters, Filters, OptionFilter
 } from './Discover.styled';
 import { Card, Label, Option } from '../../global';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { withRouter } from "react-router-dom";
 
 class Discover extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             searchStore: undefined,
-            activeFilterIndex: 0
+            activeFilterIndex: 0,
+            filtersHidden: true
         }
         this.makeSearch = this.makeSearch.bind(this)
         this.storeResults = this.storeResults.bind(this)
         this.handleToggleFilter = this.handleToggleFilter.bind(this)
+        this.toggleFilters = this.toggleFilters.bind(this)
     }
-
     componentDidMount() {
         if(!this.searchStore) {
             this.makeSearch()
@@ -52,6 +56,10 @@ class Discover extends React.Component {
         })
     }
 
+    toggleFilters() {
+        this.setState({ filtersHidden: !this.state.filtersHidden })
+    }
+
     handleToggleFilter(index) {
         this.setState({ activeFilterIndex: index }, () => {
             this.makeSearch()
@@ -69,13 +77,13 @@ class Discover extends React.Component {
                     libraryName={lib.libraryName}
                     authorName={lib.authorName}
                     creationDate={lib.creationDate}
-                    wordCount={lib.wordCount}
+                    wordCount={lib.words.length}
                     playCount={lib.playCount}
                     _id={lib._id}
                 />
             ))
         }
-
+        
         return(
             <StyledDiscover>
                 <Card>
@@ -89,68 +97,59 @@ class Discover extends React.Component {
                     <SearchBar/>
                 </Option>
                 <OptionFilter>
-                    <div>
+                    <ToggleFilters onClick={this.toggleFilters}>
                         <h3>Filters</h3>
                         <FontAwesomeIcon className="icon filter" icon={faChevronDown} />
-                    </div>
+                    </ToggleFilters>
 
-                    <Filters>
-                        <Filter><input type="radio"/>Created by me</Filter>
-                        <Filter><input type="radio"/>Play Count (> 50)</Filter>
-                        <Filter><input type="radio"/>Favorite Count (> 50)</Filter>
+                    <Filters active={this.state.filtersHidden}>
+                        <Filter name="owned" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter} />
+                        <Filter name="plays" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter} />
+                        <Filter name="favorites" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter} />
                     </Filters>
                 </OptionFilter>
                 <Table>
+                    <TableHead>
+                        <DataHeader size={4}>Library Name
+                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                        </DataHeader>
 
-                <TableHead>
-                    <DataHeader size={4}>
-                        Library Name
-                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                    </DataHeader>
-                    <DataHeader size={3}>
-                        Author
-                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                    </DataHeader>
-                    <DataHeader size={2}>
-                        Words
-                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                    </DataHeader>
-                    <DataHeader size={2}>
-                        Plays
-                        <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                    </DataHeader>
-                    <DataHeader size={2}></DataHeader>
-                </TableHead>
-                <TableBody>
-                    {tableRows}
-                </TableBody>
-                </Table>
+                        <DataHeader size={3}>Author
+                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                        </DataHeader>
 
+                        <DataHeader size={2}>Words
+                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                        </DataHeader>
+
+                        <DataHeader size={2}>Plays
+                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                        </DataHeader>
+
+                        <DataHeader size={2}></DataHeader>
+                    </TableHead>
+                
+                    <TableBody>
+                        {tableRows}
+                    </TableBody>
+                    </Table>
                 </Card>
-
-                {/* <SearchFilter>
-                    <FilterToggle name="All" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter}/>
-                    <FilterToggle name="Top" index={1} count={10} isActive={this.state.activeFilterIndex === 1} onClick={this.handleToggleFilter}/>
-                    <FilterToggle name="Owned" index={2} count={13} isActive={this.state.activeFilterIndex === 2} onClick={this.handleToggleFilter}/>
-                </SearchFilter> */}
             </StyledDiscover>
         )
     }
 }
 
-class FilterToggle extends React.Component {
+class Filter extends React.Component {
     handleClick = () => this.props.onClick(this.props.index)
     render() {
         return(
-            <StyledFilterToggle
-                active={this.props.isActive ? true : false}
-                onClick={this.handleClick}
-            >
+            <StyledFilter>
+                <input type="radio" active={this.props.isActive ? true : false}
+                    onClick={this.handleClick}/>
                 {this.props.name}
-                <FilterResultsCount>{this.props.count}</FilterResultsCount>
-            </StyledFilterToggle>
+            </StyledFilter>
         )
     }
 }
 
-export default Discover;
+export default withRouter(Discover);

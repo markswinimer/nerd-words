@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const StyledViewLibrary = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 2em;s
+    margin-top: 2em;
 `
 
 export const Container = styled.div`

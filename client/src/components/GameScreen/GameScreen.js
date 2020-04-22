@@ -4,12 +4,11 @@ import axios from 'axios';
 import {
     StyledGameScreen, DeckInfo, Indicator, Label, DataDisplay,
     ViewDiscarded, Deck, Card, CardBack, Logo, Word,
-    DrawControls, Control, RefreshDeck
+    DrawControls, Control
 } from './GameScreen.styled';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlasses, faAngleDown, faRedoAlt, faCog, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
-import { constants } from 'crypto';
+import { faGlasses, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 export default class GameScreen extends React.Component {
     constructor(props) {
@@ -32,9 +31,6 @@ export default class GameScreen extends React.Component {
 
 
     loadLibrary(id) {
-            if (!id) {
-                let id = "5e66ce6f3df09970e8150888"
-            }
             let url = "/libraries/" + id
             const options = {
                 url: url,

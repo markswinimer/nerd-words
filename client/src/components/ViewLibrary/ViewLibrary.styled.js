@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faPlusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
+import { Label } from '../../global';
 
 export const StyledViewLibrary = styled.div`
     display: flex;
@@ -101,16 +100,14 @@ export const WordForm = styled.form`
     padding: 1em;
     background-color: #f3f3f3;
     display: ${props => !props.hidden ? "none" : "inherit"};
-
+`
+export const NameLabel = styled(Label)`
+    flex-direction: row;
 `
 
-export const Title = styled(Container)`
-    padding: 1em 2em;
-    border: 1px solid silver;
+export const Title = styled.div`
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
+    flex-direction: column;
 
     .icon {
         height: 100%;
@@ -220,9 +217,9 @@ export const StyledEditToggle = styled.div`
         font-size: 1.3em;
         color: ${({ theme }) => theme.primaryTextColor};
         margin-left: auto;
-        margin-right: .75em;
-        margin-top: .75em;
         cursor: pointer;
+        position: relative;
+        right: -.5em;
 
         .save {
          font-size: 1.2em;
@@ -230,48 +227,6 @@ export const StyledEditToggle = styled.div`
         }
 `
 
-
-export const Card = styled.div`
-    box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
-    margin-top: 2em;
-    :first-of-type {
-        margin-top: 0;
-    }
-`
-
-
-
-export const Label = styled.div`
-    display: flex;
-    flex-direction: row;
-    background-color: #F8F8F8;
-    background-color: #c73636;
-    color: white;
-    padding: 1rem 2rem;
-    font-family: "Roboto Condensed";
-    font-weight: 400;
-    border-bottom: 1px solid #D3D3D3;
-    padding: 0 0em 1em 2em;
-    border-bottom: 1px solid silver;
-
-    h1 {
-        font-size: 1.75em;
-        margin-top: .5em;
-        /* border: 1px solid white; */
-    }
-    h2 {
-        margin-top: 1em;
-    }
-    p {
-        font-weight: 300;
-        color: #404040;
-        font-size: .6em;
-        margin-top: .2em;
-    }
-    .icon {
-        color: white;
-    }
-`
 
 export const StartLabel = styled(Label)`
     flex-direction: row;

@@ -1,10 +1,11 @@
 import React from 'react';
+import axios from 'axios';
+import { withRouter } from "react-router-dom";
+
 import EditableInput from './EditableInput';
-import TextAreaField from '../sub-components/TextAreaField';
+import { StartLabel, StartButton, Option, Form, Card, Label } from './NewLibraryForm.styled';
 
-import { StartLabel, StartButton, Option, Form, FormButton, Card, Label } from './NewLibraryForm.styled';
-
-export default class NewLibraryForm extends React.Component {
+class NewLibraryForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +16,7 @@ export default class NewLibraryForm extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.postNewLibrary = this.postNewLibrary.bind(this)
     }
 
     handleChange(event) {
@@ -29,8 +31,28 @@ export default class NewLibraryForm extends React.Component {
         event.preventDefault();
         const payload = this.state.library
 
-        this.props.postNewLibrary(payload)
+        this.postNewLibrary(payload)
         // this.setState({ library: editLibrary })
+    }
+
+    postNewLibrary(payload) {
+        let url = "/libraries"
+
+        const options = {
+            url: url,
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: payload
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response);
+                this.props.history.push('/library/:' + response.data) 
+            })
     }
 
     render() {   
@@ -58,7 +80,7 @@ export default class NewLibraryForm extends React.Component {
                 <EditableInput
                     id="Description"
                     label=""
-                    name="libraryDescription"
+                    name="description"
                     type="text"
                     value={this.state.library.libraryDescription}
                     handleChange={this.handleChange}
@@ -75,3 +97,4 @@ export default class NewLibraryForm extends React.Component {
         )
     }
 }
+export default withRouter(NewLibraryForm);

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, Option, Label } from '../../global';
+import { Option } from '../../global';
 
 
 export const StyledDiscover = styled.div`
@@ -15,24 +15,25 @@ export const SearchBar = styled.input`
 
 export const OptionFilter = styled(Option)`
     flex-direction: column;
-    div {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        cursor: pointer;
-    }
 `
-
-export const Filters = styled.div`
+export const ToggleFilters = styled.div`
+    display: flex;
     flex-direction: row;
-    margin-top: 1em;
-    
+    align-items: center;
+    cursor: pointer;
 `
-export const Filter = styled.div`
+export const Filters = styled.div`
+    margin-top: .5em;
+    display: ${props => props.active ? "none" : "flex"};
+    flex-direction: row;
+`
+export const StyledFilter = styled.div`
     font-family: "Roboto Condensed";
     font-size: 17px;
     margin-right: 1em;
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     input { 
         margin-right: .5em;
     }
@@ -102,23 +103,6 @@ export const SearchFilter = styled.div`
     flex-direction: row;
     border-bottom: 1px solid silver;
     justify-content: center;
-`
-
-export const StyledFilterToggle = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    height: 40px;
-    padding-bottom: .5em;
-    font-weight: bold;
-    border-bottom: ${props => props.active ? "#2px solid #c73636" : "none"};
-    color: ${props => props.active ? "#202020" : "#707070"};
-
-    :hover {
-        color: #202020;
-        border-bottom: 2px solid #d87171;
-        cursor: pointer;
-    }
 `
 
 export const FilterResultsCount = styled.div`

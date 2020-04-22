@@ -1,21 +1,21 @@
 import React from 'react';
-import LibraryPreview from '../LibraryPreview';
 import EditableInput from './EditableInput';
 import LibraryWordList from './LibraryWordList';
 import EditToggle from './EditToggle';
 import AddWordsForm from './AddWordsForm';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 import { seedLibrary } from '../../seed'
+import { withRouter } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleUp, faPlusSquare, faMinusSquare, faGamepad, faStar, faEdit, faCalendarAlt, faChevronUp, faChevronDown, faSave } from '@fortawesome/free-solid-svg-icons'
+import { faGamepad, faStar } from '@fortawesome/free-solid-svg-icons'
 
-import { StyledViewLibrary, Container, DescriptionField, WordListContainer, LibraryInformation, WordList, StyledWordField,
-    Scroll, DetailsField, DetailsContainer, Detail, Title,
-    StyledEditableInput, EditableParagraph
+import { StyledViewLibrary, DetailsField, DetailsContainer, Detail, Title,
+    StyledEditableInput, NameLabel
 } from './ViewLibrary.styled'
 
-import { Label, Card } from './ViewLibrary.styled'
+import { Card } from '../../global';
 
 const emptyLibrary = {
     libraryName: undefined,
@@ -27,7 +27,7 @@ const emptyLibrary = {
     _id: undefined
 }
 
-export default class ViewLibrary extends React.Component {
+class ViewLibrary extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -201,21 +201,22 @@ export default class ViewLibrary extends React.Component {
 
         return(
             <StyledViewLibrary>
-                <LibraryInformation>
-
                     <Card>
-                        <Label>
-                        {!this.state.libraryName
-                        ? <h1>{this.state.library.libraryName}</h1>
-                        : <EditableInput
-                                id="libraryName"
-                                type="text"
-                                font={StyledEditableInput}
-                                value={this.state.currentWordValue}
-                                handleChange={this.handleWordChange}
-                            />
-                        }
-
+                        <NameLabel>
+                        <Title>
+                            {!this.state.libraryName
+                            ? <h1>{this.state.library.libraryName}</h1>
+                            : <EditableInput
+                                    id="libraryName"
+                                    type="text"
+                                    font={StyledEditableInput}
+                                    value={this.state.currentWordValue}
+                                    handleChange={this.handleWordChange}
+                                />
+                            }
+                            <p>{this.state.library.description}</p>
+                        </Title>
+                        
                         {this.state.authenticatedUser
                             ? <EditToggle
                                 toggleEdit={this.toggleEdit}
@@ -224,39 +225,10 @@ export default class ViewLibrary extends React.Component {
                             />
                             : null
                         }
-                    </Label>
-                    </Card>
-
-                    <DescriptionField>
-                        <div>
-                            <h2>Description</h2>
-                            {this.state.authenticatedUser
-                                ? <EditToggle
-                                    toggleEdit={this.toggleEdit}
-                                    id="description"
-                                    active={this.state.description}
-                                />
-                                : null
-                            }
-                        </div>
-
-                        {!this.state.description
-                            ? <p>{this.state.library.description}</p>
-                            : <EditableInput
-                                id="description"
-                                type="text"
-                                font={EditableParagraph}
-                                value={this.state.currentWordValue}
-                                handleChange={this.handleWordChange}
-                            />
-                        }
-                        
-                    </DescriptionField>
-
+                      </NameLabel>
                     <DetailsField>
-                            <h2>Details</h2>
+                      <h2>Details</h2>
                         <DetailsContainer>
-                            
                             <div className="column">
                                 <Detail className="authorName">
                                     {/* <FontAwesomeIcon className="icon" icon={faPlusSquare} /> */}
@@ -291,18 +263,9 @@ export default class ViewLibrary extends React.Component {
                             </div>
                         </DetailsContainer>
                     </DetailsField>
-                </LibraryInformation>
-                
-                {this.state.authenticatedUser
-                ?   <AddWordsForm
-                        active={this.state.addWords}
-                        toggleEdit={this.toggleEdit}
-                        currentWord={this.state.currentWordValue}
-                        handleSubmit={this.handleWordSubmit}
-                        handleChange={this.handleWordChange}
-                    />
-                : null
-                }
+                    </Card>
+
+              
 
                 <LibraryWordList
                     library={this.state.library}
@@ -312,7 +275,20 @@ export default class ViewLibrary extends React.Component {
                     updateWord={this.updateWord}
                     authenticatedUser={this.state.authenticatedUser}
                 />
+
+                {this.state.authenticatedUser
+                    ? <AddWordsForm
+                        active={this.state.addWords}
+                        toggleEdit={this.toggleEdit}
+                        currentWord={this.state.currentWordValue}
+                        handleSubmit={this.handleWordSubmit}
+                        handleChange={this.handleWordChange}
+                    />
+                    : null
+                }
             </StyledViewLibrary>
         )
     }
 }
+
+export default withRouter(ViewLibrary);

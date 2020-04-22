@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-import { create } from 'domain';
 
 export const GlobalStyles = createGlobalStyle`
     html, body {
@@ -126,8 +125,8 @@ export const Card = styled.div`
 
 export const Label = styled.div`
     display: flex;
-    flex-direction: ${props => props.layout == "row" ? "row" : "column"};
-    align-items: ${props => props.layout == "row" ? "center" : "default"};
+    flex-direction: ${props => props.layout === "row" ? "row" : "column"};
+    align-items: ${props => props.layout === "row" ? "center" : "default"};
     background-color: #F8F8F8;
     padding: 1rem 2rem;
     font-family: "Roboto Condensed";

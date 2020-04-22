@@ -1,21 +1,24 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleUp, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
-import { StyledAddWordsForm, Title, WordInputContainer, WordInput, WordForm } from './ViewLibrary.styled'
-import { Word } from '../GameScreen/GameScreen.styled'
+import { WordInput, WordForm } from './ViewLibrary.styled'
+import { Card, Label, Option } from '../../global';
 
 const AddWordsForm = (props) => {
 
     return(
-        <StyledAddWordsForm >
-            <Title onClick={props.toggleEdit} id="addWords">
+        <Card >
+            <Label onClick={props.toggleEdit} id="addWords">
                 <h2>Add Words</h2>
+            </Label>
+            <Option>
                 {!props.active
                     ? <FontAwesomeIcon onClick={props.toggleEdit} id="addWords" className="icon" icon={faAngleDown} />
                     : <FontAwesomeIcon onClick={props.toggleEdit} id="addWords" className="icon" icon={faAngleUp} />
                 }
-            </Title>
+            </Option>
+
                 <WordForm hidden={props.active} onSubmit={props.handleSubmit}>
                     <WordInput
                         autoComplete="off"
@@ -26,7 +29,7 @@ const AddWordsForm = (props) => {
                         hidden={!props.active}
                     />
                 </WordForm>
-        </StyledAddWordsForm>
+        </Card>
     )
 }
 

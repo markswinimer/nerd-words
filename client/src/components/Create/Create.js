@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from "react-router-dom";
 
 import NewLibraryForm from '../NewLibraryForm/NewLibraryForm';
 import { ViewLibrary } from '../../components'
@@ -23,6 +24,7 @@ class Create extends React.Component {
         this.switchCreateMode = this.switchCreateMode.bind(this);
         this.postNewLibrary = this.postNewLibrary.bind(this);
         this.loadEditForm = this.loadEditForm.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     switchCreateMode(event) {
@@ -92,6 +94,10 @@ class Create extends React.Component {
                 })
             })
     }
+
+    handleSelect(id) {
+        this.props.history.push('/library/:' + id)
+    }
     
     render() {
 
@@ -112,7 +118,7 @@ class Create extends React.Component {
 
                 {this.state.activeForm === "editExisting"
                     ?   <LibrarySelector className="Card"
-                            handleLibraryChoice={this.loadEditForm}
+                            handleSelect={this.handleSelect}
                         />
                     :   null
                 }
@@ -152,4 +158,4 @@ const ChooseMode = props => {
     )
 }
 
-export default Create;
+export default withRouter(Create);

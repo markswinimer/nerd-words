@@ -32,7 +32,6 @@
     "mongoose": "^5.9.2",
     "node-fetch": "^2.6.0",
     "react-media": "^1.10.0",
-    "react-router-dom": "^5.1.2",
     "react-table": "^7.0.0-rc.16",
     "styled-components": "^5.0.1"
   },
