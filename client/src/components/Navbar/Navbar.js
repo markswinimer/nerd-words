@@ -5,7 +5,7 @@ const StyledNavbar = styled.div`
     background-color: #c73636;
     display: flex;
     flex-direction: row;
-    padding: .25rem 5rem .25rem 1em;
+    padding: .5rem 5rem .5rem 4em;
     align-items: center;
     border-bottom: 1px solid #d87171;
     color: white;

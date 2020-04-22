@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Card, Label } from '../../global'
 
-export const StyledMenu = styled.nav`
-    width: 15em;
+export const MenuContainer = styled.div`
+  height: 100vh;
+  width: 300px;
+  padding: 2em 0 0 4em;  
+`
+export const StyledMenu = styled(Card)`
     min-width: 15em;
     background-color: ${({ theme }) => theme.primaryBackgroundLight};
     display: flex;
-
     flex-direction: column;
-
+    
     @media (max-width: ${({ theme }) => theme.mobile}) {
         transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
         height: ${({ open }) => open ? '0%' : 'auto'};
@@ -99,6 +103,13 @@ export const StyledMenuLink = styled(Link)`
       border-bottom: solid 4px #c73636;
       padding-top: 4px;
       padding-bottom: 4px;
-      pointer-events: none;
+      :hover {
+        background-color: white;
+        color: #c73636;
+      }
     `}
+`
+
+export const Footer = styled.div`
+  height: 20px;
 `

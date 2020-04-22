@@ -5,12 +5,13 @@ import EditToggle from './EditToggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-import { Scroll, WordList, StyledWordField,
-    WordContainer, Toggle, NameLabel
+import { ScrollBar, WordList, StyledWordField,
+    WordContainer, Toggle, NameLabel, AddWordsButton
 } from './ViewLibrary.styled';
 import { Card } from '../../global';
 
 export default class LibraryWordList extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -22,9 +23,10 @@ export default class LibraryWordList extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
-    }
 
+    }
     handleChange(event) {
+
         console.log("Current WORD = " + this.state.currentWord)
         const newWord = event.target.value
         console.log("New = " + newWord)
@@ -100,7 +102,7 @@ export default class LibraryWordList extends React.Component {
         return(
             <Card>
                 <NameLabel>
-                    <h2>Word Library</h2>
+                    <h2 onClick={this.scrollToBottom}>Word Library</h2>
                     {this.props.authenticatedUser
                     ? <EditToggle
                         toggleEdit={this.props.toggleEdit}
@@ -109,13 +111,13 @@ export default class LibraryWordList extends React.Component {
                      />
                     : null
                     }
-
                 </NameLabel>
-                <Scroll><FontAwesomeIcon className="icon" icon={faChevronUp} /></Scroll>
-                <WordList>
+                <ScrollBar><FontAwesomeIcon className="icon" icon={faChevronUp} /></ScrollBar>
+                <WordList className="element" id="containerElement">
                     {words}
+                    <div className="element" name="myScrollToElement"></div>
                 </WordList>
-                <Scroll><FontAwesomeIcon className="icon" icon={faChevronDown} /></Scroll>
+                <ScrollBar><FontAwesomeIcon className="icon" icon={faChevronDown} /></ScrollBar>
 
             </Card>
         )

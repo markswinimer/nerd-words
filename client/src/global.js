@@ -61,23 +61,27 @@ export const GlobalStyles = createGlobalStyle`
     }
     .App {
         width: 100vw;
+        margin: autp;
         max-height: 100vh;
         overflow: hidden;
         display: flex;
         flex-direction: column;
     }
     .Main {
-        flex-grow: 1;
+        max-width: 1600px;
         display: flex;
         flex-direction: row;
-        overflow: hidden;
+        justify-content: center;
+        overflow: scroll;
     }
     .Container {
+        flex: 2;
+        width: auto;
         max-width: 800px;
+        min-width: 450px;
         overflow-y: scroll;
         overflow-x: none;
-        flex-grow: 1;
-        padding: 4em 5em 2em 4em;
+        padding: 2em 2em 2em 4em;
         padding-right: 5em; /* Hide the scroll bar, mac issues */
         box-sizing: content-box; /*     ^^^      ^^^     ^^^    */
     }

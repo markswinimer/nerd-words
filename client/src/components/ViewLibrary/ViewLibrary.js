@@ -7,6 +7,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { seedLibrary } from '../../seed'
 import { withRouter } from 'react-router-dom'
+import Scroll from 'react-scroll';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faStar } from '@fortawesome/free-solid-svg-icons'
@@ -27,6 +28,8 @@ const emptyLibrary = {
     _id: undefined
 }
 
+var scroller = Scroll.scroller;
+
 class ViewLibrary extends React.Component {
     constructor(props) {
         super(props);
@@ -42,8 +45,10 @@ class ViewLibrary extends React.Component {
         }
         this.handleWordChange = this.handleWordChange.bind(this)
         this.handleWordSubmit = this.handleWordSubmit.bind(this)
-        this.toggleEdit = this.toggleEdit.bind(this)
+        this.toggleAddWords = this.toggleAddWords.bind(this)
+        this.scrollToWord = this.scrollToWord.bind(this)
         this.updateField = this.updateField.bind(this)
+        this.toggleEdit = this.toggleEdit.bind(this)
         this.updateWord = this.updateWord.bind(this)
         this.change = this.change.bind(this)
 
@@ -109,7 +114,29 @@ class ViewLibrary extends React.Component {
             currentWordValue: editingValue
         })
     }
+    toggleAddWords(e) {
+        console.log("MADE IT + " + e)
+        let editingValue = ""
+        if(this.state[e.currentTarget.id]) {
+            this.updateField(e.currentTarget.id)
+        } else {
+            editingValue = this.state.library[e.currentTarget.id]
+        }
+        this.setState({ 
+            [e.currentTarget.id]: !this.state[e.currentTarget.id],
+            currentWordValue: editingValue
+        })
+    }
 
+    scrollToWord() {
+        scroller.scrollTo('myScrollToElement', {
+            duration: 100,
+            delay: 100,
+            smooth: false,
+            containerId: 'containerElement',
+            offset: 0,
+        })
+    }
     postNewWord() {
         console.log("UPDATEFIELD")
 
@@ -133,7 +160,7 @@ class ViewLibrary extends React.Component {
             .then(response => {
                 let library = this.state.library
                 library[response.data.type] = response.data.value
-
+                this.scrollToWord()
                 this.setState({
                     library: library,
                     currentWordValue: ""
@@ -226,7 +253,7 @@ class ViewLibrary extends React.Component {
                             : null
                         }
                       </NameLabel>
-                    <DetailsField>
+                    <DetailsField active={this.state.addWords || this.state.wordLibrary === true}>
                       <h2>Details</h2>
                         <DetailsContainer>
                             <div className="column">
@@ -265,7 +292,16 @@ class ViewLibrary extends React.Component {
                     </DetailsField>
                     </Card>
 
-              
+                {this.state.authenticatedUser
+                    ? <AddWordsForm
+                        active={this.state.addWords}
+                        toggleEdit={this.toggleAddWords}
+                        currentWord={this.state.currentWordValue}
+                        handleSubmit={this.handleWordSubmit}
+                        handleChange={this.handleWordChange}
+                    />
+                    : null
+                }
 
                 <LibraryWordList
                     library={this.state.library}
@@ -276,16 +312,7 @@ class ViewLibrary extends React.Component {
                     authenticatedUser={this.state.authenticatedUser}
                 />
 
-                {this.state.authenticatedUser
-                    ? <AddWordsForm
-                        active={this.state.addWords}
-                        toggleEdit={this.toggleEdit}
-                        currentWord={this.state.currentWordValue}
-                        handleSubmit={this.handleWordSubmit}
-                        handleChange={this.handleWordChange}
-                    />
-                    : null
-                }
+     
             </StyledViewLibrary>
         )
     }

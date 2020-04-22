@@ -5,7 +5,19 @@ export const StyledViewLibrary = styled.div`
     display: flex;
     flex-direction: column;
 `
-
+export const AddWordsButton = styled.button`
+    min-width: 200px;
+    height: 40px;
+    margin-left: 2em;
+    cursor: pointer;
+    margin-left: auto;
+    font-weight: 400;
+`
+export const AddLabel = styled(Label)`
+    flex-direction: row;
+    height: 70px;
+    align-items: center;
+`
 export const Container = styled.div`
     display: flex;
     flex-direction: row;
@@ -31,11 +43,33 @@ export const DescriptionField = styled(Container)`
     }
 `
 
+export const Indicator = styled.div`
+    height: 30px;
+    width: 30px;
+    margin-left: 1.25em;
+    /* background-color: ${props => props.active ? "green" : "gray"}; */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .95em 1em;
+    color: ${props => props.active ? "green" : "gray"};
+    border: 4px solid ${props => props.active ? "green" : "gray"};
+    border-radius: 10px;
+`
+
 export const DetailsField = styled(Container)`
     flex-direction: column;
     border-bottom: none;
     padding: 0 0em 1em 2em;
-
+    /* display: ${props => props.active ? "none" : "inherit"}; */
+    transition: visibility .1s, opacity .1s linear;
+    transition: .1s ease-in ;
+    height: ${props => props.active ? "0" : "100%"};
+    padding-bottom: ${props => props.active ? "0" : "1em"};
+    visibility: ${props => props.active ? "hidden" : "visible"};
+    opacity: ${props => props.active ? 0 : 1};
+}
     div {
         display: flex;
         flex-direction: row;
@@ -99,7 +133,13 @@ export const WordForm = styled.form`
     margin-left: 4em;
     padding: 1em;
     background-color: #f3f3f3;
-    display: ${props => !props.hidden ? "none" : "inherit"};
+    display: ${props => !props.hidden ? "none" : "flex"};
+    flex-direction: row;
+    align-items: center;
+
+    h3 { 
+        margin-right: 1em;
+    }
 `
 export const NameLabel = styled(Label)`
     flex-direction: row;
@@ -169,7 +209,7 @@ export const WordContainer = styled.form`
 export const WordList = styled.div`
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow: scroll;
     max-height: 15em;
 `
 export const StyledWordField = styled.input`
@@ -183,7 +223,7 @@ export const StyledWordField = styled.input`
         border-bottom: none;
     }
 `
-export const Scroll = styled.div`
+export const ScrollBar = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -87,7 +87,6 @@ class Discover extends React.Component {
         return(
             <StyledDiscover>
                 <Card>
-
                 <Label>
                     <h1>Word Libraries</h1>
                     <p>Search for libraries to favorite and play with.</p>
