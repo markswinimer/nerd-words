@@ -14,10 +14,6 @@ export const StyledTableRow = styled.div`
 
 export const Data = styled.div`
     flex: ${props => props.size};
-
-    :last-child {
-        justify-content: center;
-    }
 `
 
 export const TableHeader = styled(StyledTableRow)`
@@ -60,6 +56,7 @@ export const Button = styled.div`
         margin-right: 1em;
     }
 `
+
 export const Entries = styled.div`
     height: 40vh;
     overflow: scroll;

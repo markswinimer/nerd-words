@@ -66,7 +66,8 @@ export const Data = styled.div`
     font-family: "Roboto Condensed";
     margin-right: .5em;
     padding: 0 1em;
-
+    cursor: pointer;
+    
     a {
         color: ${({ theme }) => theme.primaryDark};
         font-family: "Roboto Condensed";
@@ -74,7 +75,8 @@ export const Data = styled.div`
         cursor: pointer;
     }
     :last-child {
-        justify-content: center;
+        border-right: none;
+        /* justify-content: center; */
     }
     :first-of-type {
         padding-left: 0;

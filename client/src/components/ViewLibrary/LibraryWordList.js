@@ -1,5 +1,4 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import EditToggle from './EditToggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +14,7 @@ export default class LibraryWordList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            library: this.props.library,
+            // library: this.props.library,
             currentWord: "",
             currentWord_id: "",
             editing: false
@@ -26,7 +25,6 @@ export default class LibraryWordList extends React.Component {
 
     }
     handleChange(event) {
-
         console.log("Current WORD = " + this.state.currentWord)
         const newWord = event.target.value
         console.log("New = " + newWord)
@@ -68,16 +66,14 @@ export default class LibraryWordList extends React.Component {
     render() {
 
         let words = [];
-        if(this.state.library){
-        let libraryLoaded = this.props.library.words
-        console.log("current ID = " + this.state.currentWord_id)
-        words = libraryLoaded.map(word => (
-            <WordContainer onSubmit={this.handleSubmit}>
-
+        if(this.props.library){
+            let libraryLoaded = this.props.library.words
+            console.log("current ID = " + this.state.currentWord_id)
+            words = libraryLoaded.map(word => (
+                <WordContainer onSubmit={this.handleSubmit}>
                 {this.state.currentWord_id !== word 
                     ?   <h2>{word}</h2>
                     :   <WordField
-                            key={uuidv4()}
                             id={word}
                             name="libraryName"
                             type="text"
@@ -115,7 +111,7 @@ export default class LibraryWordList extends React.Component {
                 <ScrollBar><FontAwesomeIcon className="icon" icon={faChevronUp} /></ScrollBar>
                 <WordList className="element" id="containerElement">
                     {words}
-                    <div className="element" name="myScrollToElement"></div>
+                    <div className="element" name="bottomElement"></div>
                 </WordList>
                 <ScrollBar><FontAwesomeIcon className="icon" icon={faChevronDown} /></ScrollBar>
 
@@ -128,7 +124,7 @@ const WordField = props => {
     return (
         <StyledWordField
             autoComplete="off"
-            key={uuidv4()}
+            key={props.key}
             id={props.id}
             name={props.name}
             type='text'

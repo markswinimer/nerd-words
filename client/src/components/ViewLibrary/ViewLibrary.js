@@ -1,10 +1,10 @@
 import React from 'react';
+import validateWord from '../../helpers';
 import EditableInput from './EditableInput';
 import LibraryWordList from './LibraryWordList';
 import EditToggle from './EditToggle';
 import AddWordsForm from './AddWordsForm';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 import { seedLibrary } from '../../seed'
 import { withRouter } from 'react-router-dom'
 import Scroll from 'react-scroll';
@@ -41,7 +41,8 @@ class ViewLibrary extends React.Component {
             description: false,
             wordLibrary: false,
             addWords: false,
-            authenticatedUser: true
+            authenticatedUser: true,
+            error: false
         }
         this.handleWordChange = this.handleWordChange.bind(this)
         this.handleWordSubmit = this.handleWordSubmit.bind(this)
@@ -114,6 +115,7 @@ class ViewLibrary extends React.Component {
             currentWordValue: editingValue
         })
     }
+
     toggleAddWords(e) {
         console.log("MADE IT + " + e)
         let editingValue = ""
@@ -129,14 +131,15 @@ class ViewLibrary extends React.Component {
     }
 
     scrollToWord() {
-        scroller.scrollTo('myScrollToElement', {
+        scroller.scrollTo('bottomElement', {
             duration: 100,
             delay: 100,
-            smooth: false,
+            smooth: true,
             containerId: 'containerElement',
-            offset: 0,
+            offset: 50,
         })
     }
+
     postNewWord() {
         console.log("UPDATEFIELD")
 
@@ -156,6 +159,12 @@ class ViewLibrary extends React.Component {
             data: word
         };
 
+        if(this.state.library.words.includes(this.state.currentWordValue)) {
+            this.setState({ error: "cannot add duplicate words" })
+        } else if (!validateWord(this.state.currentWordValue)) {
+            this.setState({ error: "word must not contain special characters" })
+        } else  {
+
         axios(options)
             .then(response => {
                 let library = this.state.library
@@ -163,9 +172,11 @@ class ViewLibrary extends React.Component {
                 this.scrollToWord()
                 this.setState({
                     library: library,
-                    currentWordValue: ""
+                    currentWordValue: "",
+                    error: false
                 })
         })
+        }
     }
     
     updateField(field) {
@@ -200,6 +211,7 @@ class ViewLibrary extends React.Component {
     updateWord(payload) {
         // This function will eventually point to the word list entry in the database once it is independant from the word library entry
         let url = "/libraries/" + this.state.library._id
+        console.log("updating word")
         const options = {
             url: url,
             method: 'PATCH',
@@ -299,6 +311,7 @@ class ViewLibrary extends React.Component {
                         currentWord={this.state.currentWordValue}
                         handleSubmit={this.handleWordSubmit}
                         handleChange={this.handleWordChange}
+                        error={this.state.error}
                     />
                     : null
                 }

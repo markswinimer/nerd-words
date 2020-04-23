@@ -1,8 +1,6 @@
 import React from 'react';
 import TableRow from './TableRow';
 
-// A simple component that shows the pathname of the current location
-
 import { StyledFilter, StyledDiscover,
     TableHead, TableBody, Table, DataHeader, SearchBar, ToggleFilters, Filters, OptionFilter
 } from './Discover.styled';
@@ -125,7 +123,7 @@ class Discover extends React.Component {
                             <FontAwesomeIcon className="icon" icon={faChevronDown} />
                         </DataHeader>
 
-                        <DataHeader size={2}></DataHeader>
+                        {/* <DataHeader size={2}></DataHeader> */}
                     </TableHead>
                 
                     <TableBody>

@@ -62,9 +62,12 @@ export const DetailsField = styled(Container)`
     flex-direction: column;
     border-bottom: none;
     padding: 0 0em 1em 2em;
+    
     /* display: ${props => props.active ? "none" : "inherit"}; */
+    
     transition: visibility .1s, opacity .1s linear;
     transition: .1s ease-in ;
+    
     height: ${props => props.active ? "0" : "100%"};
     padding-bottom: ${props => props.active ? "0" : "1em"};
     visibility: ${props => props.active ? "hidden" : "visible"};
@@ -128,8 +131,7 @@ export const WordInput = styled.input`
 `
 export const WordForm = styled.form`
     padding-top: 1em;
-    border: 1px solid silver;
-    border-top: none;
+    border-left: 1px solid #f5f5f5;
     margin-left: 4em;
     padding: 1em;
     background-color: #f3f3f3;
@@ -288,4 +290,9 @@ export const StartButton = styled.button`
     margin-left: 2em;
     text-align: center;
 
+`
+
+export const Error = styled.div`
+    margin-left: 1em;
+    color: red;
 `

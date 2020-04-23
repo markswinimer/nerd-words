@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
-import { WordInput, WordForm, AddLabel, AddWordsButton, Indicator } from './ViewLibrary.styled'
+import { WordInput, WordForm, AddLabel, AddWordsButton, Indicator, Error } from './ViewLibrary.styled'
 import { Card, Label, Option } from '../../global';
 
 const AddWordsForm = (props) => {
@@ -40,6 +40,10 @@ const AddWordsForm = (props) => {
                         onChange={props.handleChange}
                         hidden={!props.active}
                     />
+                    {props.error
+                    ? <Error>{props.error}</Error>
+                    : null
+                    }
                 </WordForm>
         </Card>
     )

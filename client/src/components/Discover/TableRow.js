@@ -14,7 +14,7 @@ export default class TableRow extends React.Component {
                 {/* <Data className="creationDate">{creationDate}</Data> */}
                 <Data size={2} className="wordCount">{wordCount}</Data>
                 <Data size={2} className="playCount">{playCount}</Data>
-                <DataClickable size={2}><Link>view</Link></DataClickable>
+                {/* <DataClickable size={2}><Link>view</Link></DataClickable> */}
             </StyledTableRow>
         )
     }
