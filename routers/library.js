@@ -40,13 +40,22 @@ router.get('/libraries/top', async (req, res) => {
 
 router.get('/libraries', async (req, res) => {
     console.log("Get request to 'all libraries' route")
+    console.log(req.query.query)
+
+    let libraries;
+    console.log((typeof req.query) === undefined)
+    if(req.query.query) {
+        libraries = await Library.find({ libraryName: req.query.query })
+    } else {
+        libraries = await Library.find({})
+    }
 
     try {
-        const libraries = await Library.find({})
         res.send(libraries)
     } catch (e) {
         res.status(500).send(e)
     }
+
 })
 
 

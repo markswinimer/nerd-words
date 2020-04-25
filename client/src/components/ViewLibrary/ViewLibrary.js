@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faStar } from '@fortawesome/free-solid-svg-icons'
 
 import { StyledViewLibrary, DetailsField, DetailsContainer, Detail, Title,
-    StyledEditableInput, NameLabel
+    StyledEditableInput, NameLabel, AddWordsButton
 } from './ViewLibrary.styled'
 
 import { Card } from '../../global';
@@ -35,10 +35,12 @@ class ViewLibrary extends React.Component {
         super(props);
         this.state = {
             currentWordValue: "",
+            currentOtherValue: "",
+            editingTitle: false,
             initLibrary: true,
             library: emptyLibrary,
             libraryName: undefined,
-            description: false,
+            description: undefined,
             wordLibrary: false,
             addWords: false,
             authenticatedUser: true,
@@ -49,6 +51,8 @@ class ViewLibrary extends React.Component {
         this.toggleAddWords = this.toggleAddWords.bind(this)
         this.scrollToWord = this.scrollToWord.bind(this)
         this.updateField = this.updateField.bind(this)
+        this.toggleEditTitle = this.toggleEditTitle.bind(this)
+        this.checkSubmitTitle = this.checkSubmitTitle.bind(this)
         this.toggleEdit = this.toggleEdit.bind(this)
         this.updateWord = this.updateWord.bind(this)
         this.change = this.change.bind(this)
@@ -57,7 +61,12 @@ class ViewLibrary extends React.Component {
 
     handleWordChange(event) {
         const currentWord = event.target.value
-        this.setState({ currentWordValue: currentWord })
+        console.log("word")
+        console.log(currentWord)
+        console.log("target")
+        console.log(event.target.id)
+
+        this.setState({ [event.target.id]: currentWord })
     }
 
     componentDidMount() {
@@ -114,6 +123,31 @@ class ViewLibrary extends React.Component {
             [e.currentTarget.id]: !this.state[e.currentTarget.id],
             currentWordValue: editingValue
         })
+    }
+
+    checkSubmitTitle(e) {
+        if(e.keyCode == 13) {
+            e.preventDefault()
+            this.updateField(e.currentTarget.id)
+            console.log('value ' + e.target.value)
+        }
+    }
+
+    toggleEditTitle(e) {
+        console.log("MADE IT + " + e)
+        let newLibraryName = "";
+        let newDescription = "";
+        if(this.state.editingTitle) {
+            this.updateField(e.currentTarget.id)
+        } else {
+            newLibraryName = this.state.library.libraryName
+            newDescription = this.state.library.description
+            this.setState({
+                editingTitle: !this.state.editingTitle,
+                libraryName: newLibraryName,
+                description: newDescription
+            })
+        }
     }
 
     toggleAddWords(e) {
@@ -183,7 +217,7 @@ class ViewLibrary extends React.Component {
         console.log("UPDATEFIELD")
         let url = "/libraries/" + this.state.library._id
         let update = {
-            [field]: this.state.currentWordValue
+            [field]: this.state[field]
         }
         const options = {
             url: url,
@@ -203,7 +237,10 @@ class ViewLibrary extends React.Component {
 
                 this.setState({
                     library: library,
-                    currentWordValue: ""
+                    currentWordValue: "",
+                    editingTitle: false,
+                    libraryName: undefined,
+                    description: undefined
                 })
             })
     }
@@ -243,25 +280,42 @@ class ViewLibrary extends React.Component {
                     <Card>
                         <NameLabel>
                         <Title>
-                            {!this.state.libraryName
+                            {!this.state.editingTitle
                             ? <h1>{this.state.library.libraryName}</h1>
                             : <EditableInput
-                                    id="libraryName"
-                                    type="text"
-                                    font={StyledEditableInput}
-                                    value={this.state.currentWordValue}
-                                    handleChange={this.handleWordChange}
-                                />
-                            }
-                            <p>{this.state.library.description}</p>
-                        </Title>
-                        
-                        {this.state.authenticatedUser
-                            ? <EditToggle
-                                toggleEdit={this.toggleEdit}
                                 id="libraryName"
-                                active={this.state.libraryName}
-                            />
+                                name="libraryName"
+                                type="text"
+                                value={this.state.libraryName}
+                                checkSubmitTitle={this.checkSubmitTitle}
+                                handleChange={this.handleWordChange}
+                              />
+                            }
+                          
+                            {!this.state.editingTitle
+                            ? <p>{this.state.library.description}</p>
+                            : <EditableInput
+                                id="description"
+                                name="description"
+                                type="text"
+                                value={this.state.description}
+                                checkSubmitTitle={this.checkSubmitTitle}
+                                handleChange={this.handleWordChange}
+                              />
+                            }
+                        </Title>
+                        {this.state.authenticatedUser
+                            ? <AddWordsButton active={this.state.editingTitle} onClick={this.toggleEditTitle} id="editTitle">
+                                {this.state.editingTitle
+                                    ? "Save"
+                                    : "Edit"
+                                }
+                                </AddWordsButton>
+                            // ? <EditToggle
+                            //     toggleEdit={this.toggleEditTitle}
+                            //     id="libraryName"
+                            //     active={this.state.libraryName}
+                            // />
                             : null
                         }
                       </NameLabel>
@@ -325,7 +379,6 @@ class ViewLibrary extends React.Component {
                     authenticatedUser={this.state.authenticatedUser}
                 />
 
-     
             </StyledViewLibrary>
         )
     }

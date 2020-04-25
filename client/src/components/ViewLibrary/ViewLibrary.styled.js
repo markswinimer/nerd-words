@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Label } from '../../global';
 
 export const StyledViewLibrary = styled.div`
@@ -66,13 +66,12 @@ export const DetailsField = styled(Container)`
     /* display: ${props => props.active ? "none" : "inherit"}; */
     
     transition: visibility .1s, opacity .1s linear;
-    transition: .1s ease-in ;
+    transition: .1s ease-in;
     
     height: ${props => props.active ? "0" : "100%"};
     padding-bottom: ${props => props.active ? "0" : "1em"};
     visibility: ${props => props.active ? "hidden" : "visible"};
     opacity: ${props => props.active ? 0 : 1};
-}
     div {
         display: flex;
         flex-direction: row;
@@ -147,7 +146,7 @@ export const NameLabel = styled(Label)`
     flex-direction: row;
 `
 
-export const Title = styled.div`
+export const Title = styled.form`
     display: flex;
     flex-direction: column;
 
@@ -159,14 +158,6 @@ export const Title = styled.div`
     h2 {
         margin-top: 0;
         margin-right: 1em;
-    }
-
-    :hover {
-            color: white;
-            background-color: ${({ theme }) => theme.primaryDark};
-        .icon {
-                color: white;
-            }
     }
 
 `
@@ -203,6 +194,11 @@ export const WordContainer = styled.form`
         padding: 0 1.5em;
     }   
 
+    p {
+        margin-left: 1em;
+        color: red;
+    }
+
     .icon { 
         margin-left: 1em;
     }
@@ -238,14 +234,29 @@ export const ScrollBar = styled.div`
         border-top: 1px solid silver
     }
 `
-
+const fadeIn = keyframes`
+  from { opacity: 0}
+  to   { opacity: 1}
+`
 export const StyledEditableInput = styled.input`
-        margin-top: .5em;
-        font-size: 2em;
-        font-weight: bold;
-        font-family: "Roboto";
+
         height: auto;
-        border-bottom: 2px solid red;
+        padding-bottom: 0;
+        padding-left: .25em;
+        border: 1px solid silver;
+        /* border-bottom: 2px inset red; */
+        font-family: "Roboto Condensed";
+        font-size: 28px;
+        font-weight: 400;
+        font-style: italic;
+        transition: 1s ease-in;
+        animation: ${fadeIn} .75s;
+
+        :last-of-type {
+            margin-top: .5em;
+            height: 30px;
+            font-size: 18px;
+        }
 `
 export const EditableParagraph = styled(StyledEditableInput)`
         font-size: 1em;

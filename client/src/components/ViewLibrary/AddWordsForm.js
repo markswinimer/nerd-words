@@ -17,10 +17,10 @@ const AddWordsForm = (props) => {
                 }</Indicator> */}
                 <AddWordsButton active={props.active} onClick={props.toggleEdit} id="addWords">
                     {props.active
-                        ? "Turn Off"
-                        : "Turn On" 
+                        ? "Stop"
+                        : "Enable" 
                     }
-                    </AddWordsButton>
+                </AddWordsButton>
 
             </AddLabel>
             {/* <Option>
@@ -34,7 +34,7 @@ const AddWordsForm = (props) => {
                     <h3>Add a word:</h3>
                     <WordInput
                         autoComplete="off"
-                        id="0"
+                        id="currentWordValue"
                         type='text'
                         value={props.currentWord}
                         onChange={props.handleChange}

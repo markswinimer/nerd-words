@@ -4,7 +4,8 @@ const Library = mongoose.model('Library', {
     libraryName: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     authorName: {
         type: String,

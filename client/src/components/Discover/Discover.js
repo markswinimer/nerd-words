@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import TableRow from './TableRow';
 
 import { StyledFilter, StyledDiscover,
@@ -15,12 +16,15 @@ class Discover extends React.Component {
         this.state = {
             searchStore: undefined,
             activeFilterIndex: 0,
-            filtersHidden: true
+            filtersHidden: true,
+            search: undefined
         }
         this.makeSearch = this.makeSearch.bind(this)
+        this.search = this.search.bind(this)
         this.storeResults = this.storeResults.bind(this)
         this.handleToggleFilter = this.handleToggleFilter.bind(this)
         this.toggleFilters = this.toggleFilters.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
     componentDidMount() {
         if(!this.searchStore) {
@@ -30,6 +34,29 @@ class Discover extends React.Component {
 
     storeResults(data) {
         this.setState({ searchStore: data })
+    }
+    handleChange(e) {
+        this.setState({ search: e.target.value})
+    }
+    search(e) {
+        e.preventDefault()
+        // let query = '/libraries/' + "?query=maryanne"
+        let query = `/libraries/?query=${this.state.search}`
+
+        const options = {
+            url: query,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
+        };
+
+        axios(options)
+            .then(response => {
+                console.log(response.data);
+                this.storeResults(response.data)
+            })
     }
 
     makeSearch() {
@@ -90,8 +117,11 @@ class Discover extends React.Component {
                     <p>Search for libraries to favorite and play with.</p>
                 </Label>
                 <Option>
-                    <h2>Search</h2>
-                    <SearchBar/>
+                    <form onSubmit={this.search}>
+                        <h2>Search</h2>
+                        <SearchBar value={this.state.search} onChange={this.handleChange}/>
+                    </form>
+
                 </Option>
                 <OptionFilter>
                     <ToggleFilters onClick={this.toggleFilters}>

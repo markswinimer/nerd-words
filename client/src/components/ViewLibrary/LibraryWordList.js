@@ -1,4 +1,5 @@
 import React from 'react';
+import validateWord from '../../helpers';
 
 import EditToggle from './EditToggle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -33,17 +34,21 @@ export default class LibraryWordList extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log("HIHIHI")
-        const payload = {
-            word: this.state.currentWord,
-            id: this.state.currentWord_id
+
+        if (!validateWord(this.state.currentWord)) {
+            this.setState({ error: "word must not contain special characters" })
+        } else {
+            const payload = {
+                word: this.state.currentWord,
+                id: this.state.currentWord_id
+            }
+            this.props.updateWord(payload)
+            this.setState({
+                currentWord_id: "",
+                currentWord: "",
+                editing: false
+            })
         }
-        this.props.updateWord(payload)
-        this.setState({
-            currentWord_id: "",
-            currentWord: "",
-            editing: false
-        })
     }
 
     toggleEdit(e) {
@@ -88,7 +93,12 @@ export default class LibraryWordList extends React.Component {
                     active={this.props.active}
                     onClick={this.toggleEdit}
                 >
+                  
                     <FontAwesomeIcon className="icon" icon={faPencilAlt} />
+                        {this.state.error && this.state.currentWord_id == word
+                            ? <p>{this.state.error}</p>
+                            : null
+                        }
                 </Toggle>
             </WordContainer>
 
@@ -100,11 +110,12 @@ export default class LibraryWordList extends React.Component {
                 <NameLabel>
                     <h2 onClick={this.scrollToBottom}>Word Library</h2>
                     {this.props.authenticatedUser
-                    ? <EditToggle
-                        toggleEdit={this.props.toggleEdit}
-                        id="wordLibrary"
-                        active={this.props.active}
-                     />
+                    ? <AddWordsButton active={this.props.active} onClick={this.props.toggleEdit} id="wordLibrary">
+                        {this.props.active
+                            ? "Save"
+                            : "Edit"
+                        }
+                        </AddWordsButton>
                     : null
                     }
                 </NameLabel>
