@@ -15,20 +15,21 @@ class Discover extends React.Component {
         super(props);
         this.state = {
             searchStore: undefined,
-            activeFilterIndex: 0,
+            filter: 0,
             filtersHidden: true,
-            search: undefined
+            search: undefined,
+            searchBarValue: undefined
         }
-        this.makeSearch = this.makeSearch.bind(this)
         this.search = this.search.bind(this)
         this.storeResults = this.storeResults.bind(this)
         this.handleToggleFilter = this.handleToggleFilter.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.toggleFilters = this.toggleFilters.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
     componentDidMount() {
         if(!this.searchStore) {
-            this.makeSearch()
+            this.search("/libraries")
         }
     }
 
@@ -38,11 +39,12 @@ class Discover extends React.Component {
     handleChange(e) {
         this.setState({ search: e.target.value})
     }
-    search(e) {
+    handleSubmit(e) {
         e.preventDefault()
-        // let query = '/libraries/' + "?query=maryanne"
         let query = `/libraries/?query=${this.state.search}`
-
+        this.search(query);
+    }
+    search(query) {
         const options = {
             url: query,
             method: 'GET',
@@ -54,31 +56,8 @@ class Discover extends React.Component {
 
         axios(options)
             .then(response => {
-                console.log(response.data);
                 this.storeResults(response.data)
             })
-    }
-
-    makeSearch() {
-        let url = "/libraries"
-
-        if(this.state.activeFilterIndex === 0) {
-            console.log('Default...')
-        } else if(this.state.activeFilterIndex === 1) {
-            url += "/top"
-        } else if(this.state.activeFilterIndex === 2) {
-            url += "/owned"
-        }
-        
-        fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            this.storeResults(data)
-            console.log(data)
-        })
-        .catch(err => {
-            console.log("Request was unsuccesful, error log: " + err)
-        })
     }
 
     toggleFilters() {
@@ -86,8 +65,9 @@ class Discover extends React.Component {
     }
 
     handleToggleFilter(index) {
-        this.setState({ activeFilterIndex: index }, () => {
-            this.makeSearch()
+        const query = `/libraries/?filter=${index}`
+        this.setState({ filter: index }, () => {
+            this.search(query)
         })
     }
 
@@ -117,9 +97,9 @@ class Discover extends React.Component {
                     <p>Search for libraries to favorite and play with.</p>
                 </Label>
                 <Option>
-                    <form onSubmit={this.search}>
+                    <form onSubmit={this.handleSubmit}>
                         <h2>Search</h2>
-                        <SearchBar value={this.state.search} onChange={this.handleChange}/>
+                        <SearchBar value={this.state.searchBarValue} onChange={this.handleChange}/>
                     </form>
 
                 </Option>
@@ -130,9 +110,8 @@ class Discover extends React.Component {
                     </ToggleFilters>
 
                     <Filters active={this.state.filtersHidden}>
-                        <Filter name="owned" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter} />
-                        <Filter name="plays" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter} />
-                        <Filter name="favorites" index={0} count={50} isActive={this.state.activeFilterIndex === 0} onClick={this.handleToggleFilter} />
+                            <Filter name="Top 10" index="topTen" count={50} isActive={this.state.filter === "plays"} onClick={this.handleToggleFilter} />
+                            <Filter name="Show Libraries with 0 words" index="noWords" count={50} isActive={this.state.filter === "noWords"} onClick={this.handleToggleFilter} />
                     </Filters>
                 </OptionFilter>
                 <Table>

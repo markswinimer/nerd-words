@@ -38,16 +38,24 @@ router.get('/libraries/top', async (req, res) => {
     }
 })
 
+// search
 router.get('/libraries', async (req, res) => {
     console.log("Get request to 'all libraries' route")
+    console.log(req.query)
     console.log(req.query.query)
 
     let libraries;
-    console.log((typeof req.query) === undefined)
     if(req.query.query) {
         libraries = await Library.find({ libraryName: req.query.query })
+    } else if(req.query.filter) {
+        if (req.query.filter === "topTen") {
+            libraries = await Library.find({}).sort('-playCount').limit(10)
+        } else if(req.query.filter === "noWords") {
+            libraries = await Library.find({})
+        }
     } else {
-        libraries = await Library.find({})
+        allLibraries = await Library.find({})
+        libraries = allLibraries.filter(library => library.words.length > 0)
     }
 
     try {
@@ -57,8 +65,6 @@ router.get('/libraries', async (req, res) => {
     }
 
 })
-
-
 
 router.get('/libraries/:id', async (req, res) => {
     const _id = req.params.id
