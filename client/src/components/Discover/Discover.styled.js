@@ -22,23 +22,34 @@ export const ToggleFilters = styled.div`
     align-items: center;
     cursor: pointer;
 `
+
+export const SearchForm = styled.form`
+    display: flex;
+`
 export const Filters = styled.div`
     margin-top: .5em;
     display: ${props => props.active ? "none" : "flex"};
     flex-direction: row;
 `
 export const StyledFilter = styled.div`
-    font-family: "Roboto Condensed";
+    font-family: "Roboto";
     font-size: 17px;
-    margin-right: 1em;
+    margin-right: 2em;
     display: flex;
     flex-direction: row;
     align-items: center;
-    input { 
-        margin-right: .5em;
-    }
+    
 `
-
+export const RadioBox = styled.div`
+    height: 15px;
+    width: 15px;
+    border-radius: 4px;
+    border: ${props => props.active ? "none" : "1px solid silver"};
+    background-color: ${props => props.active ? "#C73636" : "white"};
+    margin-right: .75em;
+    cursor: pointer;
+    
+`
 export const Table = styled.div`
     width: 100%;
 `

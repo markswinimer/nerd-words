@@ -3,7 +3,8 @@ import axios from 'axios';
 import TableRow from './TableRow';
 
 import { StyledFilter, StyledDiscover,
-    TableHead, TableBody, Table, DataHeader, SearchBar, ToggleFilters, Filters, OptionFilter
+    TableHead, TableBody, Table, DataHeader, SearchBar, ToggleFilters, Filters, OptionFilter, RadioBox,
+    SearchForm
 } from './Discover.styled';
 import { Card, Label, Option } from '../../global';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,6 +36,7 @@ class Discover extends React.Component {
 
     storeResults(data) {
         this.setState({ searchStore: data })
+
     }
     handleChange(e) {
         this.setState({ search: e.target.value})
@@ -61,14 +63,19 @@ class Discover extends React.Component {
     }
 
     toggleFilters() {
-        this.setState({ filtersHidden: !this.state.filtersHidden })
+        this.setState({ 
+            filtersHidden: !this.state.filtersHidden,
+            filter: undefined
+         })
     }
 
     handleToggleFilter(index) {
         const query = `/libraries/?filter=${index}`
-        this.setState({ filter: index }, () => {
-            this.search(query)
-        })
+        if (this.state.filter !== index) {
+            this.setState({ filter: index }, () => {
+                this.search(query)
+            })
+        }
     }
 
 
@@ -97,10 +104,10 @@ class Discover extends React.Component {
                     <p>Search for libraries to favorite and play with.</p>
                 </Label>
                 <Option>
-                    <form onSubmit={this.handleSubmit}>
+                    <SearchForm onSubmit={this.handleSubmit}>
                         <h2>Search</h2>
                         <SearchBar value={this.state.searchBarValue} onChange={this.handleChange}/>
-                    </form>
+                    </SearchForm>
 
                 </Option>
                 <OptionFilter>
@@ -110,7 +117,7 @@ class Discover extends React.Component {
                     </ToggleFilters>
 
                     <Filters active={this.state.filtersHidden}>
-                            <Filter name="Top 10" index="topTen" count={50} isActive={this.state.filter === "plays"} onClick={this.handleToggleFilter} />
+                            <Filter name="Top 10" index="topTen" count={50} isActive={this.state.filter === "topTen"} onClick={this.handleToggleFilter} />
                             <Filter name="Show Libraries with 0 words" index="noWords" count={50} isActive={this.state.filter === "noWords"} onClick={this.handleToggleFilter} />
                     </Filters>
                 </OptionFilter>
@@ -149,9 +156,8 @@ class Filter extends React.Component {
     handleClick = () => this.props.onClick(this.props.index)
     render() {
         return(
-            <StyledFilter>
-                <input type="radio" active={this.props.isActive ? true : false}
-                    onClick={this.handleClick}/>
+            <StyledFilter active={this.props.isActive ? true : false}>
+                <RadioBox active={this.props.isActive ? true : false} onClick={this.handleClick}/>
                 {this.props.name}
             </StyledFilter>
         )
