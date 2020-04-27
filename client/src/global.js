@@ -21,6 +21,8 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 1.25em;
         padding: .1em 0 .2em .5em;
         margin: 0;
+        max-width: 300px;
+
     }
     body {
         display: flex;
@@ -103,10 +105,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
-        button {
-            width: 100%;
-            max-width: 100%;
-        }
+  
         .Main {
             display: flex;
             flex-direction: column;
@@ -114,8 +113,24 @@ export const GlobalStyles = createGlobalStyle`
         .Container {
             overflow: auto;
             padding: 2em 1em;
+            min-width: 0px;
+        }
+
+        input {
+            width: 100%;
+            margin-left: 0;
         }
     }
+    @media (max-width: 500px) {
+              button {
+            width: 100%;
+            max-width: 100%;
+        }
+        input {
+
+        }
+    }
+    
 `
 
 export const Card = styled.div`

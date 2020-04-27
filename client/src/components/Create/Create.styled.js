@@ -6,9 +6,6 @@ export const StyledChooseMode = styled.div`
 `
 
 export const Button = styled.button`
-    width: 100px;
-    @media (max-width: ${({ theme }) => theme.mobile}) {
-    }
 `
 
 export const StyledCreate = styled.div`
@@ -50,7 +47,7 @@ export const Option = styled.div`
         font-family: "Roboto Condensed";
     }
 
-    @media (max-width: ${({ theme }) => theme.mobile}) {
+    @media (max-width: 500px) {
         flex-direction: column;
 
         h2  {

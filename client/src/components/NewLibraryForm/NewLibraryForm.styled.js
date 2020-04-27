@@ -11,7 +11,6 @@ export const StyledEditableInput = styled.input`
     min-height: 2em;
     padding: 0 .5em;
     border: none;
-    width: 300px;
     border: 1px solid silver;
 `
 
@@ -128,10 +127,16 @@ export const Option = styled.div`
     }
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
-        flex-direction: column;
 
         h2  {
             margin-bottom: .5em;
+        }
+    }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+        input {
+            margin-left: 0;
         }
     }
 `

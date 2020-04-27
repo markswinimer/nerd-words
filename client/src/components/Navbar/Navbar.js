@@ -5,13 +5,16 @@ const StyledNavbar = styled.div`
     background-color: #c73636;
     display: flex;
     flex-direction: row;
-    padding: .5rem 5rem .5rem 4em;
+    padding: .5em 5em .5em 4em;
     align-items: center;
     border-bottom: 1px solid #d87171;
     color: white;
 
     .links {
         margin-left: auto;
+    }
+    @media (max-width: 800px) {
+    padding: .5em 5em .5em 1em;
     }
 `
 const Logo = styled.div`
