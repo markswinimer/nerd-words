@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const StyledBurger = styled.div`
   position: absolute;
-  top: 1em;
-  right: 1rem;
+  top: .5em;
+  right: 1em;
   display: none;
   flex-direction: column;
   justify-content: space-around;

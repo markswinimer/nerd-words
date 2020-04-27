@@ -6,6 +6,15 @@ export const MenuContainer = styled.div`
   height: 100vh;
   width: 300px;
   padding: 2em 0 0 4em;  
+
+  @media (max-width: ${({ theme }) => theme.mobile}) {
+    width: 100%;
+    padding: 0;
+    transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
+    height: ${({ open }) => open ? '0%' : 'auto'};
+    display: ${({ open }) => open ? 'flex' : 'none'};
+    flex-direction: column;
+  }
 `
 export const StyledMenu = styled(Card)`
     min-width: 15em;
@@ -13,14 +22,6 @@ export const StyledMenu = styled(Card)`
     display: flex;
     flex-direction: column;
     
-    @media (max-width: ${({ theme }) => theme.mobile}) {
-        transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100%)'};
-        height: ${({ open }) => open ? '0%' : 'auto'};
-        display: ${({ open }) => open ? 'flex' : 'none'};
-        width: 100%;
-        flex-direction: column;
-    }
-
     .user {
       padding-left: 1em;
       padding: 2em 0em 3em 1em;

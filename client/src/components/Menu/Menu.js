@@ -9,8 +9,8 @@ import { StyledMenu, StyledMenuLink, MenuContainer, Footer } from './Menu.styled
 const Menu = ({ currentPage, open, setOpen, history }) => {
     const path = history.location.pathname;
     return (
-        <MenuContainer>
-        <StyledMenu open={open}>
+        <MenuContainer open={open}>
+        <StyledMenu>
 
             <div className="user">
                 <p>Hello,</p>
