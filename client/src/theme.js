@@ -1,15 +1,3 @@
-/* black on white */
-/* color: #202020; */
-
-/* black on gray */
-/* color: #303030; */
-
-/* Main Red */
-/* color: c73636 */
-
-/* Out of focus Red */
-/* color: #d87171 */
-
 export const theme = {
     primaryDark: '#c73636',
     primaryLight: '#d87171',

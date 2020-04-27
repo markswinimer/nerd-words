@@ -1,16 +1,16 @@
 import React from 'react';
-import validateWord from '../../helpers';
-import EditableInput from './EditableInput';
-import LibraryWordList from './LibraryWordList';
-import EditToggle from './EditToggle';
-import AddWordsForm from './AddWordsForm';
 import axios from 'axios';
-import { seedLibrary } from '../../seed'
-import { withRouter } from 'react-router-dom'
 import Scroll from 'react-scroll';
-
+import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faStar } from '@fortawesome/free-solid-svg-icons'
+
+import validateWord from '../../helpers';
+
+import EditableInput from './EditableInput';
+import LibraryWordList from './LibraryWordList';
+import AddWordsForm from './AddWordsForm';
+
 
 import { StyledViewLibrary, DetailsField, DetailsContainer, Detail, Title,
     StyledEditableInput, NameLabel, AddWordsButton

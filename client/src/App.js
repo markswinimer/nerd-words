@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-
-import Home from './components/Home/Home';
-import Discover from './components/Discover/Discover';
-
 import { ThemeProvider } from 'styled-components';
+
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 
-import { Burger, Menu } from './components';
-import { Create } from './components';
-import { Play } from './components';
-import { Navbar } from './components';
+import Home from './components/Home/Home';
+import Discover from './components/Discover/Discover';
+import Burger from './components/Burger/Burger';
+import Menu from './components/Menu/Menu';
+import Create from './components/Create/Create';
+import Play from './components/Play/Play';
+import Navbar from './components/Navbar/Navbar';
 import ViewLibrary from './components/ViewLibrary/ViewLibrary';
-
 
 import {
   BrowserRouter as Router,

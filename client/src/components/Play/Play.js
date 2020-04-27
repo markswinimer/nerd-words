@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { GameScreen, GameSetup } from '../';
+import GameScreen from '../GameScreen/GameScreen';
+import GameSetup from '../GameSetup/GameSetup';
 
 const StyledPlay = styled.div`
     height: 100%;

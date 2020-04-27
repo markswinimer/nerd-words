@@ -3,9 +3,8 @@ import axios from 'axios';
 import { withRouter } from "react-router-dom";
 
 import NewLibraryForm from '../NewLibraryForm/NewLibraryForm';
-import { ViewLibrary } from '../../components'
-import { LibrarySelector } from '../../components'
-import { seedGameData } from '../../seed'
+import ViewLibrary from '../ViewLibrary/ViewLibrary';
+import LibrarySelector from '../LibrarySelector/LibrarySelector';
 
 import { Option, Button, StyledChooseMode, StyledCreate } from './Create.styled' 
 import { Card, Label } from '../../global'; 

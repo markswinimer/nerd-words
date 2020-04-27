@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-import { LibrarySelector } from '../../components';
+import LibrarySelector from '../LibrarySelector/LibrarySelector';
+
 import { StartButton, StyledRadioField, StyledDropDownField, RadioOption, StyledGameSetup, SelectedRadioOption, Option } from './GameSetup.styled'
 import { Label, Card } from '../../global';
 
