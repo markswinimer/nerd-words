@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import LibrarySelector from '../LibrarySelector/LibrarySelector';
 
-import { StyledChooseMode, StyledCreate } from './Create.styled' 
+import { StyledCreate } from './Create.styled' 
 import { Card, Label, Option, StyledLink } from '../../global'; 
 
 class Create extends React.Component {

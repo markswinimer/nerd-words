@@ -2,8 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
 
-import EditableInput from './EditableInput';
-import { StartLabel, StartButton, Option, Form, Card, Label } from './NewLibraryForm.styled';
+import EditableInput from '../global-components/EditableInput';
+
+import { StyledNewLibraryForm } from './NewLibraryForm.styled';
+import { Option, Card, Label } from '../../global';
 
 class NewLibraryForm extends React.Component {
     constructor(props) {
@@ -32,7 +34,6 @@ class NewLibraryForm extends React.Component {
         const payload = this.state.library
 
         this.postNewLibrary(payload)
-        // this.setState({ library: editLibrary })
     }
 
     postNewLibrary(payload) {
@@ -57,42 +58,44 @@ class NewLibraryForm extends React.Component {
 
     render() {   
         return (
-            <Card>
-            <Form onSubmit={this.handleSubmit}>
-                <Label>
-                <h1>Create a new Library</h1>
-                <p>Start your new library by choosing a name and description.</p>
-                </Label>
+            <StyledNewLibraryForm>
+                <Card>
+                    <form onSubmit={this.handleSubmit}>
+                        <Label>
+                            <h1>Create a new Library</h1>
+                            <p>Start your new library by choosing a name and description.</p>
+                        </Label>
 
-                <Option>
-                <h2>Library Name</h2>
-                <EditableInput
-                    id="Library Name"
-                    label=""
-                    name="libraryName"
-                    type="text"
-                    value={this.state.library.libraryName}
-                    handleChange={this.handleChange}
-                />
-            </Option>
-            <Option>
-                <h2>Description</h2>
-                <EditableInput
-                    id="Description"
-                    label=""
-                    name="description"
-                    type="text"
-                    value={this.state.library.libraryDescription}
-                    handleChange={this.handleChange}
-                />
-            </Option>
+                        <Option>
+                            <h2>Library Name</h2>
+                            <EditableInput
+                                id="Library Name"
+                                label=""
+                                name="libraryName"
+                                type="text"
+                                value={this.state.library.libraryName}
+                                handleChange={this.handleChange}
+                            />
+                        </Option>
 
-            <StartLabel>
-                
-                <StartButton>Create</StartButton>
-            </StartLabel>
-            </Form>
-            </Card>
+                        <Option>
+                            <h2>Description</h2>
+                            <EditableInput
+                                id="Description"
+                                label=""
+                                name="description"
+                                type="text"
+                                value={this.state.library.libraryDescription}
+                                handleChange={this.handleChange}
+                            />
+                        </Option>
+
+                        <Label>
+                            <button>Create</button>
+                        </Label>
+                    </form>
+                </Card>
+            </StyledNewLibraryForm>
             
         )
     }

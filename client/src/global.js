@@ -124,12 +124,9 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
     @media (max-width: 500px) {
-              button {
+        button {
             width: 100%;
             max-width: 100%;
-        }
-        input {
-
         }
     }
     
@@ -192,15 +189,4 @@ export const Option = styled.div`
     h2 {
         margin-right: 1em;
     }
-
-    input {
-        border: 1px solid silver;
-        padding-left: .25em;
-        font-weight: 300;
-        :focus {
-            outline: none;
-
-        }
-    }
-
 `
