@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const GlobalStyles = createGlobalStyle`
     html, body {
@@ -102,6 +103,7 @@ export const GlobalStyles = createGlobalStyle`
         border-radius: 3px;
         height: 40px;
         min-width: 150px;
+        cursor: pointer;
     }
 
     @media (max-width: ${({ theme }) => theme.mobile}) {
@@ -131,6 +133,22 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
     
+`
+export const StyledLink = styled(Link)`
+    border: none;
+    font-size: 20px;
+    font-family: "Roboto Condensed";
+    font-weight: 300;
+    background-color: #c73636;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    height: 40px;
+    min-width: 150px;
+    cursor: pointer;
 `
 
 export const Card = styled.div`
@@ -169,7 +187,6 @@ export const Option = styled.div`
 
     :first-child {
         border-bottom: none;
-
     }
 
     h2 {

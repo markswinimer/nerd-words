@@ -12,6 +12,7 @@ import Create from './components/Create/Create';
 import Play from './components/Play/Play';
 import Navbar from './components/Navbar/Navbar';
 import ViewLibrary from './components/ViewLibrary/ViewLibrary';
+import NewLibraryForm from './components/NewLibraryForm/NewLibraryForm';
 
 import {
   BrowserRouter as Router,
@@ -45,6 +46,9 @@ function App() {
                   </Route>
                   <Route exact key='/create' path='/create'>
                     <Create/>
+                  </Route>
+                  <Route exact key='/create' path='/create/newLibrary'>
+                    <NewLibraryForm/>
                   </Route>
                     <Route key='/discover' path='/discover' children={<Discover/>}>
                   </Route>
