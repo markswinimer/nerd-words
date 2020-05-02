@@ -1,15 +1,16 @@
 import React from 'react';
 import axios from 'axios';
-import TableRow from './TableRow';
-
-import { StyledFilter, StyledDiscover,
-    TableHead, TableBody, Table, DataHeader, SearchBar, ToggleFilters, Filters, OptionFilter, RadioBox,
-    SearchForm
-} from './Discover.styled';
-import { Card, Label, Option } from '../../global';
+import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { withRouter } from "react-router-dom";
+
+import TableRow from './TableRow';
+
+import { StyledFilter, StyledDiscover, Table, TableHeader, TableBody, SearchBar,
+    ToggleFilters, Filters, OptionFilter, RadioBox, SearchForm, Data
+} from './Discover.styled';
+import { Card, Label, Option } from '../../global';
+
 
 class Discover extends React.Component {
     constructor(props) {
@@ -78,8 +79,6 @@ class Discover extends React.Component {
         }
     }
 
-
-
     render() {
         let tableRows;
 
@@ -99,52 +98,54 @@ class Discover extends React.Component {
         return(
             <StyledDiscover>
                 <Card>
-                <Label>
-                    <h1>Word Libraries</h1>
-                    <p>Search for libraries to favorite and play with.</p>
-                </Label>
-                <Option>
-                    <SearchForm onSubmit={this.handleSubmit}>
-                        <h2>Search</h2>
-                        <SearchBar value={this.state.searchBarValue} onChange={this.handleChange}/>
-                    </SearchForm>
+                    <Label>
+                        <h1>Word Libraries</h1>
+                        <p>Search for libraries to favorite and play with.</p>
+                    </Label>
 
-                </Option>
-                <OptionFilter>
-                    <ToggleFilters onClick={this.toggleFilters}>
-                        <h3>Filters</h3>
-                        <FontAwesomeIcon className="icon filter" icon={faChevronDown} />
-                    </ToggleFilters>
+                    <Option>
+                        <SearchForm onSubmit={this.handleSubmit}>
+                            <h2>Search</h2>
+                            <SearchBar value={this.state.searchBarValue} onChange={this.handleChange}/>
+                        </SearchForm>
+                    </Option>
 
-                    <Filters active={this.state.filtersHidden}>
-                            <Filter name="Top 10" index="topTen" count={50} isActive={this.state.filter === "topTen"} onClick={this.handleToggleFilter} />
-                            <Filter name="Show Libraries with 0 words" index="noWords" count={50} isActive={this.state.filter === "noWords"} onClick={this.handleToggleFilter} />
-                    </Filters>
-                </OptionFilter>
-                <Table>
-                    <TableHead>
-                        <DataHeader size={4}>Library Name
-                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                        </DataHeader>
+                    <OptionFilter>
+                        <ToggleFilters onClick={this.toggleFilters}>
+                            <h3>Filters</h3>
+                            <FontAwesomeIcon className="icon filter" icon={faChevronDown} />
+                        </ToggleFilters>
 
-                        <DataHeader size={3}>Author
-                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                        </DataHeader>
+                        <Filters active={this.state.filtersHidden}>
+                                <Filter name="Top 10" index="topTen" count={50} isActive={this.state.filter === "topTen"} onClick={this.handleToggleFilter} />
+                                <Filter name="Show Libraries with 0 words" index="noWords" count={50} isActive={this.state.filter === "noWords"} onClick={this.handleToggleFilter} />
+                        </Filters>
+                    </OptionFilter>
 
-                        <DataHeader size={2}>Words
-                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                        </DataHeader>
+                    <Table>
+                        <TableHeader>
+                            <Data className="header" size={4}>Library Name
+                                <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                            </Data>
 
-                        <DataHeader size={2}>Plays
-                            <FontAwesomeIcon className="icon" icon={faChevronDown} />
-                        </DataHeader>
+                            <Data className="header" size={3}>Author
+                                <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                            </Data>
 
-                        {/* <DataHeader size={2}></DataHeader> */}
-                    </TableHead>
-                
-                    <TableBody>
-                        {tableRows}
-                    </TableBody>
+                            <Data className="header" size={2}>Words
+                                <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                            </Data>
+
+                            <Data className="header" size={2}>Plays
+                                <FontAwesomeIcon className="icon" icon={faChevronDown} />
+                            </Data>
+
+                            {/* <Data className="header" size={2}></Data> */}
+                        </TableHeader>
+                    
+                        <TableBody>
+                            {tableRows}
+                        </TableBody>
                     </Table>
                 </Card>
             </StyledDiscover>

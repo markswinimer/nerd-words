@@ -12,11 +12,18 @@ export const AddWordsButton = styled.button`
     cursor: pointer;
     margin-left: auto;
     font-weight: 400;
+
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        width: auto;
+        max-width: 10px;  
+        min-width: 50px;      
+    }
 `
 export const AddLabel = styled(Label)`
     flex-direction: row;
     height: 70px;
     align-items: center;
+
 `
 export const Container = styled.div`
     display: flex;
@@ -144,13 +151,13 @@ export const WordForm = styled.form`
 `
 export const NameLabel = styled(Label)`
     flex-direction: row;
-`
-
-export const Title = styled.form`
-    display: flex;
-    flex-direction: column;
-
-    .icon {
+    align-items: center;
+    
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+        .icon {
         height: 100%;
         font-size: 2em;
         color: ${({ theme }) => theme.primaryDark};
@@ -159,7 +166,6 @@ export const Title = styled.form`
         margin-top: 0;
         margin-right: 1em;
     }
-
 `
 
 export const WordListContainer = styled.div`

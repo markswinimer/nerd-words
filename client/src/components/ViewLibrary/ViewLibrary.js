@@ -279,31 +279,31 @@ class ViewLibrary extends React.Component {
             <StyledViewLibrary>
                     <Card>
                         <NameLabel>
-                        <Title>
-                            {!this.state.editingTitle
-                            ? <h1>{this.state.library.libraryName}</h1>
-                            : <EditableInput
-                                id="libraryName"
-                                name="libraryName"
-                                type="text"
-                                value={this.state.libraryName}
-                                checkSubmitTitle={this.checkSubmitTitle}
-                                handleChange={this.handleWordChange}
-                              />
-                            }
-                          
-                            {!this.state.editingTitle
-                            ? <p>{this.state.library.description}</p>
-                            : <EditableInput
-                                id="description"
-                                name="description"
-                                type="text"
-                                value={this.state.description}
-                                checkSubmitTitle={this.checkSubmitTitle}
-                                handleChange={this.handleWordChange}
-                              />
-                            }
-                        </Title>
+                            <div>
+                                {!this.state.editingTitle
+                                ? <h1>{this.state.library.libraryName}</h1>
+                                : <EditableInput
+                                    id="libraryName"
+                                    name="libraryName"
+                                    type="text"
+                                    value={this.state.libraryName}
+                                    checkSubmitTitle={this.checkSubmitTitle}
+                                    handleChange={this.handleWordChange}
+                                />
+                                }
+                            
+                                {!this.state.editingTitle
+                                ? <p>{this.state.library.description}</p>
+                                : <EditableInput
+                                    id="description"
+                                    name="description"
+                                    type="text"
+                                    value={this.state.description}
+                                    checkSubmitTitle={this.checkSubmitTitle}
+                                    handleChange={this.handleWordChange}
+                                />
+                                }
+                            </div>
                         {this.state.authenticatedUser
                             ? <AddWordsButton active={this.state.editingTitle} onClick={this.toggleEditTitle} id="editTitle">
                                 {this.state.editingTitle

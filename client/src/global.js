@@ -114,7 +114,7 @@ export const GlobalStyles = createGlobalStyle`
         }
         .Container {
             overflow: auto;
-            padding: 2em 1em;
+            padding: 0em 0em;
             min-width: 0px;
         }
 
@@ -151,8 +151,13 @@ export const StyledLink = styled(Link)`
 export const Card = styled.div`
     box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.75);
     margin-top: 2em;
-    /* font-size: 28px; */
+
     :first-of-type {
+        margin-top: 0;
+    }
+
+    @media (max-width: ${({ theme }) => theme.mobile}) {
+        box-shadow: none;
         margin-top: 0;
     }
 `

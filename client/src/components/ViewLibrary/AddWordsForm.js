@@ -18,7 +18,7 @@ const AddWordsForm = (props) => {
                 <AddWordsButton active={props.active} onClick={props.toggleEdit} id="addWords">
                     {props.active
                         ? "Stop"
-                        : "Enable" 
+                        : "Edit" 
                     }
                 </AddWordsButton>
 
