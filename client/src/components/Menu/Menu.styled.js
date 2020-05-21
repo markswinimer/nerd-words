@@ -24,11 +24,15 @@ export const StyledMenu = styled(Card)`
     
     .user {
       padding-left: 1em;
-      padding: 2em 0em 3em 1em;
+      padding: 2em 0em 2em 1em;
       background-color: #F5F5F5;
       font-size: .8em;
       font-family: 'Roboto';
 
+      a {
+        border-bottom: 2px solid #c73636;
+        padding-bottom: 0px;
+      }
       #name {
         color: #c73636;
         font-size: 1.5em;
@@ -36,7 +40,7 @@ export const StyledMenu = styled(Card)`
         margin-bottom: 1em;
       } 
       p {
-        margin-top: .25em;
+        margin-top: 1em;
         margin-bottom: .25em;
       }
     }

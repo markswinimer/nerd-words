@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNavbar = styled.div` 
@@ -16,6 +17,12 @@ const StyledNavbar = styled.div`
     @media (max-width: 800px) {
     padding: .5em 5em .5em 1em;
     }
+`
+const HomeLink = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
 `
 const Logo = styled.div`
     width: 30px;
@@ -40,8 +47,10 @@ const Title = styled.div`
 const Navbar = () => {
     return(
         <StyledNavbar>
-            <Logo>N</Logo>
-            <Title>Nerd Words</Title>
+            <HomeLink to="/">
+                <Logo>N</Logo>
+                <Title>Nerd Words</Title>
+            </HomeLink>
             <div className='links'></div>
         </StyledNavbar>
     )

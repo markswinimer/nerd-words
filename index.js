@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const libraryRouter = require('./routers/library')
+const userRouter = require('./routers/user')
 const cors = require('cors')
 
 
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/node-reac
 app.use(cors()) 
 app.use(bodyParser.json());
 app.use(libraryRouter);
+app.use(userRouter);
 // { useUnifiedTopology: true }
 // { useNewUrlParser: true }
 

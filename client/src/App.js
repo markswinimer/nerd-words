@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 
@@ -13,6 +12,7 @@ import Play from './components/Play/Play';
 import Navbar from './components/Navbar/Navbar';
 import ViewLibrary from './components/ViewLibrary/ViewLibrary';
 import NewLibraryForm from './components/NewLibraryForm/NewLibraryForm';
+import LoginPage from './components/Login/LoginPage';
 
 import {
   BrowserRouter as Router,
@@ -41,6 +41,9 @@ function App() {
               />
               <div className="Container">
                 <Switch>
+                  <Route exact key='/login' path='/login'>
+                    <LoginPage />
+                  </Route>
                   <Route exact key='/play' path='/play'>
                     <Play/>
                   </Route>

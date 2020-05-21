@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faPencilAlt, faSearch, faGamepad } from '@fortawesome/free-solid-svg-icons'
@@ -13,10 +13,13 @@ const Menu = ({ currentPage, open, setOpen, history }) => {
         <StyledMenu>
 
             <div className="user">
+                <Link to="/login" id="name">Please Log In</Link>
+                    <p>Logging in is required to create and favorite libraries.</p>
+            </div>
+            {/* <div className="user">
                 <p>Hello,</p>
                 <h3 id="name">Default Account</h3>
-                <p>Account | Log Out</p>
-            </div>
+            </div> */}
 
             <div>
                 <MenuLink
