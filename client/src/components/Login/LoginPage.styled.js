@@ -11,4 +11,10 @@ export const StyledLoginPage = styled.div`
     h3 {
         margin-right: 1em;
     }
+
+    .signup {
+        text-decoration: underline;
+        color: #C73636;
+        cursor: pointer;
+    }
 `

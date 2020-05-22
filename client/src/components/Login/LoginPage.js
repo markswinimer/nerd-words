@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import EditableInput from '../global-components/EditableInput';
+import CreateAccount from './CreateAccount';
 
 import { Card, Label, Option } from '../../global';
 import { StyledLoginPage } from './LoginPage.styled';
@@ -10,7 +12,7 @@ class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            email: "",
             password: ""
         }
         this.handleChange = this.handleChange.bind(this);
@@ -53,41 +55,49 @@ class LoginPage extends React.Component {
             })
     }
 
+    
 
     render() {
         return(
             <StyledLoginPage>
-                <Card >
-                    <Label className="Label">
-                        <h2>Log into your account</h2>
-                        <p>Logging in allows you to create, save, and favorite libraries.</p>
-                    </Label>
-                    <form onSubmit={this.handleSubmit}>
-                    <Option>
-                        <h2>Username</h2>
-                        <EditableInput
-                            id="username"
-                            name="username"
-                            type="text"
-                            value={this.state.username}
-                            handleChange={this.handleChange}
-                        />
-                    </Option>
-                    <Option>
-                        <h2>Password</h2>
-                        <EditableInput
-                            id="password"
-                            name="password"
-                            type="text"
-                            value={this.state.password}
-                            handleChange={this.handleChange}
-                        />
-                    </Option>
-                    <Option>
-                        <button>Log in</button>
-                    </Option>
-                    </form>
-                </Card>
+                {/* Log in or sign up */}
+                    <Card>
+                        <Label className="Label">
+                            <h2>Log into your account</h2>
+                            <p>Logging in allows you to create, save, and favorite libraries.</p>
+                        </Label>
+                        <form onSubmit={this.handleSubmit}>
+                        <Option>
+                            <h2>Username</h2>
+                            <EditableInput
+                                id="username"
+                                name="username"
+                                type="text"
+                                value={this.state.username}
+                                handleChange={this.handleChange}
+                            />
+                        </Option>
+                        <Option>
+                            <h2>Password</h2>
+                            <EditableInput
+                                id="password"
+                                name="password"
+                                type="text"
+                                value={this.state.password}
+                                handleChange={this.handleChange}
+                            />
+                        </Option>
+                        <Option>
+                            <Link to="/signup" className="signup" onClick={this.handleSignUpForm}>
+                                If you don't have an account click here to sign up.
+                            </Link>
+                        </Option>
+                        <Option>
+                            <button>Log in</button>
+                        </Option>
+                        </form>
+                    </Card>
+
             </StyledLoginPage>
         )
     }

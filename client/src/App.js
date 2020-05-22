@@ -13,6 +13,7 @@ import Navbar from './components/Navbar/Navbar';
 import ViewLibrary from './components/ViewLibrary/ViewLibrary';
 import NewLibraryForm from './components/NewLibraryForm/NewLibraryForm';
 import LoginPage from './components/Login/LoginPage';
+import CreateAccount from './components/Login/CreateAccount';
 
 import {
   BrowserRouter as Router,
@@ -43,6 +44,9 @@ function App() {
                 <Switch>
                   <Route exact key='/login' path='/login'>
                     <LoginPage />
+                  </Route>
+                  <Route exact key='/signup' path='/signup'>
+                    <CreateAccount />
                   </Route>
                   <Route exact key='/play' path='/play'>
                     <Play/>
