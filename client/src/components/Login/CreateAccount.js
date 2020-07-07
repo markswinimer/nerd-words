@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import validator from 'validator';
 
 import EditableInput from '../global-components/EditableInput';
 
@@ -59,8 +61,8 @@ class CreateAccount extends React.Component {
             <div>
                 <Card>
                         <Label className="Label">
-                            <h2>Log into your account</h2>
-                            <p>Logging in allows you to create, save, and favorite libraries.</p>
+                            <h2>Sign Up</h2>
+                            <p>Signing up allows you to create, save, and favorite libraries.</p>
                         </Label>
                         <form onSubmit={this.handleSignUp}>
                             <Option>
@@ -93,6 +95,11 @@ class CreateAccount extends React.Component {
                                     handleChange={this.handleChange}
                                 />
                             </Option>
+                        <Option>
+                            <Link to="/login" className="signup" onClick={this.handleSignUpForm}>
+                                Back to Log In Page.
+                            </Link>
+                        </Option>
                             <Option>
                                 <button>Sign Up</button>
                             </Option>

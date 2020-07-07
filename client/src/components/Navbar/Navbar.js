@@ -4,11 +4,18 @@ import styled from 'styled-components';
 
 const StyledNavbar = styled.div` 
     background-color: #c73636;
+    border-bottom: 1px solid #d87171;
+    color: white;
+
+    @media (max-width: 800px) {
+        padding: .5em 5em .5em 1em;
+    }
+`
+const Container = styled.div`
     display: flex;
     flex-direction: row;
     padding: .5em 5em .5em 4em;
     align-items: center;
-    border-bottom: 1px solid #d87171;
     color: white;
 
     .links {
@@ -17,6 +24,11 @@ const StyledNavbar = styled.div`
     @media (max-width: 800px) {
     padding: .5em 5em .5em 1em;
     }
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 `
 const HomeLink = styled(Link)`
     display: flex;
@@ -44,14 +56,38 @@ const Title = styled.div`
     font-family: "Roboto Condensed";
     font-weight: bold;
 `
+
+const LoginButtons = styled.div`
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+`
+const Button = styled.button`
+    width: 100px;
+    height: 35px;
+`
+
+const SignUp = styled(Button)`
+    background-color: "#C73636";
+    color: "white";
+`
+const Login = styled(Button)`
+    background-color: "#C73636";
+    color: "white";
+`
 const Navbar = () => {
     return(
         <StyledNavbar>
-            <HomeLink to="/">
-                <Logo>N</Logo>
-                <Title>Nerd Words</Title>
-            </HomeLink>
-            <div className='links'></div>
+            <Container>
+                <HomeLink to="/">
+                    <Logo>N</Logo>
+                    <Title>Nerd Words</Title>
+                </HomeLink>
+                <LoginButtons>
+                    <Signup open>Login</Signup>
+                    <Login >Sign Up</Login>
+                </LoginButtons>
+            </Container>
         </StyledNavbar>
     )
 }
