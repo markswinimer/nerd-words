@@ -1,6 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import { StyledEditableInput } from './global-components.styled';
+const StyledEditableInput = styled.input`
+    margin-top: .5em;
+    min-height: 2em;
+    padding: 0 .5em;
+    border: none;
+    border: 1px solid silver;
+    width: ${props => props.width};
+    max-width: 100%;
+`
 
 const EditableInput = props => {
     return (
@@ -10,8 +19,9 @@ const EditableInput = props => {
             name={props.name}
             type='text'
             value={props.value}
-            onChange={props.handleChange}>
-        </StyledEditableInput>
+            onChange={props.handleChange}
+            width={props.width}
+        />
     )
 }
 

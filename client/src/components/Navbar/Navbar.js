@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import SignupModal from '../Modals/SignupModal';
+import LoginModal from '../Modals/LoginModal';
+
 const StyledNavbar = styled.div` 
     background-color: #c73636;
     border-bottom: 1px solid #d87171;
@@ -63,33 +66,73 @@ const LoginButtons = styled.div`
     flex-direction: row;
 `
 const Button = styled.button`
-    width: 100px;
+    min-width: 50px;
     height: 35px;
+    margin-left: 1em;
+    padding: .5em 1em;
+    font-weight: 400;
 `
 
-const SignUp = styled(Button)`
-    background-color: "#C73636";
-    color: "white";
+const Signup = styled(Button)`
+    background-color: white;
+    color: #C73636;
+    border: 1px solid #C73636;
+
+    :hover {
+        border: 1px solid white;
+        background-color: #7AB317;
+        color: white;
+    }
 `
 const Login = styled(Button)`
-    background-color: "#C73636";
-    color: "white";
+    background-color: #C73636;
+    color: white;
+    border: 1px solid white;
+    :hover {
+        background-color: #7AB317;
+        color: white;
+    }
 `
-const Navbar = () => {
-    return(
-        <StyledNavbar>
-            <Container>
-                <HomeLink to="/">
-                    <Logo>N</Logo>
-                    <Title>Nerd Words</Title>
-                </HomeLink>
-                <LoginButtons>
-                    <Signup open>Login</Signup>
-                    <Login >Sign Up</Login>
-                </LoginButtons>
-            </Container>
-        </StyledNavbar>
-    )
+
+class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            activeModal: "signup"
+        }
+        this.toggleModal = this.toggleModal.bind(this);
+    }
+
+    toggleModal(e) {
+        const id = e.target.id;
+
+        if (id !== this.state.activeModal || this.state.activeModal === undefined) {
+            this.setState({ activeModal: id })
+        }
+    }
+
+
+
+    render() {
+        return(
+            <StyledNavbar>
+                <Container>
+                    <HomeLink to="/">
+                        <Logo>N</Logo>
+                        <Title>Nerd Words</Title>
+                    </HomeLink>
+                    <LoginButtons>
+                        <Login onClick={this.toggleModal} id="login">Log in</Login>
+                        <Signup onClick={this.toggleModal} id="signup">Sign Up</Signup>
+                    </LoginButtons>
+                </Container>
+
+                { this.state.activeModal === "signup" ? <SignupModal toggleModal={this.toggleModal}/> : null }
+                { this.state.activeModal === "login" ? <LoginModal toggleModal={this.toggleModal}/> : null }
+
+            </StyledNavbar>
+        )
+    }
 }
 
 export default Navbar;

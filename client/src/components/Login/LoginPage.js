@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
                         </Label>
                         <form onSubmit={this.handleSubmit}>
                         <Option>
-                            <h2>Username</h2>
+                            <h2>{this.props.labelr}</h2>
                             <EditableInput
                                 id="username"
                                 name="username"
