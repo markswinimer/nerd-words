@@ -25,18 +25,6 @@ export const ModalContent = styled.form`
     width: 35%;
     max-width: 600px;
     border-radius: 5px;
-    
-    a:link, a:visited {
-        font-size: 16px;   
-        color: #05676E;  
-        padding-bottom: 1px;
-
-    }
-
-    a:hover, a:active {
-        padding-bottom: 0;
-        border-bottom: 1px solid;
-    }
 `
 
 export const InputSection = styled.div`

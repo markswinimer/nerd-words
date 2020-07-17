@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import SignupModal from '../Modals/SignupModal';
-import LoginModal from '../Modals/LoginModal';
+import Modal from '../Modals/Modal';
+import { faBullseye } from '@fortawesome/free-solid-svg-icons';
 
 const StyledNavbar = styled.div` 
     background-color: #c73636;
@@ -98,7 +98,7 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeModal: "signup"
+            modal: "signup"
         }
         this.toggleModal = this.toggleModal.bind(this);
     }
@@ -106,12 +106,18 @@ class Navbar extends React.Component {
     toggleModal(e) {
         const id = e.target.id;
 
-        if (id !== this.state.activeModal || this.state.activeModal === undefined) {
-            this.setState({ activeModal: id })
+        if(id === this.state.modal) {
+            this.setState({
+                modal: undefined,
+                modalTitle: ""
+            })
+        } else if(id !== this.state.modal) {
+            this.setState({
+                modal: id,
+                modalTitle: e.target.name
+            })
         }
     }
-
-
 
     render() {
         return(
@@ -122,13 +128,18 @@ class Navbar extends React.Component {
                         <Title>Nerd Words</Title>
                     </HomeLink>
                     <LoginButtons>
-                        <Login onClick={this.toggleModal} id="login">Log in</Login>
-                        <Signup onClick={this.toggleModal} id="signup">Sign Up</Signup>
+                        <Login onClick={this.toggleModal} id="login" name="Log In">Log in</Login>
+                        <Signup onClick={this.toggleModal} id="signup" name="Sign Up">Sign Up</Signup>
                     </LoginButtons>
                 </Container>
 
-                { this.state.activeModal === "signup" ? <SignupModal toggleModal={this.toggleModal}/> : null }
-                { this.state.activeModal === "login" ? <LoginModal toggleModal={this.toggleModal}/> : null }
+                {this.state.modal 
+                    ? <Modal
+                            modal={this.state.modal} 
+                            modalTitle={this.state.modalTitle}
+                            toggleModal={this.toggleModal}
+                        /> 
+                : null }
 
             </StyledNavbar>
         )

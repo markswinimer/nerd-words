@@ -1,13 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const errorTypes = {
-    email: "please use a valid email",
-    username: "not a valid username, no spaces or special characters please",
-    password: "password must be over 8 characters long",
-    confirmPassword: "passwords do not match"
-}
-
 const StyledFormInput = styled.div`
     margin-top: 2em;
 `
@@ -52,17 +45,13 @@ const StyledInput = styled.input`
 `
 
 const FormInput = props => {
-    let containsError = false;
-    if(props.inputError) {
-        containsError = props.inputError[props.id]
-    }
 
     return (
         <StyledFormInput>
             <InputContainer>
 
                 <InputLabel>{props.label}</InputLabel>
-                
+
                 <StyledInput
                     autoComplete="off"
                     id={props.id}
@@ -75,8 +64,8 @@ const FormInput = props => {
                 />
             </InputContainer>
 
-            { containsError !== false 
-                ? <InputError>{errorTypes[props.name]}</InputError> 
+            { props.error 
+                ? <InputError>{props.error}</InputError> 
                 : null }
 
         </StyledFormInput>
