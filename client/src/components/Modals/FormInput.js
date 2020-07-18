@@ -45,7 +45,6 @@ const StyledInput = styled.input`
 `
 
 const FormInput = props => {
-
     return (
         <StyledFormInput>
             <InputContainer>
@@ -56,7 +55,7 @@ const FormInput = props => {
                     autoComplete="off"
                     id={props.id}
                     name={props.name}
-                    type='text'
+                    type={props.type}
                     value={props.value}
                     onChange={props.handleChange}
                     width={props.width}

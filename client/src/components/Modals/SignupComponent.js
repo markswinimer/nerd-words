@@ -4,7 +4,7 @@ import axios from 'axios';
 import validate from 'validate.js';
 import FormInput from './FormInput';
 
-import { validateEmail, validateUsername, validatePassword } from '../../validators';
+import { validateEmail, validateUsername, validatePassword, validatePasswordsMatch } from '../../validators';
 
 import {
     StyledLoginComponent, InputSection, SignupField, SignupButton, ChangeMethodLink
@@ -41,6 +41,9 @@ class SignupComponent extends React.Component {
         this.validateEmail = this.validateEmail.bind(this);
         this.validateUsername = this.validateUsername.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
+        this.validatePasswordsMatch = this.validatePasswordsMatch.bind(this);
+        this.handleValidation = this.handleValidation.bind(this);
+        this.trimInput = this.trimInput.bind(this);
     }
 
     handleChange(e) {
@@ -60,60 +63,81 @@ class SignupComponent extends React.Component {
         this.requestSignUp(payload);
     }
 
+    async validateEmail(e) {
+        let value = e.target.value.trim();
+        let fieldName = e.target.id;
 
-    validateEmail(e) {
-        if(this.state[e.target.id].value !== undefined) {
-            const id = e.target.id;
-            const value = e.target.value;
-            const valid = validateEmail(value);
+        // await this.trimInput(value, fieldName);
 
-            if(valid !== true) {
-                console.log("NOT TRUE")
-                console.log(valid)
-                this.setState({
-                    [e.target.id]: {
-                        ...this.state[e.target.id],
-                        error: valid,
-                        valid: false
-                    }
-                })
-            }
+        if(this.state[fieldName].value !== undefined) {
+            
+            const valid = validateEmail(fieldName);
+
+            this.handleValidation(valid, value, fieldName);
         }
     }
-    validateUsername(e) {
-        if(this.state[e.target.id].value !== undefined) {
-            const id = e.target.id;
-            const value = e.target.value;
-            const valid = validateUsername(value);
+    
+    async validateUsername(e) {
+        let value = e.target.value.trim();
+        let fieldName = e.target.id;
 
-            if(valid !== true) {
-                console.log("NOT TRUE")
-                console.log(valid)
-                this.setState({
-                    [e.target.id]: {
-                        ...this.state[e.target.id],
-                        error: valid,
-                        valid: false
-                    }
-                })
-            }
+        await this.trimInput(value, fieldName);
+
+        if(this.state[fieldName].value !== undefined) {
+           
+            const valid = validateUsername(value);
+           
+            this.handleValidation(valid, value, fieldName);
         }
     }
 
     validatePassword(e) {
-        if(this.state[e.target.id].value !== undefined) {
-            const valid = validatePassword(e.target.value);
+        let value = e.target.value;
+        let fieldName = e.target.id;
 
-            if(valid !== true) {
-                this.setState({
-                    [e.target.id]: {
-                        ...this.state[e.target.id],
-                        error: valid,
-                        valid: false
-                    }
-                })
-            }
+        if(this.state[fieldName].value !== undefined) {
+
+            const valid = validatePassword(value);
+            
+            this.handleValidation(valid, value, fieldName);
         }
+    }
+
+    validatePasswordsMatch(e) {
+        let value = e.target.value;
+        let fieldName = e.target.id;
+
+        if(this.state[fieldName].value !== undefined) {
+            
+            const valid = validatePasswordsMatch(value, this.state.password.value);
+            
+            this.handleValidation(valid, value, fieldName);
+        }
+    }
+
+    handleValidation(valid, value, fieldName) {
+        if (valid !== true) {
+            this.setState({
+                [fieldName]: {
+                    value: value,
+                    error: valid,
+                    valid: false
+                }
+            })
+        } else if(valid == true) {
+            this.setState({
+                [fieldName]: {
+                    value: value,
+                    error: undefined,
+                    valid: true
+                }
+            })
+        }
+    }
+
+    trimInput(value, fieldName) {
+        const valueTrimmed = value.trim()
+        return value.trim()
     }
 
     requestLogin(payload) {
@@ -167,7 +191,7 @@ class SignupComponent extends React.Component {
                         label="password"
                         id="password"
                         name="password"
-                        type="text"
+                        type="password"
                         value={this.state.password.value}
                         handleChange={this.handleChange}
                         error={this.state.password.error}
@@ -177,11 +201,11 @@ class SignupComponent extends React.Component {
                         label="confirmPassword"
                         id="confirmPassword"
                         name="confirmPassword"
-                        type="text"
+                        type="password"
                         value={this.state.confirmPassword.value}
                         handleChange={this.handleChange}
                         error={this.state.confirmPassword.error}
-                        validateInput={this.validatePassword}
+                        validateInput={this.validatePasswordsMatch}
                     />
                 </InputSection>
 

@@ -1,6 +1,9 @@
 import validate from 'validate.js';
 
 function validateEmail(field) {
+    if (!field) {
+        return "Email cannot be empty"
+    }
     const constraints = {
         email: {
             email: {
@@ -12,24 +15,34 @@ function validateEmail(field) {
     
     const results = validate({ email: field }, constraints)
     
-    if(results) {
+    if(results) {  
         return results.email;
     } else {
         return true;
     }
 }
+
 function validateUsername(field) {
+    if (!field) {
+        return "Username cannot be empty"
+    }
     const constraints = {
         username: {
-            email: {
-                email: true,
-                message: "^Username invalid"
+            presence: true,
+            format: {
+                pattern: "[a-z0-9]+",
+                flags: "i",
+                message: "^Username must not contain special characters."
+            },
+            length: {
+                minimum: 6,
+                maximum: 12,
             }
         }
     }
     
     const results = validate({ username: field }, constraints)
-    
+    console.log(results)
     if(results) {
         return results.username;
     } else {
@@ -37,11 +50,18 @@ function validateUsername(field) {
     }
 }
 function validatePassword(field) {
+    if (!field) {
+        return "Password cannot be empty"
+    }
     const constraints = {
         password: {
-            email: {
-                email: true,
-                message: "^Password invalid"
+            format: {
+                pattern: "[a-z0-9]+",
+                flags: "i",
+                message: "^Username must not contain special characters."
+            },
+            length: {
+                minimum: 6,
             }
         }
     }
@@ -55,4 +75,31 @@ function validatePassword(field) {
     }
 }
 
-export { validateEmail, validateUsername, validatePassword };
+function validatePasswordsMatch(confirmPassword, password) {
+    if (!confirmPassword) {
+        return "Please type in your password again"
+    }
+    const constraints = {
+        confirmPassword: {
+            equality: {
+                attribute: "password",
+                message: "^Passwords do not match."
+            }
+        },
+        password: {
+            presence: true
+        }
+    }
+    
+    const results = validate({ confirmPassword: confirmPassword, password: password }, constraints)
+    
+    console.log(results)
+    
+    if (results) {
+        return results.confirmPassword;
+    } else {
+        return true;
+    }
+}
+
+export { validateEmail, validateUsername, validatePassword, validatePasswordsMatch };
