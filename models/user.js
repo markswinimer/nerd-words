@@ -4,10 +4,14 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const User = mongoose.model('User', {
-    name: {
+    username: {
         type: String,
         required: true,
         trim: true,
+        length: {
+            minimum: 6,
+            maximum: 12
+        }
     },
     email: {
         type: String,
@@ -25,7 +29,11 @@ const User = mongoose.model('User', {
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        length: {
+            minimum: 6,
+            maximum: 20
+        }
     }
 })
 

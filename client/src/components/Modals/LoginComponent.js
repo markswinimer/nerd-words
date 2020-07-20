@@ -1,38 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import validate from 'validate.js';
 import FormInput from './FormInput';
+import { withRouter } from "react-router-dom";
 
-import { validateEmail } from '../../validators';
+import { validateEmail, validateUsername, validatePassword, validatePasswordsMatch } from '../../validators';
 
 import {
     StyledLoginComponent, InputSection, SignupField, SignupButton, ChangeMethodLink
 } from './LoginComponent.styled';
 
-class LoginComponent extends React.Component {
+class SignupComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             email: {
-                value: undefined,
+                value: '',
                 valid: false,
-                error: undefined
+                error: ''
             },
             password: {
-                value: undefined,
+                value: '',
                 valid: false,
-                error: undefined
+                error: ''
             }
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.requestLogin = this.requestLogin.bind(this);
-        this.validateInput = this.validateInput.bind(this);
+        this.validateLogin = this.validateLogin.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
+        this.handleValidation = this.handleValidation.bind(this);
     }
 
     handleChange(e) {
-        console.log(e.target.name)
         this.setState({
             [e.target.name]: {
                 ...this.state[e.target.name],
@@ -43,56 +43,96 @@ class LoginComponent extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const payload = {
-            ...this.state
-        };
-        this.requestSignUp(payload);
-    }
 
+        const payload = this.validateLogin(this.state)
+        
+        console.log(payload)
 
-    validateInput(e) {
-        if(this.state[e.target.id].value !== undefined) {
-            const id = e.target.id;
-            const value = e.target.value;
-            const valid = validateEmail(value);
+        if (payload !== false) {
+            let url = "/login"
 
-            if(valid !== true) {
-                console.log(valid)
-                this.setState({
-                    [e.target.id]: {
-                        ...this.state[e.target.id],
-                        error: valid,
-                        valid: false
-                    }
+            console.log("Posting")
+
+            const options = {
+                url: url,
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data: payload
+            };
+
+            axios(options)
+                .then(response => {
+                    console.log(response);
+                    this.props.closeModal(false);
+                    this.props.history.push('/create')
                 })
+        }
+    }
+    validateLogin(userState) {
+        let valid = true;
+
+        for (const [key, v] of Object.entries(userState)) {
+            if (userState[key].valid === false) {
+                valid = false;
+                break;
             }
+        }
+
+        if (valid) {
+            let login = {
+                email: this.state.email.value,
+                password: this.state.password.value
+            }
+            return login;
+        } else {
+            return false
         }
     }
 
-    requestLogin(payload) {
-        let url = "/login"
+    validateEmail(e) {
+        let value = e.target.value.trim();
+        let fieldName = e.target.id;
 
-        console.log("Posting")
-        const options = {
-            url: url,
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            data: payload
-        };
+        const valid = validateEmail(value);
 
-        axios(options)
-            .then(response => {
-                console.log(response);
-                this.props.history.push('/')
+        this.handleValidation(valid, value, fieldName);
+    }
+
+    validatePassword(e) {
+        let value = e.target.value;
+        let fieldName = e.target.id;
+
+        const valid = validatePassword(value);
+
+        this.handleValidation(valid, value, fieldName);
+    }
+
+    handleValidation(valid, value, fieldName) {
+        if (valid !== true) {
+            this.setState({
+                [fieldName]: {
+                    value: value,
+                    error: valid,
+                    valid: false
+                }
             })
+        } else if (valid == true) {
+            this.setState({
+                [fieldName]: {
+                    value: value,
+                    error: '',
+                    valid: true
+                }
+            })
+        }
     }
 
     render() {
         return (
-            <StyledLoginComponent>
+            <StyledLoginComponent onSubmit={this.handleSubmit}>
 
                 <InputSection>
 
@@ -104,34 +144,31 @@ class LoginComponent extends React.Component {
                         value={this.state.email.value}
                         handleChange={this.handleChange}
                         error={this.state.email.error}
-                        validateInput={this.validateInput}
+                        validateInput={this.validateEmail}
                     />
 
                     <FormInput
                         label="password"
                         id="password"
                         name="password"
-                        type="text"
+                        type="password"
                         value={this.state.password.value}
                         handleChange={this.handleChange}
                         error={this.state.password.error}
-                        validateInput={this.validateInput}
+                        validateInput={this.validatePassword}
                     />
+                  
                 </InputSection>
 
-                {/* <Link to="/login" id="signup" onClick={this.props.loginOptionChange}>
-                    Don't have an account? Sign up now.
-                </Link> */}
-
                 <ChangeMethodLink id="signup" onClick={this.props.loginOptionChange}>
-                    Don't have an account? Sign up now.
+                    Don't have an account yet? Sign up here.
                 </ChangeMethodLink>
 
-                <SignupButton>Log in</SignupButton>
+                <SignupButton type="submit" value="log in" />
 
             </StyledLoginComponent>
         )
     }
 }
 
-export default LoginComponent;
+export default withRouter(SignupComponent);

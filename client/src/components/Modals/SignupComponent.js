@@ -1,169 +1,203 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import validate from 'validate.js';
 import FormInput from './FormInput';
+import { withRouter } from "react-router-dom";
 
 import { validateEmail, validateUsername, validatePassword, validatePasswordsMatch } from '../../validators';
 
 import {
-    StyledLoginComponent, InputSection, SignupField, SignupButton, ChangeMethodLink
+    StyledLoginComponent, InputSection, SignupField, SignupButton, ChangeMethodLink, FormError
 } from './LoginComponent.styled';
 
 class SignupComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: {
-                value: undefined,
-                valid: false,
-                error: undefined
+            user: { 
+                email: {
+                    value: '',
+                    valid: false,
+                    error: ''
+                },
+                username: {
+                    value: '',
+                    valid: false,
+                    error: ''
+                },
+                password: {
+                    value: '',
+                    valid: false,
+                    error: ''
+                },
+                confirmPassword: {
+                    value: '',
+                    valid: false,
+                    error: ''
+                }
             },
-            username: {
-                value: undefined,
-                valid: false,
-                error: undefined
-            },
-            password: {
-                value: undefined,
-                valid: false,
-                error: undefined
-            },
-            confirmPassword: {
-                value: undefined,
-                valid: false,
-                error: undefined
+            validation: {
+                error: '',
+                valid: true
             }
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.requestLogin = this.requestLogin.bind(this);
+        this.validateSubmit = this.validateSubmit.bind(this);
         this.validateEmail = this.validateEmail.bind(this);
         this.validateUsername = this.validateUsername.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
         this.validatePasswordsMatch = this.validatePasswordsMatch.bind(this);
         this.handleValidation = this.handleValidation.bind(this);
-        this.trimInput = this.trimInput.bind(this);
+        this.pushErrors = this.pushErrors.bind(this);
     }
 
     handleChange(e) {
+        let inputState = this.state.user
+        inputState[e.target.name].value = e.target.value
         this.setState({
-            [e.target.name]: {
-                ...this.state[e.target.name],
-                value: e.target.value
+            ...this.state,
+            user: inputState
+        })
+    }
+
+    pushErrors(){
+        let userState = this.state.user;
+        for (const [key, v] of Object.entries(userState)) {
+            console.log(key)
+            if(userState[key].error === '' && userState[key].valid === false) {
+                userState[key].error = key + ' cannot be empty'
+            }
+        }
+       this.setState({ 
+            user: userState,
+            validation: {
+                valid: false,
+                error: "Cannot submit, check above fields."
             }
         })
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const payload = {
-            ...this.state
-        };
-        this.requestSignUp(payload);
+        
+        const payload = this.validateSubmit(this.state.user)
+        console.log(payload)
+        if(payload === false) {
+            this.pushErrors()
+        } else {
+            let url = "/users"
+            
+            console.log("Posting")
+
+            const options = {
+                url: url,
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data: payload
+            };
+
+            axios(options)
+                .then(response => {
+                    console.log(response);
+                    this.props.closeModal(false);
+                    this.props.history.push('/create')
+                })
+        }
+    }
+    validateSubmit(userState) {
+        let valid = true;
+
+        for (const [key,v] of Object.entries(userState)) {
+            if(userState[key].valid === false) {
+                valid = false;
+                break;
+            }
+        }
+
+        if (valid) {
+            let newUser = {
+                email: this.state.user.email.value,
+                username: this.state.user.username.value,
+                password: this.state.user.password.value
+            }
+            return newUser;
+        } else {
+            return false
+        }
     }
 
-    async validateEmail(e) {
+    validateEmail(e) {
         let value = e.target.value.trim();
         let fieldName = e.target.id;
 
-        // await this.trimInput(value, fieldName);
+        const valid = validateEmail(value);
 
-        if(this.state[fieldName].value !== undefined) {
-            
-            const valid = validateEmail(fieldName);
-
-            this.handleValidation(valid, value, fieldName);
-        }
+        this.handleValidation(valid, value, fieldName);
     }
     
-    async validateUsername(e) {
+    validateUsername(e) {
         let value = e.target.value.trim();
         let fieldName = e.target.id;
 
-        await this.trimInput(value, fieldName);
-
-        if(this.state[fieldName].value !== undefined) {
-           
-            const valid = validateUsername(value);
-           
-            this.handleValidation(valid, value, fieldName);
-        }
+        const valid = validateUsername(value);
+        
+        this.handleValidation(valid, value, fieldName);
     }
 
     validatePassword(e) {
         let value = e.target.value;
         let fieldName = e.target.id;
 
-        if(this.state[fieldName].value !== undefined) {
+        const valid = validatePassword(value);
 
-            const valid = validatePassword(value);
-            
-            this.handleValidation(valid, value, fieldName);
-        }
+        this.handleValidation(valid, value, fieldName);
     }
 
     validatePasswordsMatch(e) {
         let value = e.target.value;
         let fieldName = e.target.id;
-
-        if(this.state[fieldName].value !== undefined) {
             
-            const valid = validatePasswordsMatch(value, this.state.password.value);
+        const valid = validatePasswordsMatch(value, this.state.user.password.value);
             
-            this.handleValidation(valid, value, fieldName);
-        }
+        this.handleValidation(valid, value, fieldName);
     }
 
     handleValidation(valid, value, fieldName) {
         if (valid !== true) {
             this.setState({
-                [fieldName]: {
-                    value: value,
-                    error: valid,
-                    valid: false
+                ...this.state,
+                user: {
+                    ...this.state.user,
+                    [fieldName]: {
+                        value: value,
+                        error: valid,
+                        valid: false
+                    }
                 }
             })
         } else if(valid == true) {
             this.setState({
-                [fieldName]: {
-                    value: value,
-                    error: undefined,
-                    valid: true
+                ...this.state,
+                user: {
+                    ...this.state.user,
+                    [fieldName]: {
+                        value: value,
+                        error: '',
+                        valid: true
+                    }
                 }
             })
         }
     }
 
-    trimInput(value, fieldName) {
-        const valueTrimmed = value.trim()
-        return value.trim()
-    }
-
-    requestLogin(payload) {
-        let url = "/login"
-
-        console.log("Posting")
-        const options = {
-            url: url,
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            data: payload
-        };
-
-        axios(options)
-            .then(response => {
-                console.log(response);
-                this.props.history.push('/')
-            })
-    }
-
     render() {
+        let user = this.state.user
+        console.log(this.state)
         return (
-            <StyledLoginComponent>
+            <StyledLoginComponent onSubmit={this.handleSubmit}>
 
                 <InputSection>
 
@@ -172,9 +206,9 @@ class SignupComponent extends React.Component {
                         id="email"
                         name="email"
                         type="text"
-                        value={this.state.email.value}
+                        value={user.email.value}
                         handleChange={this.handleChange}
-                        error={this.state.email.error}
+                        error={user.email.error}
                         validateInput={this.validateEmail}
                     />
                     <FormInput
@@ -182,9 +216,9 @@ class SignupComponent extends React.Component {
                         id="username"
                         name="username"
                         type="text"
-                        value={this.state.username.value}
+                        value={user.username.value}
                         handleChange={this.handleChange}
-                        error={this.state.username.error}
+                        error={user.username.error}
                         validateInput={this.validateUsername}
                     />
                     <FormInput
@@ -192,19 +226,19 @@ class SignupComponent extends React.Component {
                         id="password"
                         name="password"
                         type="password"
-                        value={this.state.password.value}
+                        value={user.password.value}
                         handleChange={this.handleChange}
-                        error={this.state.password.error}
+                        error={user.password.error}
                         validateInput={this.validatePassword}
                     />
                     <FormInput
-                        label="confirmPassword"
+                        label="confirm password"
                         id="confirmPassword"
                         name="confirmPassword"
                         type="password"
-                        value={this.state.confirmPassword.value}
+                        value={user.confirmPassword.value}
                         handleChange={this.handleChange}
-                        error={this.state.confirmPassword.error}
+                        error={user.confirmPassword.error}
                         validateInput={this.validatePasswordsMatch}
                     />
                 </InputSection>
@@ -212,12 +246,14 @@ class SignupComponent extends React.Component {
                 <ChangeMethodLink id="login" onClick={this.props.loginOptionChange}>
                     Already have an account? Click here to log in.
                 </ChangeMethodLink>
-
-                <SignupButton>Log in</SignupButton>
+                
+                <FormError display={!this.state.validation.valid}>{this.state.validation.error}</FormError>
+                
+                <SignupButton type="submit" value="sign up"/>
 
             </StyledLoginComponent>
         )
     }
 }
 
-export default SignupComponent;
+export default withRouter(SignupComponent);

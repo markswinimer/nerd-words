@@ -35,8 +35,8 @@ class SignupModal extends React.Component {
                         <ModalTitle>{modals[this.props.modal]}</ModalTitle>
                     </ModalHeader>
                     <ModalBody>
-                        { this.props.modal === "signup" ? <SignupComponent id={this.props.modal} loginOptionChange={this.props.toggleModal}/> : null }
-                        {this.props.modal === "login" ? <LoginComponent id={this.props.modal} loginOptionChange={this.props.toggleModal}/> : null }
+                        {this.props.modal === "signup" ? <SignupComponent id={this.props.modal} loginOptionChange={this.props.toggleModal} closeModal={this.props.toggleModal}/> : null }
+                        {this.props.modal === "login" ? <LoginComponent id={this.props.modal} loginOptionChange={this.props.toggleModal} closeModal={this.props.toggleModal}/> : null }
                     </ModalBody>
                 </ModalContent>
             </Modal>

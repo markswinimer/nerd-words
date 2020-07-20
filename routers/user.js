@@ -6,6 +6,7 @@ const router = new express.Router()
 router.post('/users', async (req, res) => {
     console.log("---Attempting Create User---")
     console.log(req.body)
+
     const user = new User(req.body)
 
     try {

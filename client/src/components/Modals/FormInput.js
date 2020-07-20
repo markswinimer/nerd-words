@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledFormInput = styled.div`
-    margin-top: 2em;
+    margin-top: 1em;
 `
 
 const InputContainer = styled.div`
@@ -25,8 +25,8 @@ const InputError = styled.div`
     font-weight: 500;
     padding: .25em .5em;
     margin-top: .25em;
-    margin-right: 2em;
     border-radius: 4px;
+    display: ${props => props.display ? "inline-block" : "none" };
 `
 
 const StyledInput = styled.input`
@@ -63,9 +63,7 @@ const FormInput = props => {
                 />
             </InputContainer>
 
-            { props.error 
-                ? <InputError>{props.error}</InputError> 
-                : null }
+            <InputError display={props.error}>{props.error ? props.error : null}</InputError> 
 
         </StyledFormInput>
     )

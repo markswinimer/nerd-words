@@ -13,7 +13,7 @@ export const Modal = styled.div`
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     flex-direction: column;
     align-items: center;
-    padding-top: 10em;
+    padding-top: 3em;
     font-family: "Roboto Condensed";
 `
 
@@ -23,7 +23,8 @@ export const ModalContent = styled.form`
     justify-content: center;
     background-color: #fefefe;
     width: 35%;
-    max-width: 600px;
+    min-width: 450px;
+    max-width: 550px;
     border-radius: 5px;
 `
 

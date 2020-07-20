@@ -104,9 +104,15 @@ class Navbar extends React.Component {
     }
 
     toggleModal(e) {
-        const id = e.target.id;
+        let id;
 
-        if(id === this.state.modal) {
+        if(e) {
+            id = e.target.id;
+        } else {
+            id = "closed";
+        } 
+
+        if (id === this.state.modal || id === "closed") {
             this.setState({
                 modal: undefined,
                 modalTitle: ""
