@@ -13,8 +13,8 @@ router.post('/users', async (req, res) => {
         await user.save()
         res.status(201).send(user)
     } catch (e) {
-        console.log(e)
-        res.status(400).send()
+        console.log(e.message)
+        res.status(400).send(e)
     }
 })
 
@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
     console.log(req.body)
     const user = new User(req.body)
 
-    try {
+    try { 
         await user.save()
         res.status(201).send(user)
     } catch(e) {

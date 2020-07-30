@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const User = mongoose.model('User', {
     username: {
         type: String,
+        unique: true,
         required: true,
         trim: true,
         length: {
@@ -29,7 +30,6 @@ const User = mongoose.model('User', {
         type: String,
         required: true,
         trim: true,
-        unique: true,
         length: {
             minimum: 6,
             maximum: 20

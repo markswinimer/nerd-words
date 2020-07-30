@@ -15,26 +15,48 @@ class SignupComponent extends React.Component {
         this.state = {
             user: { 
                 email: {
-                    value: '',
-                    valid: false,
+                    value: 'mark@gmail.com',
+                    valid: true,
                     error: ''
                 },
                 username: {
-                    value: '',
-                    valid: false,
+                    value: 'markmark1',
+                    valid: true,
                     error: ''
                 },
                 password: {
-                    value: '',
-                    valid: false,
+                    value: 'numnum',
+                    valid: true,
                     error: ''
                 },
                 confirmPassword: {
-                    value: '',
-                    valid: false,
+                    value: 'numnum',
+                    valid: true,
                     error: ''
                 }
             },
+            // user: { 
+            //     email: {
+            //         value: '',
+            //         valid: false,
+            //         error: ''
+            //     },
+            //     username: {
+            //         value: '',
+            //         valid: false,
+            //         error: ''
+            //     },
+            //     password: {
+            //         value: '',
+            //         valid: false,
+            //         error: ''
+            //     },
+            //     confirmPassword: {
+            //         value: '',
+            //         valid: false,
+            //         error: ''
+            //     }
+            // },
             validation: {
                 error: '',
                 valid: true
@@ -63,7 +85,6 @@ class SignupComponent extends React.Component {
     pushErrors(){
         let userState = this.state.user;
         for (const [key, v] of Object.entries(userState)) {
-            console.log(key)
             if(userState[key].error === '' && userState[key].valid === false) {
                 userState[key].error = key + ' cannot be empty'
             }
@@ -81,7 +102,7 @@ class SignupComponent extends React.Component {
         e.preventDefault();
         
         const payload = this.validateSubmit(this.state.user)
-        console.log(payload)
+
         if(payload === false) {
             this.pushErrors()
         } else {
@@ -101,10 +122,14 @@ class SignupComponent extends React.Component {
 
             axios(options)
                 .then(response => {
-                    console.log(response);
+                    console.log("RESPONSE : " + response);
                     this.props.closeModal(false);
                     this.props.history.push('/create')
                 })
+                .catch(error => {
+                    console.log("RESPONSE : " + error.response);
+                    console.log(error);
+                });
         }
     }
     validateSubmit(userState) {
@@ -195,7 +220,7 @@ class SignupComponent extends React.Component {
 
     render() {
         let user = this.state.user
-        console.log(this.state)
+
         return (
             <StyledLoginComponent onSubmit={this.handleSubmit}>
 
